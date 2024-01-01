@@ -1,27 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto:ital@0;1&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.nav__link::after {
+  content: '';
+  position: absolute;
+  background: #fff;
+  transition: transform .2s ease-in-out;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  border-bottom: 1px solid #fff;
+  transform: scaleX(0);
+}
+
+.nav__link:hover::after {
+  transform: scaleX(1);
+}
+
+.product__menu::after {
+  content: '';
+  border: 10px solid transparent;
+  top: -20px;
+  left: calc(50% - 10px);
+  border-bottom-color: #fff;
+  position: absolute;
+}
+
+.product__menu {}
+
+.nav__link { }
+
+.product__banner_container {
+  perspective: 700px;
+}
+
+.product__banner {
+  transform: rotate3d(.5,-.866,0,15deg) rotate(-1deg);
+  perspective: 700px;
+}
+
+.product__test_scrollbar {
+  overflow-y: auto;
+}
+
+.product__test_scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.product__test_scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.product__test_scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+.product__test_scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: 'Jura', sans-serif;
 }
