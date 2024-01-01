@@ -156,7 +156,7 @@ export default function Question() {
                     </div>
                 </div>
                 <div id={'prompt_vertical_resizer'} onMouseDown={handleMouseDown} className={'w-[15px] h-full bg-transparent cursor-col-resize transition-colors hover:bg-[#626ee3]'}></div>
-                <div  className={'flex flex-col h-full w-screen min-w-[1px]'} style={{ flexBasis: `${((window.innerWidth - promptW) / window.innerWidth) * 100}%` }}>
+                <div  className={'flex flex-col h-full w-screen min-w-[1px]'}>
                     <div className={'flex flex-col'}>
                         <div className={'bg-[#15314b] text-white font-bold flex rounded-[4px]'}>
                             <button className={'px-[15px] py-[10px] transition-colors hover:bg-[#626ee3]'}>Your Solutions</button>
