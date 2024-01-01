@@ -93,7 +93,7 @@ export default function Question() {
                                 <p className={'mb-[10px]'}> Given two non-empty arrays of integers, write a function that determines
                                     whether the second array is a subsequence of the first one.</p>
                                 <p className={'mb-[30px]'}>
-                                    A subsequence of an array is a set of numbers that aren't necessarily adjacent
+                                    A subsequence of an array is a set of numbers that are not necessarily adjacent
                                     in the array but that are in the same order as they appear in the array. For
                                     instance, the numbers </p>
                                 <h3>Sample Input</h3>
@@ -177,7 +177,7 @@ export default function Question() {
                             <button className={'bg-[#008529] px-[15px] text-[14px] text-white font-open_sans'}>Submit code</button>
                         </div>
                         <div className={'p-[20px] bg-[#001528] h-full min-h-[350px]'}>
-                            <h3 className={'text-[#445d6e] flex items-center h-full text-center w-full justify-center font-bold font-open_sans'}>Run Or Submit your code when you're ready</h3>
+                            <h3 className={'text-[#445d6e] flex items-center h-full text-center w-full justify-center font-bold font-open_sans'}>Run Or Submit your code when you are ready</h3>
                         </div>
                     </div>
                 </div>

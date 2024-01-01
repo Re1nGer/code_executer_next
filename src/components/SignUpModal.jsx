@@ -17,7 +17,7 @@ const SignUpModal = ({ isOpen, onClose }) => {
 					<HeaderIcon className={'max-w-[290px] max-h-[25px] text-[#02203c]'} />
 					<h1 className={'text-[30px] font-jura text-[#02203c]'}>AlgoExpert</h1>
 				</div>
-				<h3 className={'text-center text-[#445d6e] mb-[30px] leading-[1.7]'}>Log in to save your progress. We won't post anything anywhere.</h3>
+				<h3 className={'text-center text-[#445d6e] mb-[30px] leading-[1.7]'}>Log in to save your progress. We will not post anything anywhere.</h3>
 				<div className={'flex flex-col gap-[10px] font-bold text-[14px]'}>
 					<button className={'flex items-center shadow-[0_2px_4px_0_rgba(0,0,0,.25)] border-[1px] border-transparent rounded-[4px] bg-[#4285f4] text-white h-[50px] transition-all hover:translate-y-[-3px] hover:shadow-[0_2px_10px_2px_rgba(0,0,0,.35)]'}>
 						<div className={'bg-white flex justify-center items-center flex-grow-0 flex-shrink-0 h-full rounded-[4px] basis-auto w-[48px]'}>
