@@ -5,34 +5,29 @@ import ArrowIcon from '../../../icons/Arrow.svg?react'
 import ShareIcon from '../../../icons/ShareIcon.svg?react'
 import BugIcon from '../../../icons/BugIcon.svg?react'
 import SettingIcon from '../../../icons/SettingIcon.svg?react'
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import EyeIcon from '../../../icons/EyeIcon.svg?react'
 import StarIcon from '../../../icons/StarIcon.svg?react'
 import InfoIcon from '../../../icons/InfoIcon.svg?react'
-import { Editor } from "@monaco-editor/react";
 import Link from 'next/link'
 import EditorPanel from "@/components/EditorPanel";
 import PromptSkeleton from "@/components/PromptSkeleton";
 import Hint from "@/components/Hint";
+import TestCasePanel from "@/components/TestCasePanel";
+
 
 
 export default function Question({ params }) {
 
     const [promptW, setPromptW] = useState(800)
 
-    const outputWindowRef = useRef(null)
+    const [testH, setTestH] = useState(200)
 
     const [question, setQuestion] = useState(null)
 
     const [isQuestionLoading, setIsQuestionLoading] = useState(true)
 
     const editorPanelWidthPercent = window ? ((innerWidth - promptW) / innerWidth) * 100 : 1
-
-    console.log(question)
-
-    const handleResize = (event) => {
-        setPromptW(event.clientX);
-    };
 
     const fetchQuestion = async (id) => {
         try {
@@ -52,10 +47,28 @@ export default function Question({ params }) {
         window.removeEventListener('mouseup', handleMouseUp);
     };
 
+    const handleResize = (event) => {
+        setPromptW(event.clientX);
+    };
+
     const handleMouseDown = () => {
         window.addEventListener('mousemove', handleResize);
         window.addEventListener('mouseup', handleMouseUp);
     };
+
+    const handleTestOutputResize = (event) => {
+        console.log(event.clientY)
+        setTestH(event.clientY)
+    }
+    const handleTestOutputUp = () => {
+        window.removeEventListener('mousemove', handleTestOutputResize);
+        window.removeEventListener('mouseup', handleTestOutputUp);
+    }
+
+    const handleTestPanelDown = () => {
+        window.addEventListener('mousemove', handleTestOutputResize);
+        window.addEventListener('mouseup', handleTestOutputUp);
+    }
 
     useEffect(() => {
         fetchQuestion(params.id)
@@ -95,7 +108,7 @@ export default function Question({ params }) {
             </div>
             <div className={`rounded-[4px] flex h-full`}>
                 <div className={'flex flex-col h-full'} style={{width: `${promptW}px`}}>
-                    <div className={'flex flex-col'}>
+                    <div className={'flex flex-col'} style={{ flexBasis: `${((window.innerHeight - testH) / innerHeight) * 100 }%` }}>
                         <div className={'bg-[#15314b] text-white font-bold flex rounded-[4px]'}>
                             <button className={'px-[15px] py-[10px] transition-colors hover:bg-[#626ee3]'}>Prompt
                             </button>
@@ -124,8 +137,8 @@ export default function Question({ params }) {
                                     <span>155,070+</span>
                                 </div>
                             </div>
-                            { isQuestionLoading ? (
-                                <PromptSkeleton />
+                            {isQuestionLoading ? (
+                                <PromptSkeleton/>
                             ) : (
                                 <>
                                     <div className={'flex gap-[10px] items-center text-white'}>
@@ -138,24 +151,26 @@ export default function Question({ params }) {
                                         <div dangerouslySetInnerHTML={{__html: question?.prompt}}></div>
                                         <div className={'flex flex-col gap-[10px] font-bold'}>
                                             <h1>Hints</h1>
-                                            <Hint heading={'Hint 1'} />
-                                            <Hint heading={'Hint 2'} />
-                                            <Hint heading={'Hint 3'} />
-                                            <Hint heading={'Hint 4'} />
+                                            <Hint heading={'Hint 1'}/>
+                                            <Hint heading={'Hint 2'}/>
+                                            <Hint heading={'Hint 3'}/>
+                                            <Hint heading={'Hint 4'}/>
                                         </div>
                                     </div>
                                 </>
-                            ) }
+                            )}
                         </div>
                     </div>
                     <div
-                        className={'w-full h-[15px] bg-transparent cursor-col-resize transition-colors hover:bg-[#626ee3]'}></div>
-                    <div ref={outputWindowRef} className={'flex flex-col'}>
+                        onMouseDown={handleTestPanelDown}
+                        className={'w-full h-[50px] bg-transparent cursor-col-resize transition-colors hover:bg-[#626ee3]'}></div>
+                    <div className={'flex flex-col'} style={{ height: `${testH}px` }}>
                         <div className={'flex justify-between bg-[#15314b]'}>
                             <div className={'text-white font-bold flex rounded-[4px]'}>
                                 <button className={'px-[15px] py-[10px] transition-colors hover:bg-[#626ee3]'}>Tests
                                 </button>
-                                <button className={'px-[15px] py-[10px] transition-colors hover:bg-[#626ee3]'}>Quick Test
+                                <button className={'px-[15px] py-[10px] transition-colors hover:bg-[#626ee3]'}>Quick
+                                    Test
                                 </button>
                                 <button className={'px-[15px] py-[10px] transition-colors hover:bg-[#626ee3]'}>Sandbox
                                 </button>
@@ -172,20 +187,13 @@ export default function Question({ params }) {
                                 </button>
                             </div>
                         </div>
-                        <div className={'p-[20px] bg-[#001528] blur-[4px]'}>
-                            <div className={'flex flex-col text-white'}>
-                                <div className={'flex flex-col gap-[1rem]'}>
-                                    <h1 className={'font-bold font-open_sans text-[18px]'}>Test Case 1</h1>
-                                    <Editor height={'90px'} theme={'vs-dark'}
-                                            defaultValue={'{\n\tarray: [1,2,3,4,5], \n\tsequence:[1,2,3,4,5,6]\n}'}/>
-                                </div>
-                            </div>
-                        </div>
+                        <TestCasePanel />
                     </div>
                 </div>
-                <div id={'prompt_vertical_resizer'} onMouseDown={handleMouseDown}
+                <div
+                     onMouseDown={handleMouseDown}
                      className={'w-[15px] h-full bg-transparent cursor-col-resize transition-colors hover:bg-[#626ee3]'}></div>
-                <EditorPanel width={editorPanelWidthPercent + '%'} />
+                <EditorPanel width={editorPanelWidthPercent + '%'}/>
             </div>
         </section>
     )
