@@ -5,7 +5,6 @@ import Header from "@/components/Header";
 
 const Questions = () => {
     return (
-        <Header>
             <section className={'h-full flex justify-center'}>
                 <div className={'flex flex-col max-w-[720px] w-full justify-center items-center'}>
                     <h1 className={'text-[38px] text-white mb-[30px]'}>200 Coding Interview Questions</h1>
@@ -13,7 +12,6 @@ const Questions = () => {
                     <BuyAlgoExpertButton className={'w-full'} />
                 </div>
             </section>
-        </Header>
     )
 }
 
