@@ -37,6 +37,21 @@
 
 .product__menu {}
 
+.questions__arrow::after {
+  content: "";
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  transform: rotate(45deg);
+  top: -8px;
+  left: 10px;
+  box-shadow: -1px -2px 3px rgba(50,50,93,.1);
+  background: #ffffff;
+  z-index: -10;
+}
+
+.questions__arrow {}
+
 .nav__link { }
 
 .product__banner_container {

@@ -19,9 +19,15 @@ const Header = ({ children }) => {
         setIsProductMenuOpen(true)
     }
 
+    const handleOnClickLogin = () => {
+        setIsModalOpen(true)
+    }
+
     return (
-            <header className={'h-[540px] bg-gradient-to-r from-[#02203c] to-[#001528] flex flex-col'}
-                    onMouseMove={() => setIsProductMenuOpen(false)}>
+            <header
+                className={'h-[540px] bg-gradient-to-r from-[#02203c] to-[#001528] flex flex-col'}
+                onMouseMove={() => setIsProductMenuOpen(false)}
+            >
                 <div className={'mx-[20px] py-[30px] flex justify-center items-center relative'}>
                     <HeaderLogo />
                     <div className={'w-[150px]'}></div>
@@ -35,7 +41,7 @@ const Header = ({ children }) => {
                     </nav>
                     <div className={'w-[150px]'}></div>
                     <div className={'flex-1 max-w-[290px] items-start h-full flex justify-start'}>
-                        <LogInButton onClick={() => setIsModalOpen(true)}/>
+                        <LogInButton onClick={handleOnClickLogin} />
                     </div>
                 </div>
                 <SignUpModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}/>
