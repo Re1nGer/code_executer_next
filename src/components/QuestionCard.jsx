@@ -4,13 +4,15 @@ import Link from "next/link";
 
 
 const colors = {
-    0: { bg: "#34ed43", shadow: "#20ad2b" },
-    1: { bg: "#51adef", shadow: "#257dbc" },
-    2: { bg: "#ef5151", shadow: "#c62121" },
-    3: { bg: "#383535", shadow: "#110f0f" }
+    1: { bg: "#34ed43", shadow: "#20ad2b" },
+    2: { bg: "#51adef", shadow: "#257dbc" },
+    3: { bg: "#ef5151", shadow: "#c62121" },
+    4: { bg: "#383535", shadow: "#110f0f" },
+    5: { bg: "#6b6b6b", shadow: "#474747" },
 };
 
-const QuestionCard = ({ name, completed, striked, difficulty = 0, id }) => {
+//is_random property colors the span element in black
+const QuestionCard = ({ name = 'Validate Subsequence', completed, striked, difficulty = 1, is_random, id }) => {
 
     const getDifficultyStyles = () => {
         return { background: colors[difficulty].bg, boxShadow: `8px 0 0 0 ${colors[difficulty].shadow}` };
@@ -21,7 +23,7 @@ const QuestionCard = ({ name, completed, striked, difficulty = 0, id }) => {
         <div className={'flex mr-[2rem] items-center'}>
             <div className={'w-[20px] mr-[10px] h-[20px] rounded-full bg-transparent border-[1px] border-[rgba(103,114,229,.3)]'}></div>
             <Link href={`questions/${id}`} className={'text-[15px] whitespace-nowrap overflow-ellipsis transition-colors text-[#626ee3] font-bold hover:text-[#02203c]'}>
-                Validate Subsequence
+                { name }
             </Link>
         </div>
         <div className={'flex gap-[10px] items-center'}>

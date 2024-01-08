@@ -6,9 +6,36 @@ import Header from "@/components/Header";
 import LockIcon from '../../icons/LockIcon.svg';
 import QuestionCard from "@/components/QuestionCard";
 import QuestionGroupingAndFilters from "@/components/QuestionGroupingAndFilters";
+import {useEffect, useState} from "react";
 
 
 const Questions = () => {
+
+    const [groupSelected, setGroupSelected] = useState(0);
+
+    const [questions, setQuestions] = useState([]);
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    const fetchQuestions = async () => {
+        try {
+            const request = await fetch('/api/questions');
+            const rows = await request.json();
+            setQuestions(rows)
+        }
+        catch (error) {
+            console.log(error);
+        }
+        finally {
+            setIsLoading(false)
+        }
+    }
+
+
+    useEffect(() => {
+        fetchQuestions();
+    }, [])
+
     return (
         <>
             <Header>
@@ -46,34 +73,31 @@ const Questions = () => {
                     </div>
                 </div>
             </section>
-            <QuestionGroupingAndFilters />
+            <QuestionGroupingAndFilters
+                groupSelected={groupSelected}
+                setGroupSelected={setGroupSelected}
+            />
             <section className={'flex max-w-[1600px] w-full justify-between mx-auto gap-[2rem]'}>
-                <div className={'flex flex-col gap-[1rem]'}>
+                <div className={'flex flex-col gap-[.5rem] basis-[25%]'}>
                     <div className={'text-[23px] mb-[20px]'}>Easy - 12/23</div>
-                    <QuestionCard id={'validate-subsequence'}/>
-                    <QuestionCard />
-                    <QuestionCard/>
-                    <QuestionCard/>
-                    <QuestionCard/>
-                    <QuestionCard/>
-                    <QuestionCard/>
+                    { questions.filter(item => item.difficulty === 1)
+                        .map(item =>
+                            <QuestionCard key={item.uid}
+                              id={item.uid}
+                              difficulty={item.difficulty}
+                              name={item.name} /> )
+                    }
                 </div>
-                <div className={'flex flex-col gap-[.5rem]'}>
+                <div className={'flex flex-col gap-[.5rem] basis-[25%]'}>
                     <div className={'text-[23px] mb-[20px]'}>Medium - 12/23</div>
-                    <QuestionCard difficulty={1}/>
-                    <QuestionCard difficulty={1}/>
-                    <QuestionCard difficulty={1}/>
-                    <QuestionCard difficulty={1}/>
-                    <QuestionCard difficulty={1}/>
-                    <QuestionCard difficulty={1}/>
-                    <QuestionCard difficulty={1}/>
-                    <QuestionCard difficulty={1}/>
-                    <QuestionCard difficulty={1}/>
-                    <QuestionCard difficulty={1}/>
-                    <QuestionCard difficulty={1}/>
-                    <QuestionCard difficulty={1}/>
+                    { questions.filter(item => item.difficulty === 2).map(item =>
+                        <QuestionCard key={item.uid}
+                          id={item.uid}
+                          difficulty={item.difficulty}
+                          name={item.name} /> )
+                    }
                 </div>
-                <div className={'flex flex-col gap-[.5rem]'}>
+                <div className={'flex flex-col gap-[.5rem] basis-[25%]'}>
                     <div className={'text-[23px] mb-[20px]'}>Hard - 12/23</div>
                     <QuestionCard difficulty={2}/>
                     <QuestionCard difficulty={2}/>
@@ -86,7 +110,7 @@ const Questions = () => {
                     <QuestionCard difficulty={2}/>
                     <QuestionCard difficulty={2}/>
                 </div>
-                <div className={'flex flex-col gap-[.5rem]'}>
+                <div className={'flex flex-col gap-[.5rem] basis-[25%]'}>
                     <div className={'text-[23px] mb-[20px]'}>Very Hard - 12/23</div>
                     <QuestionCard difficulty={3} />
                     <QuestionCard difficulty={3} />

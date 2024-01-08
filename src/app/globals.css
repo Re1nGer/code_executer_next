@@ -84,6 +84,15 @@
   background: #a0a0a0;
 }
 
+
+.product__card--hover:hover {
+  box-shadow: 0 0 35px -2px rgba(0,0,0,.2);
+}
+
+.product__card--hover:hover svg {
+  transform: scale(1.2);
+}
+
 body {
   font-family: 'Jura', sans-serif;
 }
