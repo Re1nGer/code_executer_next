@@ -93,6 +93,14 @@
   transform: scale(1.2);
 }
 
+.prompt__tab {
+  transition: background .2s linear;
+}
+
+.prompt__tab:hover {
+  background: #626ee3 !important;
+}
+
 body {
   font-family: 'Jura', sans-serif;
 }

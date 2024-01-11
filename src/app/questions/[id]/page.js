@@ -7,13 +7,11 @@ import BugIcon from '../../../icons/BugIcon.svg?react'
 import SettingIcon from '../../../icons/SettingIcon.svg?react'
 import { useEffect, useState } from "react";
 import EyeIcon from '../../../icons/EyeIcon.svg?react'
-import StarIcon from '../../../icons/StarIcon.svg?react'
 import InfoIcon from '../../../icons/InfoIcon.svg?react'
 import Link from 'next/link'
 import EditorPanel from "@/components/EditorPanel";
-import PromptSkeleton from "@/components/PromptSkeleton";
-import Hint from "@/components/Hint";
 import TestCasePanel from "@/components/TestCasePanel";
+import PromptTabs from "@/components/PromptTabs";
 
 
 
@@ -80,10 +78,10 @@ export default function Question({ params }) {
                 <div className={'flex gap-[15px]'}>
                     <Link href={'/'}
                           className={'rounded-[4px] transition-colors bg-[#626ee3] text-white p-[10px]'}>AlgoExpert</Link>
-                    <button
+                    <Link href={'/questions'}
                         className={'bg-[#15314b] transition-colors text-white rounded-[4px] flex justify-center items-center w-[55px] h-[40px] hover:bg-[#626ee3]'}>
-                        <ListIcon className={'max-w-[25px] max-h-[25px]'}/>
-                    </button>
+                        <ListIcon className={'max-w-[25px] max-h-[25px]'}  />
+                    </Link>
                     <button
                         className={'bg-[#15314b] transition-colors text-white rounded-[4px] flex justify-center items-center w-[55px] h-[40px] hover:bg-[#626ee3]'}>
                         <ArrowIcon className={'max-w-[25px] max-h-[25px]'}/>
@@ -93,7 +91,7 @@ export default function Question({ params }) {
                         className={'bg-[#15314b] transition-colors text-white rounded-[4px] flex justify-center items-center w-[55px] h-[40px] hover:bg-[#626ee3]'}>
                         <ShareIcon className={'max-w-[25px] max-h-[25px]'}/>
                     </button>
-                    <Timer/>
+                    <Timer />
                 </div>
                 <div className={'flex gap-[.5rem]'}>
                     <button
@@ -109,57 +107,12 @@ export default function Question({ params }) {
             <div className={`rounded-[4px] flex h-full`}>
                 <div className={'flex flex-col h-full'} style={{width: `${promptW}px`}}>
                     <div className={'flex flex-col'} style={{ flexBasis: `${((window.innerHeight - testH) / innerHeight) * 100 }%` }}>
-                        <div className={'bg-[#15314b] text-white font-bold flex rounded-[4px]'}>
-                            <button className={'px-[15px] py-[10px] transition-colors hover:bg-[#626ee3]'}>Prompt
-                            </button>
-                            <button className={'px-[15px] py-[10px] transition-colors hover:bg-[#626ee3]'}>ScratchPad
-                            </button>
-                            <button className={'px-[15px] py-[10px] transition-colors hover:bg-[#626ee3]'}>Solutions
-                            </button>
-                            <button className={'px-[15px] py-[10px] transition-colors hover:bg-[#626ee3]'}>Video Explanations
-                            </button>
-                            <button className={'px-[15px] py-[10px]'}></button>
-                        </div>
-                        <div
-                            className={'p-[20px] max-h-[550px] product__test_scrollbar overflow-x-hidden bg-[#001528]'}>
-                            <div className={'flex gap-[20px] text-white mb-[10px]'}>
-                                <div className={'flex items-center gap-[10px] font-bold'}>
-                                    <h3>Difficulty:</h3>
-                                    <span
-                                        className={'rounded-[4px] bg-gradient-to-r from-[#34ed43] to-[#369536] h-[17px] w-[17px]'}></span>
-                                </div>
-                                <div className={'flex'}>
-                                    <h3>Category:</h3>
-                                    <span className={'blur-[4px]'}>Hidden</span>
-                                </div>
-                                <div className={'flex gap-[.3rem]'}>
-                                    <h3>Successful Submissions:</h3>
-                                    <span>155,070+</span>
-                                </div>
-                            </div>
-                            {isQuestionLoading ? (
-                                <PromptSkeleton/>
-                            ) : (
-                                <>
-                                    <div className={'flex gap-[10px] items-center text-white'}>
-                                        <h2 className={'text-[24px]'}>{question?.name}</h2>
-                                        <div
-                                            className={'border-[1px] rounded-full h-[20px] w-[20px] bg-transparent border-[#505ac5]'}></div>
-                                        <StarIcon className={'w-[20px] h-[20px] cursor-pointer'}/>
-                                    </div>
-                                    <div className={'text-[14px] text-white font-open_sans'}>
-                                        <div dangerouslySetInnerHTML={{__html: question?.prompt}}></div>
-                                        <div className={'flex flex-col gap-[10px] font-bold'}>
-                                            <h1>Hints</h1>
-                                            <Hint heading={'Hint 1'}/>
-                                            <Hint heading={'Hint 2'}/>
-                                            <Hint heading={'Hint 3'}/>
-                                            <Hint heading={'Hint 4'}/>
-                                        </div>
-                                    </div>
-                                </>
-                            )}
-                        </div>
+                        <PromptTabs
+                            difficulty={question?.difficulty}
+                            name={question?.name}
+                            isLoading={isQuestionLoading}
+                            prompt={question?.prompt}
+                        />
                     </div>
                     <div
                         onMouseDown={handleTestPanelDown}
@@ -199,8 +152,16 @@ export default function Question({ params }) {
     )
 }
 
+
+
+
+
+
+
+
 const ProgrammingLanguageDropdown = () => {
     return <></>
 }
+
 
 const Timer = () => { }

@@ -5,6 +5,7 @@ import SignUpModal from "@/components/SignUpModal.jsx";
 import ProductMenu from "@/components/ProductMenu.jsx";
 import HeaderLogo from "@/components/HeaderLogo.jsx";
 import LogInButton from "@/components/LogInButton.jsx";
+import ContentMenu from "@/components/ContentMenu";
 
 
 
@@ -46,6 +47,7 @@ const Header = ({ children }) => {
                 </div>
                 <SignUpModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}/>
                 <ProductMenu isOpen={isProductMenuOpen} onClose={() => setIsProductMenuOpen(false)}/>
+                <ContentMenu />
                 { children }
             </header>
     )

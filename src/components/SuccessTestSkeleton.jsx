@@ -1,4 +1,4 @@
-import TickIcon from "@/icons/TickIcon.svg?react";
+import TickIcon from "@/icons/TickCircleIcon.svg";
 
 const SuccessTestSkeleton = () => {
     return <div
