@@ -112,12 +112,13 @@ export default function Question({ params }) {
                             name={question?.name}
                             isLoading={isQuestionLoading}
                             prompt={question?.prompt}
+                            scratchpad={question?.scratchpad}
                         />
                     </div>
                     <div
                         onMouseDown={handleTestPanelDown}
-                        className={'w-full h-[50px] bg-transparent cursor-col-resize transition-colors hover:bg-[#626ee3]'}></div>
-                    <div className={'flex flex-col'} style={{ height: `${testH}px` }}>
+                        className={'w-full h-[20px] bg-transparent cursor-col-resize transition-colors hover:bg-[#626ee3]'}></div>
+                    <div className={'flex flex-col h-full max-h-[300px]'}> {/*style={{ height: `${testH}px` }}>*/}
                         <div className={'flex justify-between bg-[#15314b]'}>
                             <div className={'text-white font-bold flex rounded-[4px]'}>
                                 <button className={'px-[15px] py-[10px] transition-colors hover:bg-[#626ee3]'}>Tests

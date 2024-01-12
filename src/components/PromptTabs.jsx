@@ -4,7 +4,7 @@ import PromptTab from "@/components/PromptTab";
 import SolutionsTab from "@/components/SolutionsTab";
 import VideoExplanationTab from "@/components/VideoExplanationTab";
 
-const PromptTabs = ({ difficulty, isLoading, name, prompt }) => {
+const PromptTabs = ({ difficulty, isLoading, name, prompt, scratchpad }) => {
 
     const [activeTab, setActiveTab] = useState(1);
 
@@ -26,7 +26,7 @@ const PromptTabs = ({ difficulty, isLoading, name, prompt }) => {
                     prompt={prompt}
                 />
             case 2:
-                return <ScratchPadTab />
+                return <ScratchPadTab scratchpad={scratchpad} />
             case 3:
                 return <SolutionsTab />
             case 4:

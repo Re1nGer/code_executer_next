@@ -9,3 +9,4 @@ export async function GET(request, { params }) {
     if (rows) return Response.json(rows[0])
     return Response.json([])
 }
+
