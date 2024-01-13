@@ -1,10 +1,10 @@
-import {useState} from "react";
+import { useState } from "react";
 import ScratchPadTab from "@/components/ScratchPadTab";
 import PromptTab from "@/components/PromptTab";
 import SolutionsTab from "@/components/SolutionsTab";
 import VideoExplanationTab from "@/components/VideoExplanationTab";
 
-const PromptTabs = ({ difficulty, isLoading, name, prompt, scratchpad }) => {
+const PromptTabs = () => {
 
     const [activeTab, setActiveTab] = useState(1);
 
@@ -19,14 +19,9 @@ const PromptTabs = ({ difficulty, isLoading, name, prompt, scratchpad }) => {
     const renderActiveTab = () => {
         switch (activeTab) {
             case 1:
-                return <PromptTab
-                    name={name}
-                    difficulty={difficulty}
-                    isLoading={isLoading}
-                    prompt={prompt}
-                />
+                return <PromptTab />
             case 2:
-                return <ScratchPadTab scratchpad={scratchpad} />
+                return <ScratchPadTab />
             case 3:
                 return <SolutionsTab />
             case 4:
@@ -66,4 +61,4 @@ const PromptTabs = ({ difficulty, isLoading, name, prompt, scratchpad }) => {
     );
 }
 
-export default PromptTabs
+export default PromptTabs;

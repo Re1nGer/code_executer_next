@@ -12,6 +12,7 @@ import Link from 'next/link'
 import EditorPanel from "@/components/EditorPanel";
 import TestCasePanel from "@/components/TestCasePanel";
 import PromptTabs from "@/components/PromptTabs";
+import { useQuestionContext } from "@/hooks/useQuestionContext";
 
 
 
@@ -21,11 +22,11 @@ export default function Question({ params }) {
 
     const [testH, setTestH] = useState(200)
 
-    const [question, setQuestion] = useState(null)
-
     const [isQuestionLoading, setIsQuestionLoading] = useState(true)
 
     const editorPanelWidthPercent = window ? ((innerWidth - promptW) / innerWidth) * 100 : 1
+
+    const { setQuestion, setIsLoading } = useQuestionContext();
 
     const fetchQuestion = async (id) => {
         try {
@@ -36,7 +37,7 @@ export default function Question({ params }) {
             console.log(error)
         }
         finally {
-            setIsQuestionLoading(false)
+            setIsLoading(false)
         }
     }
 
@@ -86,7 +87,7 @@ export default function Question({ params }) {
                         className={'bg-[#15314b] transition-colors text-white rounded-[4px] flex justify-center items-center w-[55px] h-[40px] hover:bg-[#626ee3]'}>
                         <ArrowIcon className={'max-w-[25px] max-h-[25px]'}/>
                     </button>
-                    <ProgrammingLanguageDropdown/>
+                    <ProgrammingLanguageDropdown />
                     <button
                         className={'bg-[#15314b] transition-colors text-white rounded-[4px] flex justify-center items-center w-[55px] h-[40px] hover:bg-[#626ee3]'}>
                         <ShareIcon className={'max-w-[25px] max-h-[25px]'}/>
@@ -107,13 +108,7 @@ export default function Question({ params }) {
             <div className={`rounded-[4px] flex h-full`}>
                 <div className={'flex flex-col h-full'} style={{width: `${promptW}px`}}>
                     <div className={'flex flex-col'} style={{ flexBasis: `${((window.innerHeight - testH) / innerHeight) * 100 }%` }}>
-                        <PromptTabs
-                            difficulty={question?.difficulty}
-                            name={question?.name}
-                            isLoading={isQuestionLoading}
-                            prompt={question?.prompt}
-                            scratchpad={question?.scratchpad}
-                        />
+                        <PromptTabs />
                     </div>
                     <div
                         onMouseDown={handleTestPanelDown}

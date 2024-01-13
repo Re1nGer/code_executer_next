@@ -2,8 +2,12 @@ import QuestionDifficulty from "@/components/QuestionDifficulty";
 import PromptSkeleton from "@/components/PromptSkeleton";
 import StarIcon from "@/icons/StarIcon.svg";
 import Hint from "@/components/Hint";
+import {useQuestionContext} from "@/hooks/useQuestionContext";
 
-const PromptTab = ({ difficulty, isLoading, name, prompt }) => {
+const PromptTab = () => {
+
+    const { question: { name, difficulty, prompt, hints, correctcount, failureCount }, isLoading  } = useQuestionContext();
+
     return (
         <div
             className={'p-[20px] max-h-[550px] product__test_scrollbar overflow-x-hidden bg-[#001528]'}>
@@ -18,11 +22,11 @@ const PromptTab = ({ difficulty, isLoading, name, prompt }) => {
                 </div>
                 <div className={'flex gap-[.3rem]'}>
                     <h3>Successful Submissions:</h3>
-                    <span>155,070+</span>
+                    <span>{correctcount}</span>
                 </div>
             </div>
             {isLoading ? (
-                <PromptSkeleton/>
+                <PromptSkeleton />
             ) : (
                 <>
                     <div className={'flex gap-[10px] items-center text-white'}>
@@ -35,10 +39,7 @@ const PromptTab = ({ difficulty, isLoading, name, prompt }) => {
                         <div dangerouslySetInnerHTML={{__html: prompt}}></div>
                         <div className={'flex flex-col gap-[10px] font-bold'}>
                             <h1>Hints</h1>
-                            <Hint heading={'Hint 1'}/>
-                            <Hint heading={'Hint 2'}/>
-                            <Hint heading={'Hint 3'}/>
-                            <Hint heading={'Hint 4'}/>
+                            { hints.map((item, idx) => <Hint key={item} heading={`Hint ${idx + 1}`} body={item} />) }
                         </div>
                     </div>
                 </>
