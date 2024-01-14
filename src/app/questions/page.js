@@ -77,7 +77,7 @@ const Questions = () => {
                 groupSelected={groupSelected}
                 setGroupSelected={setGroupSelected}
             />
-            <section className={'flex max-w-[1600px] w-full justify-between mx-auto gap-[2rem]'}>
+            <section className={'flex max-w-[1600px] min-h-[800px] w-full justify-between mx-auto gap-[2rem]'}>
                 <div className={'flex flex-col gap-[.5rem] basis-[25%]'}>
                     <div className={'text-[23px] mb-[20px]'}>Easy - 12/23</div>
                     { questions.filter(item => item.difficulty === 1)
@@ -110,25 +110,13 @@ const Questions = () => {
                 </div>
                 <div className={'flex flex-col gap-[.5rem] basis-[25%]'}>
                     <div className={'text-[23px] mb-[20px]'}>Very Hard - 12/23</div>
-                    <QuestionCard difficulty={3} />
-                    <QuestionCard difficulty={3} />
-                    <QuestionCard difficulty={3} />
-                    <QuestionCard difficulty={3} />
-                    <QuestionCard difficulty={3} />
-                    <QuestionCard difficulty={3} />
-                    <QuestionCard difficulty={3} />
-                    <QuestionCard difficulty={3} />
-                    <QuestionCard difficulty={3} />
-                    <QuestionCard difficulty={3} />
-                    <QuestionCard difficulty={3} />
-                    <QuestionCard difficulty={3} />
-                    <QuestionCard difficulty={3} />
-                    <QuestionCard difficulty={3} />
-                    <QuestionCard difficulty={3} />
-                    <QuestionCard difficulty={3} />
-                    <QuestionCard difficulty={3} />
-                    <QuestionCard difficulty={3} />
-                    <QuestionCard difficulty={3} />
+                    { questions.filter(item => item.difficulty === 4)
+                        .map(item =>
+                            <QuestionCard key={item.uid}
+                                          id={item.uid}
+                                          difficulty={item.difficulty}
+                                          name={item.name} /> )
+                    }
                 </div>
             </section>
         </>

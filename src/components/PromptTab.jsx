@@ -39,7 +39,7 @@ const PromptTab = () => {
                         <div dangerouslySetInnerHTML={{__html: prompt}}></div>
                         <div className={'flex flex-col gap-[10px] font-bold'}>
                             <h1>Hints</h1>
-                            { hints.map((item, idx) => <Hint key={item} heading={`Hint ${idx + 1}`} body={item} />) }
+                            { hints?.map((item, idx) => <Hint key={item} heading={`Hint ${idx + 1}`} body={item} />) }
                         </div>
                     </div>
                 </>

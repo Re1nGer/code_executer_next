@@ -1,29 +1,29 @@
 import { Editor } from "@monaco-editor/react";
 import { useState } from "react";
+import { useQuestionContext } from "@/hooks/useQuestionContext";
 
-const pythonCode = `# Python code here
-def greet(name):
-    return "Hello, " + name + "!"
-print(greet("World"))`
 
 const SolutionsTab = () => {
 
-    const [activeTab, setActiveTab] = useState(1);
+    const [activeTab, setActiveTab] = useState(0);
 
     const handleTabClick = (tabIndex) => {
         setActiveTab(tabIndex);
     }
 
+    const { question: { solutions = [] } } = useQuestionContext();
+
+    console.log(solutions[activeTab], activeTab)
+
     return <>
         <div className={'p-[10px] flex gap-[10px] items-center bg-[#001528]'}>
-            <button onClick={() => handleTabClick(1)}
-                    style={{ background: activeTab === 1 ? '#626ee3' : 'transparent' }}
-                    className={'rounded-[4px] font-bold text-white px-[6px] py-[1px]'}>Solution 1</button>
-            <button onClick={() => handleTabClick(2)}
-                    style={{ background: activeTab === 2 ? '#626ee3' : 'transparent' }}
-                    className={'rounded-[4px] font-bold text-white px-[6px] py-[1px] bg-transparent'}>Solution 2</button>
+            { solutions?.map((item, idx) => (
+                <button key={item} onClick={() => handleTabClick(idx)}
+                        style={{ background: activeTab === idx ? '#626ee3' : 'transparent' }}
+                        className={'rounded-[4px] font-bold text-white px-[6px] py-[1px]'}>{`Solution ${idx + 1}`}</button>
+            )) }
         </div>
-        <SolutionTab code={pythonCode} />
+        <SolutionTab code={solutions[activeTab]} />
     </>
 }
 
@@ -34,7 +34,7 @@ const SolutionTab = ({ code = '' }) => {
             height={'60vh'}
             theme={'vs-dark'}
             options={{ readOnly: true }}
-            defaultValue={code}
+            value={code}
             language={'python'}
         />
     </div>
