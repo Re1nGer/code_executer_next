@@ -90,7 +90,8 @@ const Questions = () => {
                 </div>
                 <div className={'flex flex-col gap-[.5rem] basis-[25%]'}>
                     <div className={'text-[23px] mb-[20px]'}>Medium - 12/23</div>
-                    { questions.filter(item => item.difficulty === 2).map(item =>
+                    { questions.filter(item => item.difficulty === 2)
+                        .map(item =>
                         <QuestionCard key={item.uid}
                           id={item.uid}
                           difficulty={item.difficulty}
@@ -99,16 +100,13 @@ const Questions = () => {
                 </div>
                 <div className={'flex flex-col gap-[.5rem] basis-[25%]'}>
                     <div className={'text-[23px] mb-[20px]'}>Hard - 12/23</div>
-                    <QuestionCard difficulty={2}/>
-                    <QuestionCard difficulty={2}/>
-                    <QuestionCard difficulty={2}/>
-                    <QuestionCard difficulty={2}/>
-                    <QuestionCard difficulty={2}/>
-                    <QuestionCard difficulty={2}/>
-                    <QuestionCard difficulty={2}/>
-                    <QuestionCard difficulty={2}/>
-                    <QuestionCard difficulty={2}/>
-                    <QuestionCard difficulty={2}/>
+                    { questions.filter(item => item.difficulty === 3)
+                        .map(item =>
+                            <QuestionCard key={item.uid}
+                                          id={item.uid}
+                                          difficulty={item.difficulty}
+                                          name={item.name} /> )
+                    }
                 </div>
                 <div className={'flex flex-col gap-[.5rem] basis-[25%]'}>
                     <div className={'text-[23px] mb-[20px]'}>Very Hard - 12/23</div>

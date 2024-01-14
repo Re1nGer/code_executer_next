@@ -12,7 +12,7 @@ const colors = {
 };
 
 //is_random property colors the span element in black
-const QuestionCard = ({ name = 'Validate Subsequence', completed, striked, difficulty = 1, is_random, id }) => {
+const QuestionCard = ({ name = 'Validate Subsequence', completed, striked, difficulty = 1, id }) => {
 
     const getDifficultyStyles = () => {
         return { background: colors[difficulty].bg, boxShadow: `8px 0 0 0 ${colors[difficulty].shadow}` };

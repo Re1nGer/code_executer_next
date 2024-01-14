@@ -35,7 +35,7 @@ const PromptTab = () => {
                             className={'border-[1px] rounded-full h-[20px] w-[20px] bg-transparent border-[#505ac5]'}></div>
                         <StarIcon className={'w-[20px] h-[20px] cursor-pointer'}/>
                     </div>
-                    <div className={'text-[14px] text-white font-open_sans'}>
+                    <div className={'text-[14px] text-white font-open_sans question'}>
                         <div dangerouslySetInnerHTML={{__html: prompt}}></div>
                         <div className={'flex flex-col gap-[10px] font-bold'}>
                             <h1>Hints</h1>
