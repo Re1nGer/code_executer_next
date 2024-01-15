@@ -1,12 +1,22 @@
+'use client'
+
 import { AnimatePresence, motion } from 'framer-motion'
 import GoogleIcon from '../icons/GoogleIcon.svg?react'
 import GithubIcon from '../icons/GitHubIcon.svg?react'
 import Facebook from '../icons/FacebookIcon.svg?react'
 import LinkedIn from '../icons/LinkedIn.svg?react'
 import HeaderIcon from "../icons/HeaderIcon.svg?react";
+import {signIn, useSession} from "next-auth/react";
+import {getServerSession} from "next-auth";
+import options from '../../pages/api/auth/[...nextauth]'
 
 const SignUpModal = ({ isOpen, onClose }) => {
+
 	const handleClickOutside = () => onClose()
+
+	//const { data } = useSession();
+
+	//const session = getServerSession(options);
 
 	return (
 		<AnimatePresence>
@@ -19,7 +29,7 @@ const SignUpModal = ({ isOpen, onClose }) => {
 				</div>
 				<h3 className={'text-center text-[#445d6e] mb-[30px] leading-[1.7]'}>Log in to save your progress. We will not post anything anywhere.</h3>
 				<div className={'flex flex-col gap-[10px] font-bold text-[14px]'}>
-					<button className={'flex items-center shadow-[0_2px_4px_0_rgba(0,0,0,.25)] border-[1px] border-transparent rounded-[4px] bg-[#4285f4] text-white h-[50px] transition-all hover:translate-y-[-3px] hover:shadow-[0_2px_10px_2px_rgba(0,0,0,.35)]'}>
+					<button onClick={() => signIn('google')} className={'flex items-center shadow-[0_2px_4px_0_rgba(0,0,0,.25)] border-[1px] border-transparent rounded-[4px] bg-[#4285f4] text-white h-[50px] transition-all hover:translate-y-[-3px] hover:shadow-[0_2px_10px_2px_rgba(0,0,0,.35)]'}>
 						<div className={'bg-white flex justify-center items-center flex-grow-0 flex-shrink-0 h-full rounded-[4px] basis-auto w-[48px]'}>
 							<GoogleIcon className={'w-[18px]'} />
 						</div>
