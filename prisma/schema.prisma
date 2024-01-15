@@ -1,0 +1,64 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model Question {
+  uid           String       @id @default(cuid())
+  name          String
+  category      String
+  difficulty    Int
+  prompt        String?
+  scratchpads   Scratchpad[]
+  scratchpadIds Int[]        @unique
+  userSolutions Solution[]
+  solutions     String[]
+  languages     Language[]
+  users         User[]
+}
+
+model User {
+  id        String     @id @default(cuid())
+  name      String?
+  email     String?    @unique
+  createdAt DateTime   @default(now()) @map(name: "created_at")
+  updatedAt DateTime   @updatedAt @map(name: "updated_at")
+  questions Question[]
+  scratchpads Scratchpad[]
+
+  @@map(name: "users")
+}
+
+model Scratchpad {
+  id         Int      @id @default(autoincrement())
+  text       String?
+  question   Question @relation(fields: [questionId], references: [uid])
+  questionId String
+  user       User @relation(fields: [userId], references: [id])
+  userId     String
+}
+
+model Solution {
+  id         Int       @id @default(autoincrement())
+  code       String?
+  question   Question? @relation(fields: [questionId], references: [uid])
+  questionId String?
+  language Language? @relation(fields: [languageId], references: [id])
+  languageId Int? @unique
+}
+
+model Language {
+  id         Int       @id @default(autoincrement())
+  question   Question? @relation(fields: [questionId], references: [uid])
+  name String?
+  solution Solution?
+  solutionId Int
+  questionId String?
+}
