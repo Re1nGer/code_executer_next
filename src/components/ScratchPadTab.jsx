@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useCallback, useEffect, useState} from "react";
 import { Editor } from "@monaco-editor/react";
 import TickIcon from "@/icons/TickIcon.svg";
 import { useDebounce } from "@/hooks/useDebounce";
@@ -24,6 +24,7 @@ const ScratchPadTab = () => {
         setLocalScratchPad(value)
     }
 
+
     const handleSave = async () => {
         try {
             const body = { uid: id, scratchpad: debouncedScratchPad };
@@ -38,9 +39,8 @@ const ScratchPadTab = () => {
         }
     }
 
-    useEffect(() => {
-        handleSave()
-    }, [debouncedScratchPad])
+    useCallback(handleSave, [debouncedScratchPad, handleSave])
+
 
     return <div className={'max-h-[550px] product__test_scrollbar overflow-x-hidden bg-[#001528] relative'}>
         <Editor

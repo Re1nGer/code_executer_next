@@ -6,6 +6,9 @@ import ProductMenu from "@/components/ProductMenu.jsx";
 import HeaderLogo from "@/components/HeaderLogo.jsx";
 import LogInButton from "@/components/LogInButton.jsx";
 import ContentMenu from "@/components/ContentMenu";
+import ArrowDownIcon from '../icons/ArrowDown.svg';
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 
 
@@ -14,6 +17,10 @@ const Header = ({ children }) => {
     const [isModalOpen, setIsModalOpen] = React.useState(false)
 
     const [isProductMenuOpen, setIsProductMenuOpen] = React.useState(false)
+
+    const { data } = useSession();
+
+    const isLoggedIn = data?.user;
 
     const handleOnMouseOver = (e) => {
         e.stopPropagation()
@@ -42,7 +49,9 @@ const Header = ({ children }) => {
                     </nav>
                     <div className={'w-[150px]'}></div>
                     <div className={'flex-1 max-w-[290px] items-start h-full flex justify-start'}>
-                        <LogInButton onClick={handleOnClickLogin} />
+                        { !isLoggedIn ? (
+                            <LogInButton onClick={handleOnClickLogin} />
+                        ) : <ProfileMenu image={data?.user?.image} name={data?.user?.name} /> }
                     </div>
                 </div>
                 <SignUpModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}/>
@@ -55,3 +64,11 @@ const Header = ({ children }) => {
 
 
 export default Header
+
+const ProfileMenu = ({ image, name }) => {
+    return <div className={'flex gap-[10px] items-center text-white'}>
+        <Image src={image} className={'rounded-full'} alt={'user'} width={'35'} height={'35'} />
+        <span className={'overflow-hidden text-ellipsis'}>{name}</span>
+        <ArrowDownIcon className={'w-[11px] h-[11px] cursor-pointer'} />
+    </div>
+}
