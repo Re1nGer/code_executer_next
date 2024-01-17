@@ -1,6 +1,9 @@
+import { motion } from "framer-motion";
+
 const ProductTestSkeletons = () => {
-    return <div
-        className={"bg-[#15314b] flex flex-col rounded-[4px] border-[2px] border-[#15314b] max-w-[291px] w-full"}>
+    return <motion.div
+            className={"bg-[#15314b] flex flex-col rounded-[4px] border-[2px] border-[#15314b] max-w-[291px] w-full"}
+           >
         <div className={"max-h-[30px] h-full flex justify-between"}>
             <h3 className={"pl-[10px]"}>Input</h3>
             <button className={"bg-[#0046c7] text-white text-center px-[15px] h-full"}>Run</button>
@@ -67,7 +70,7 @@ const ProductTestSkeletons = () => {
                 <div className={"bg-[#be8a28] w-[60px] rounded-[4px] h-[13px]"}></div>
             </div>
         </div>
-    </div>;
+    </motion.div>;
 }
 
 export default ProductTestSkeletons
