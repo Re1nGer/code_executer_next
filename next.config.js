@@ -6,6 +6,7 @@ const nextConfig = {
 }
 
 module.exports = {
+    target: 'serverless',
     images: {
         remotePatterns: [
             {
