@@ -48,17 +48,15 @@ const Header = ({ children }) => {
 
     return (
             <header
-                className={'h-[540px] bg-gradient-to-r from-[#02203c] to-[#001528] flex flex-col'}
-                onMouseMove={handleOnMouseMoveHeader}
+                className={'h-[540px] bg-gradient-to-r from-[#02203c] to-[#001528] flex flex-col relative'}
                 onClick={handleClickOutside}
+
             >
-                <div className={'mx-[20px] py-[30px] flex justify-center items-center relative'}>
+                <div className={'mx-[20px] py-[30px] flex justify-center items-center'}>
                     <HeaderLogo />
                     <div className={'w-[150px]'}></div>
-                    <nav
-                        className={'flex relative mx-[55px] gap-[30px] h-full items-start font-open_sans text-[14px] text-white'}
-                        onMouseMove={(e) => e.stopPropagation()}>
-                        <div onMouseOver={handleOnMouseOver} className={'bg-transparent relative nav__link'}>Products</div>
+                    <nav className={'flex relative mx-[55px] gap-[30px] h-full items-start font-open_sans text-[14px] text-white'}>
+                    <div onMouseOver={handleOnMouseOver} className={'bg-transparent relative z-10 nav__link'}>Products</div>
                         <div onMouseOver={handleOnMouseOverContentMenu} className={'bg-transparent relative nav__link'}>Content</div>
                         <div className={'bg-transparent relative nav__link'}>Team</div>
                         <div className={'bg-transparent font-bold relative italic nav__link'}>Purchase</div>
@@ -74,7 +72,7 @@ const Header = ({ children }) => {
                         /> }
                     </div>
                 </div>
-                <SignUpModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}/>
+                <SignUpModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
                 <ProductMenu isOpen={isProductMenuOpen} onClose={() => setIsProductMenuOpen(false)}/>
                 <ContentMenu isOpen={isContentMenuOpen} />
                 { children }
