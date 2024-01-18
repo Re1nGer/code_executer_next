@@ -25,7 +25,7 @@ const ProductInputSkeletons = () => {
     return <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { delay: .3 } }}
-            className={"bg-[#15314b] flex flex-col rounded-[4px] border-[2px] border-[#15314b] max-w-[291px] w-full"}
+            className={"bg-[#15314b] flex flex-col rounded-[4px] border-[2px] border-[#15314b] max-w-[291px] w-full product__landing_input-skeleton"}
            >
         <div className={"max-h-[30px] h-full flex justify-between"}>
             <h3 className={"pl-[10px]"}>Input</h3>

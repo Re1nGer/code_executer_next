@@ -27,7 +27,7 @@ const ProductTestSkeletons = () => {
     return <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0, transition: { delay: .2  } }}
-        className={"bg-[#15314b] max-h-[205px] flex flex-col rounded-[4px] border-[2px] border-[#15314b] max-w-[291px] h-full w-full"}>
+        className={"bg-[#15314b] max-h-[205px] flex flex-col rounded-[4px] border-[2px] border-[#15314b] max-w-[291px] h-full w-full product__landing_tests-skeleton"}>
         <div className={"max-h-[30px] h-full"}>
             <h3 className={"pl-[10px]"}>Tests</h3>
         </div>

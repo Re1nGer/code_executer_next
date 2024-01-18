@@ -4,7 +4,9 @@ const ProductPromptSkeletons = () => {
     const randomWidth = () => Math.floor(Math.random() * 90) + 160
 
 
-    return <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className={"bg-[#15314b] flex flex-col rounded-[4px] border-[2px] border-[#15314b] max-w-[291px] w-full"}>
+    return <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+                       className={"bg-[#15314b] flex flex-col rounded-[4px]" +
+                           " border-[2px] border-[#15314b] max-w-[291px] w-full product__landing_prompt-skeleton"}>
         <div className={"h-[30px]"}>
             <h3 className={"pl-[10px]"}>Prompt</h3>
         </div>

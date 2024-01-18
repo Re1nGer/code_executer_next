@@ -118,6 +118,22 @@
   padding-bottom: 2px;
 }
 
+.product__landing_output-skeleton {
+  box-shadow: 0 37.5px 40px -17.5px rgba(0,0,0,.4), 46.2px 37.5px 70px -7.5px rgba(0,0,0,.5);
+}
+
+.product__landing_tests-skeleton {
+  box-shadow: 0 27.5px 40px -17.5px rgba(0,0,0,.4), 46.2px 37.5px 40px -17.5px rgba(0,0,0,.4);
+}
+
+.product__landing_input-skeleton {
+  box-shadow: 0 0 5px 0 rgba(0,0,0,.4);
+}
+
+.product__landing_prompt-skeleton {
+  box-shadow: 0 0 5px 0 rgba(0,0,0,.4);
+}
+
 body {
   font-family: 'Jura', sans-serif;
 }
