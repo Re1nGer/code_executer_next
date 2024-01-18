@@ -3,8 +3,8 @@
 import Header from "@/components/Header";
 import ProductLanding from "@/components/ProductLanding";
 import ProductPromptSkeletons from "@/components/ProductPromptSkeletons";
-import ProductTestSkeletons from "@/components/ProductTestSkeletons";
 import ProductInputSkeletons from "@/components/ProductInputSkeletons";
+import ProductTestSkeletons from "@/components/ProductTestSkeletons";
 import ProductOutputSkeleton from "@/components/ProductOutputSkeleton";
 
 export default function Home() {
@@ -18,8 +18,8 @@ export default function Home() {
             <div
                 className={'flex flex-wrap gap-[10px] text-white font-bold max-h-[500px] max-w-[600px] product__banner'}>
               <ProductPromptSkeletons />
-              <ProductTestSkeletons />
               <ProductInputSkeletons />
+              <ProductTestSkeletons />
               <ProductOutputSkeleton />
             </div>
           </div>

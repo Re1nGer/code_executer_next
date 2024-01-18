@@ -3,8 +3,8 @@
 import Header from "@/components/Header";
 import ProductLanding from "@/components/ProductLanding";
 import ProductPromptSkeletons from "@/components/ProductPromptSkeletons";
-import ProductInputSkeletons from "@/components/ProductTestSkeletons";
-import ProductTestSkeletons from "@/components/ProductInputSkeletons";
+import ProductInputSkeletons from "@/components/ProductInputSkeletons";
+import ProductTestSkeletons from "@/components/ProductTestSkeletons";
 import ProductOutputSkeleton from "@/components/ProductOutputSkeleton";
 
 export default function layout({ children }) {
