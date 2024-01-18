@@ -7,7 +7,7 @@ import HeaderLogo from "@/components/HeaderLogo.jsx";
 import LogInButton from "@/components/LogInButton.jsx";
 import ContentMenu from "@/components/ContentMenu";
 import ArrowDownIcon from '../icons/ArrowDown.svg';
-import { useSession } from "next-auth/react";
+import {signOut, useSession} from "next-auth/react";
 import Image from "next/image";
 import {AnimatePresence, motion} from "framer-motion";
 import ProfileIcon from '../icons/ProfileIcon.svg';
@@ -89,6 +89,9 @@ const ProfileMenu = ({ image, name }) => {
 }
 
 const ProfileContent = ({ name }) => {
+
+    const handleLogOut = () => signOut();
+
     return <motion.div initial={{ scale: 0 }} animate={{scale: 1}} exit={{scale: 0}}
                        className={'max-w-[290px] origin-top-right z-10 absolute top-[45px] right-[170px] rounded-[4px] bg-[#f6f9fc] w-full min-h-[150px]'}>
         <div className={'bg-[#f6f9fc] h-full text-[14px] rounded-[4px]'}>
@@ -107,7 +110,8 @@ const ProfileContent = ({ name }) => {
                     <ProfileIcon className={'w-[22px] h-[22px]'} />
                     Recruiting Profile
                 </button>
-                <button className={'bg-[#02203c] flex gap-[15px] items-center justify-center text-white py-[.5rem] '}>
+                <button onClick={handleLogOut} className={'bg-[#02203c] flex gap-[15px]' +
+                    ' items-center justify-center text-white py-[.5rem] transition-colors hover:bg-[#001528]'}>
                     <DoorIcon className={'w-[17px] h-[17px]'} />
                     Log Out
                 </button>
