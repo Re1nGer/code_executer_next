@@ -52,7 +52,9 @@
 
 .questions__arrow {}
 
-.nav__link { }
+.nav__link {
+  cursor: pointer;
+}
 
 .product__banner_container {
   perspective: 700px;
