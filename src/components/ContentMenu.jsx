@@ -1,5 +1,4 @@
 import { AnimatePresence } from "framer-motion";
-import InterviewQuestionsIcon from '../icons/InterviewQuestionsIcon.svg'
 import Link from "next/link";
 import ArrowIcon from '../icons/ArrowDown.svg';
 import { motion } from "framer-motion";
@@ -20,6 +19,12 @@ import WebDevIcon from '../icons/WebDevIcon.svg';
 import MLCrashCourseIcon from '../icons/MlCrashIcon.svg';
 import MLDesignQuestionIcon from '../icons/MLDesignQuestionIcon.svg';
 import MLLargeScaleIcon from '../icons/LargeScaleMLIcon.svg';
+import InfraCrashCourseIcon from '../icons/InfraCrashCourse.svg';
+import SmartContractsIcon from '../icons/SmartContractsIcon.svg';
+import BlockChainCrashCourseIcon from '../icons/BlockchainCrashCourseIcon.svg';
+import EtheriumIcon from '../icons/EtheriumIcon.svg';
+import ProjectsIcon from '../icons/ProjectsIcon.svg';
+import Web3Icon from '../icons/Web3ToolsIcon.svg';
 
 
 
@@ -185,23 +190,23 @@ const MlExpertMenu = () => {
 }
 const InfraExpertMenu = () => {
     return <section className={'flex flex-col p-[15px] flex-1 bg-[#2c85cd] h-full text-white gap-[15px] rounded-[4px]'}>
-        <ContentMenuLink href={'/questions'} name={'Infra Content Quiz'} />
-        <ContentMenuLink href={'/algocourses'} name={'Infra Crash Course'} />
-        <ContentMenuLink href={'/'} name={'Infra Coding Questions'} />
-        <ContentMenuLink href={'/'} name={'Infra Design Questions'} />
-        <ContentMenuLink href={'/'} name={'Infra Quiz'} />
+        <ContentMenuLink href={'/questions'} name={'Infra Content Quiz'} Icon={IndexIcon} />
+        <ContentMenuLink href={'/algocourses'} name={'Infra Crash Course'} Icon={InfraCrashCourseIcon} />
+        <ContentMenuLink href={'/'} name={'Infra Coding Questions'} Icon={QuestionsIcon} />
+        <ContentMenuLink href={'/'} name={'Infra Design Questions'} Icon={QuestionsIcon} />
+        <ContentMenuLink href={'/'} name={'Infra Quiz'} Icon={AssessmentIcon} />
     </section>
 }
 const BlockChainExpertMenu = () => {
     return <section className={'flex flex-col p-[15px] flex-1 bg-[#bb20dd] h-full text-white gap-[10px] rounded-[4px]'}>
-        <ContentMenuLink href={'/questions'} name={'BlockChain Content Quiz'} />
-        <ContentMenuLink href={'/algocourses'} name={'Blockchain Fundamentals'} />
-        <ContentMenuLink href={'/'} name={'Etherium and Smart Contracts'} />
-        <ContentMenuLink href={'/'} name={'Solidity Fundamentals'} />
-        <ContentMenuLink href={'/'} name={'Advanced Solidity'} />
-        <ContentMenuLink href={'/'} name={'Interacting With Smart Contracts'} />
-        <ContentMenuLink href={'/'} name={'Web3 Tools'} />
-        <ContentMenuLink href={'/'} name={'Projects'} />
+        <ContentMenuLink href={'/questions'} name={'BlockChain Content Quiz'} Icon={IndexIcon} />
+        <ContentMenuLink href={'/algocourses'} name={'Blockchain Fundamentals'} Icon={BlockChainCrashCourseIcon} />
+        <ContentMenuLink href={'/'} name={'Etherium and Smart Contracts'} Icon={EtheriumIcon} />
+        <ContentMenuLink href={'/'} name={'Solidity Fundamentals'} Icon={BracketsIcon} />
+        <ContentMenuLink href={'/'} name={'Advanced Solidity'} Icon={WebDevIcon} />
+        <ContentMenuLink href={'/'} name={'Interacting With Smart Contracts'} Icon={SmartContractsIcon} />
+        <ContentMenuLink href={'/'} name={'Web3 Tools'} Icon={Web3Icon} />
+        <ContentMenuLink href={'/'} name={'Projects'} Icon={ProjectsIcon} />
     </section>
 }
 const BonusMenu = () => {
@@ -212,7 +217,7 @@ const BonusMenu = () => {
 
 const ContentMenuLink = ({ href, name, Icon }) => {
     return (
-        <Link href={href} className={'flex gap-[20px] rounded-[4px] max-h-[60px] px-[15px] bg-[rgba(0,0,0,.3)] hover:bg-[rgba(0,0,0,.5)] py-[15px]'}>
+        <Link href={href} className={'flex gap-[20px] items-center rounded-[4px] max-h-[60px] px-[15px] bg-[rgba(0,0,0,.3)] hover:bg-[rgba(0,0,0,.5)] h-full'}>
             { Icon ? (
                 <Icon className={'w-[30px]'} />
             ) : null }

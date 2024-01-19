@@ -6,8 +6,17 @@ import ProductPromptSkeletons from "@/components/ProductPromptSkeletons";
 import ProductInputSkeletons from "@/components/ProductInputSkeletons";
 import ProductTestSkeletons from "@/components/ProductTestSkeletons";
 import ProductOutputSkeleton from "@/components/ProductOutputSkeleton";
+import {useEffect} from "react";
+import {useRouter} from "next/navigation";
 
 export default function Home() {
+  const router = useRouter()
+
+  useEffect(() => {
+    // Always do navigations after the first render
+    router.push('/product');
+  }, [router])
+
   return (
       <Header>
         <div className={`flex justify-center min-h-[320px] gap-[50px]`}>

@@ -42,11 +42,6 @@ const Header = ({ children }) => {
         setIsModalOpen(true)
     }
 
-    const handleOnMouseMoveHeader = () => {
-        setIsProductMenuOpen(false);
-        setIsContentMenuOpen(false);
-    }
-
     return (
             <header
                 className={'h-[540px] bg-gradient-to-r from-[#02203c] to-[#001528] flex flex-col relative'}
