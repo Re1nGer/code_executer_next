@@ -21,10 +21,14 @@ const Header = ({ type = 'algo', children }) => {
     const getStyles = () => {
         if (type === 'algo')
             return 'linear-gradient(-90deg, #02203c,#001528)';
-        else if (type === 'system') {
+        else if (type === 'system')
             return 'linear-gradient(-45deg,#0f0f0f 50%,#292929)';
-        }
-
+        else if (type === 'frontend')
+            return 'linear-gradient(-45deg,#00334c 50%,#00557f)';
+        else if (type === 'ml')
+            return 'linear-gradient(-45deg,#263238 50%,#3b4d56)';
+        else if (type === 'infra')
+            return 'linear-gradient(-45deg,#253141 50%,#384a62)';
     }
 
     return (

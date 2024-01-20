@@ -1,3 +1,5 @@
+'use client'
+
 import SystemsExpertHeader from "@/components/SystemsExpertHeader";
 import SystemExpertLanding from "@/components/SystemExpertLanding";
 

@@ -90,16 +90,19 @@ const ContentMenu = () => {
                                                          selected={itemSelected === 'systemsexpert'}
                                         />
                                         <ContentMenuItem name={'FrontendExpert'}
+                                                         href={'/content/frontendexpert'}
                                                          bgColor={'#11967e'}
                                                          onMouseOver={() => setItemSelected('frontendexpert')}
                                                          selected={itemSelected === 'frontendexpert'}
                                         />
                                         <ContentMenuItem name={'MlExpert'}
+                                                         href={'/content/mlexpert'}
                                                          bgColor={'#f37f1b'}
-                                                         onMouseOver={() => setItemSelected('mlexpert')}
-                                                         selected={itemSelected === 'mlexpert'}
+                                                         onMouseOver={() => setItemSelected('ml')}
+                                                         selected={itemSelected === 'ml'}
                                         />
                                         <ContentMenuItem name={'InfraExpert'}
+                                                         href={'/content/infraexpert'}
                                                          bgColor={'#2c85cd'}
                                                          onMouseOver={() => setItemSelected('infraexpert')}
                                                          selected={itemSelected === 'infraexpert'}

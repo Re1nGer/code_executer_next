@@ -5,17 +5,17 @@ import HeaderIcon from "@/icons/HeaderIcon.svg?react";
 
 const HeaderLogo = () => {
 
-    const [rotate, setRotate] = useState(0)
+    const [rotate, setRotate] = useState(0);
 
-    const [sign, setSign] = useState(false)
+    const [sign, setSign] = useState(false);
     const handleOnLogoHover = () => {
         animate("#header_logo", { rotate: sign ? `-${rotate % 120}deg` : `${rotate % 120}deg` }, { duration: 2, type: 'inertia', velocity: 200 } )
-        setRotate((rotate + 45) % 120)
+        setRotate((rotate + 45) % 120);
         setSign(prevState => !prevState)
     }
 
     useEffect(() => {
-        animate("#header_logo", { rotate: `135deg`}, { duration: 3, type: 'inertia', velocity: 500 } )
+        animate("#header_logo", { rotate: '135deg' }, { duration: 3, type: 'inertia', velocity: 500 } )
     }, []);
 
     return <Link href={"/product"}>
@@ -28,6 +28,12 @@ const HeaderLogo = () => {
             <div className={"text-[#8d96eb] font-bold font-jura text-[18px]"}>Ace the Technical Interviews</div>
         </div>
     </Link>;
+}
+
+const HeaderLogoText = () => {
+    return <div className={"text-[#8d96eb] font-bold font-jura text-[18px]"}>
+        Ace the Technical Interviews
+    </div>
 }
 
 export default HeaderLogo
