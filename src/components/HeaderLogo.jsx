@@ -9,13 +9,13 @@ const HeaderLogo = () => {
 
     const [sign, setSign] = useState(false)
     const handleOnLogoHover = () => {
-        animate("#header_logo", { rotate: sign ? `-${rotate % 120}deg` : `${rotate % 120}deg`,  duration: 1 } )
+        animate("#header_logo", { rotate: sign ? `-${rotate % 120}deg` : `${rotate % 120}deg` }, { duration: 2, type: 'inertia', velocity: 200 } )
         setRotate((rotate + 45) % 120)
         setSign(prevState => !prevState)
     }
 
     useEffect(() => {
-        animate("#header_logo", { rotate: `135deg`,  duration: 2 } )
+        animate("#header_logo", { rotate: `135deg`}, { duration: 3, type: 'inertia', velocity: 500 } )
     }, []);
 
     return <Link href={"/product"}>

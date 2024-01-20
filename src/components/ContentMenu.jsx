@@ -78,11 +78,13 @@ const ContentMenu = () => {
                                 <div className={'rounded-[4px] flex relative shadow-[0_0_40px_5px_rgba(0,0,0,.5)] h-full w-full'}>
                                     <div className={'flex flex-col basis-[220px] pt-[10px] pl-[10px] bg-white relative rounded-tl-[4px] rounded-bl-[4px]'}>
                                         <ContentMenuItem name={'AlgoExpert'}
+                                                         href={'/content/algoexpert'}
                                                          onMouseOver={() => setItemSelected('algoexpert')}
                                                          selected={itemSelected === 'algoexpert'}
                                                          bgColor={'#626ee3'}
                                         />
                                         <ContentMenuItem name={'SystemsExpert'}
+                                                         href={'/content/systemsexpert'}
                                                          bgColor={'#890023'}
                                                          onMouseOver={() => setItemSelected('systemsexpert')}
                                                          selected={itemSelected === 'systemsexpert'}
@@ -124,10 +126,10 @@ const ContentMenu = () => {
 }
 
 
-const ContentMenuItem = ({ name, onMouseOver, selected, bgColor }) => {
+const ContentMenuItem = ({ name, href, onMouseOver, selected, bgColor }) => {
 
    return (
-       <div onMouseOver={onMouseOver}
+       <Link href={href ?? '/'} onMouseOver={onMouseOver}
             style={{ background: selected ? bgColor : '#fff', color: selected ? '#fff' : '#02203c' }}
             className={'flex justify-between cursor-pointer p-[15px] w-full font-bold text-[16px]' +
                 ' bg-white text-[#02203c] relative rounded-tl-[4px] rounded-bl-[4px] hover:bg-[#626ee3] hover:text-white'}>
@@ -139,7 +141,7 @@ const ContentMenuItem = ({ name, onMouseOver, selected, bgColor }) => {
                <span className={'absolute bottom-[-15px] rounded-tr-[7px] h-[15px] right-[-1px] w-[20px] z-10'} style={{ boxShadow: `0 -10px 0 0 ${bgColor}` }}></span>
            ) : null }
             <ArrowIcon className={'w-[10px] rotate-[-90deg]'} />
-       </div>
+       </Link>
    );
 }
 
@@ -159,7 +161,7 @@ const AlgoExpertMenu = () => {
 const SystemExpertMenu = () => {
 
     return <section className={'flex flex-col p-[15px] flex-1 bg-[#890023] h-full text-white gap-[15px] rounded-[4px]'}>
-        <ContentMenuLink href={'/content/systemsexpert'} name={'System Design Context Index'} Icon={IndexIcon} />
+        <ContentMenuLink href={'/system'} name={'System Design Context Index'} Icon={IndexIcon} />
         <ContentMenuLink href={'/algocourses'} name={'System Design Fundamentals'} Icon={ContainersIcon} />
         <ContentMenuLink href={'/'} name={'System Design Questions'} Icon={QuestionsIcon} />
         <ContentMenuLink href={'/'} name={'System Design Quiz'} Icon={AssessmentIcon} />
