@@ -25,6 +25,7 @@ import BlockChainCrashCourseIcon from '../icons/BlockchainCrashCourseIcon.svg';
 import EtheriumIcon from '../icons/EtheriumIcon.svg';
 import ProjectsIcon from '../icons/ProjectsIcon.svg';
 import Web3Icon from '../icons/Web3ToolsIcon.svg';
+import {useHeaderContext} from "@/hooks/useHeaderContext";
 
 
 
@@ -49,18 +50,20 @@ const getSelectedItem = (item) => {
     }
 }
 
-const ContentMenu = ({ isOpen, onClose }) => {
+const ContentMenu = () => {
 
     //TODO: set up some enum for it
     const [itemSelected, setItemSelected] = useState('algoexpert');
 
     const contentMenuRef = useRef(null);
 
-    useOutsideMouseMove(contentMenuRef, () => onClose());
+    const { isContentMenuOpen, setIsContentMenuOpen } = useHeaderContext();
+
+    useOutsideMouseMove(contentMenuRef, () => setIsContentMenuOpen(false));
 
     return (
         <AnimatePresence>
-                { isOpen ? (
+                { isContentMenuOpen ? (
                     <>
                         <motion.div
                                 ref={contentMenuRef}
@@ -156,7 +159,7 @@ const AlgoExpertMenu = () => {
 const SystemExpertMenu = () => {
 
     return <section className={'flex flex-col p-[15px] flex-1 bg-[#890023] h-full text-white gap-[15px] rounded-[4px]'}>
-        <ContentMenuLink href={'/questions'} name={'System Design Context Index'} Icon={IndexIcon} />
+        <ContentMenuLink href={'/content/systemsexpert'} name={'System Design Context Index'} Icon={IndexIcon} />
         <ContentMenuLink href={'/algocourses'} name={'System Design Fundamentals'} Icon={ContainersIcon} />
         <ContentMenuLink href={'/'} name={'System Design Questions'} Icon={QuestionsIcon} />
         <ContentMenuLink href={'/'} name={'System Design Quiz'} Icon={AssessmentIcon} />

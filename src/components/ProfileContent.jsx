@@ -6,7 +6,6 @@ import DoorIcon from "@/icons/DoorIcon.svg";
 import React from "react";
 
 const ProfileContent = () => {
-
     const handleLogOut = () => signOut();
 
     const { data } = useSession();

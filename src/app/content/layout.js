@@ -1,1 +1,3 @@
-export default function layout({ children }) {}
+export default function layout({ children }) {
+    return children;
+}

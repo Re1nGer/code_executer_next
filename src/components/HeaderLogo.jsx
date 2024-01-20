@@ -15,10 +15,10 @@ const HeaderLogo = () => {
     }
 
     useEffect(() => {
-        animate("#header_logo", { rotate: `45deg`,  duration: 1 } )
+        animate("#header_logo", { rotate: `135deg`,  duration: 2 } )
     }, []);
 
-    return <Link href={"/"}>
+    return <Link href={"/product"}>
         <div className={"w-[290px] flex flex-col gap-[10px] text-center"}>
             <div className={"flex items-center justify-center text-white gap-[15px]"}>
                 <HeaderIcon id={"header_logo"} className={"max-w-[48px] max-h-[40px]"}

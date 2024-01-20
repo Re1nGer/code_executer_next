@@ -8,70 +8,64 @@ import LogInButton from "@/components/LogInButton.jsx";
 import ContentMenu from "@/components/ContentMenu";
 import {useSession} from "next-auth/react";
 import ProfileMenu from "@/components/ProfileMenu";
+import {HeaderContext, HeaderContextProvider} from "@/contexts/HeaderContext";
+import {useHeaderContext} from "@/hooks/useHeaderContext";
 
 
-const Header = ({ children }) => {
-
-    const [isModalOpen, setIsModalOpen] = React.useState(false);
-
-    const [isProductMenuOpen, setIsProductMenuOpen] = React.useState(false);
-
-    const [profileMenuOpen, setProfileMenuOpen] = React.useState(false);
-
-    const [isContentMenuOpen, setIsContentMenuOpen] = React.useState(false);
+const Header = ({ bgColor = 'linear-gradient(-90deg, #02203c,#001528)', children }) => {
 
     const { data } = useSession();
 
     const isLoggedIn = data?.user;
 
-    const handleOnMouseOver = (e) => {
-        e.stopPropagation()
-        setIsProductMenuOpen(true)
-    }
-
-    const handleOnMouseOverContentMenu = (e) => {
-        e.stopPropagation();
-        setIsContentMenuOpen(true);
-    }
-
-    const handleClickOutside = () => {
-        setProfileMenuOpen(false);
-    }
-
-    const handleOnClickLogin = () => {
-        setIsModalOpen(true)
-    }
-
     return (
+        <HeaderContextProvider>
             <header
-                className={'h-[540px] bg-gradient-to-r from-[#02203c] to-[#001528] flex flex-col relative'}
-                onClick={handleClickOutside}
+                className={'h-[540px] flex flex-col relative'}
+                style={{ background: bgColor }}
             >
                 <div className={'mx-[20px] py-[20px] flex justify-center items-center'}>
                     <HeaderLogo />
                     <div className={'w-[150px]'}></div>
-                    <nav className={'flex relative mx-[55px] mt-[10px] gap-[30px] h-full items-start font-open_sans text-[14px] text-white'}>
-                        <div onMouseOver={handleOnMouseOver} className={'bg-transparent relative z-10 nav__link'}>Products</div>
-                        <div onMouseOver={handleOnMouseOverContentMenu} className={'bg-transparent relative z-10 nav__link'}>Content</div>
-                        <div className={'bg-transparent relative nav__link'}>Team</div>
-                        <div className={'bg-transparent font-bold relative italic nav__link'}>Purchase</div>
-                    </nav>
+                    <Navbar />
                     <div className={'w-[150px]'}></div>
                     <div className={'flex-1 max-w-[290px] items-start h-full flex justify-start'}>
                         { !isLoggedIn ? (
-                            <LogInButton onClick={handleOnClickLogin} />
-                        ) : <ProfileMenu
-                                profileMenuOpen={profileMenuOpen}
-                                setProfileMenuOpen={setProfileMenuOpen}
-                        /> }
+                            <LogInButton />
+                        ) : <ProfileMenu /> }
                     </div>
                 </div>
-                <SignUpModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-                <ProductMenu isOpen={isProductMenuOpen} onClose={() => setIsProductMenuOpen(false)}/>
-                <ContentMenu isOpen={isContentMenuOpen} onClose={() => setIsContentMenuOpen(false)} />
+                <SignUpModal />
+                <ProductMenu />
+                <ContentMenu />
                 { children }
             </header>
+        </HeaderContextProvider>
     )
+}
+
+const Navbar = () => {
+
+    const { setIsProductMenuOpen, setIsContentMenuOpen } = useHeaderContext();
+
+    const handleOnProductMenuMouseOver = (event) => {
+        event.stopPropagation();
+        setIsProductMenuOpen(true);
+    }
+
+    const handleOnContentMenuMouseOver = (event) => {
+        event.stopPropagation();
+        setIsContentMenuOpen(true);
+    }
+
+    return (
+        <nav className={'flex relative mx-[55px] mt-[10px] gap-[30px] h-full items-start font-open_sans text-[14px] text-white'}>
+            <div onMouseOver={handleOnProductMenuMouseOver} className={'bg-transparent relative z-10 nav__link'}>Products</div>
+            <div onMouseOver={handleOnContentMenuMouseOver} className={'bg-transparent relative z-10 nav__link'}>Content</div>
+            <div className={'bg-transparent relative nav__link'}>Team</div>
+            <div className={'bg-transparent font-bold relative italic nav__link'}>Purchase</div>
+        </nav>
+    );
 }
 
 

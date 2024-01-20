@@ -2,16 +2,19 @@ import React, { useRef } from 'react';
 import Link from 'next/link'
 import { AnimatePresence, motion } from "framer-motion";
 import useOutsideMouseMove from "@/hooks/useOutsideMouseMove";
+import {useHeaderContext} from "@/hooks/useHeaderContext";
 
 
-const ProductMenu = ({ isOpen, onClose }) => {
+const ProductMenu = () => {
 
     const productMenuRef = useRef(null);
 
-    useOutsideMouseMove(productMenuRef, () => onClose());
+    const { isProductMenuOpen, setIsProductMenuOpen } = useHeaderContext();
+
+    useOutsideMouseMove(productMenuRef, () => setIsProductMenuOpen(false));
 
     return <AnimatePresence>
-        { isOpen ? (
+        { isProductMenuOpen ? (
             <>
                 <motion.section
                     ref={productMenuRef}

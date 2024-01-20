@@ -7,15 +7,17 @@ import Facebook from '../icons/FacebookIcon.svg?react'
 import LinkedIn from '../icons/LinkedIn.svg?react'
 import HeaderIcon from "../icons/HeaderIcon.svg?react";
 import { signIn } from "next-auth/react";
+import {useHeaderContext} from "@/hooks/useHeaderContext";
 
-const SignUpModal = ({ isOpen, onClose }) => {
+const SignUpModal = () => {
 
+	const { isLoginModalOpen, setIsLoginModalOpen } = useHeaderContext();
 
-	const handleClickOutside = () => onClose()
+	const handleClickOutside = () => setIsLoginModalOpen(false);
 
 	return (
 		<AnimatePresence>
-			{ isOpen ? (
+			{ isLoginModalOpen ? (
 				<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={'absolute h-screen flex justify-center w-full items-center z-10 bg-black bg-opacity-[.5]'} onClick={handleClickOutside}>
 					<motion.div initial={{ x: 100 }} animate={{ x: 0 }} exit={{ x: 200, opacity: 0 }} onClick={(e) => e.stopPropagation()} className={'max-w-[325px] min-h-[calc(100% - 80px)] max-h-[460px] h-full w-full bg-white border-transparent p-[25px] border-t-[5px] border-t-[#626ee3] shadow-[2px_2px_10px_0_rgba(0,0,0,.3)] rounded-[6px] mx-auto'}>
 						<h1 className={'font-open_sans text-[24px] text-center mb-[15px]'}>Sign in to</h1>
