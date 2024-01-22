@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import CrossIcon from "@/icons/CrossIcon.svg?react";
+import CrossIcon from "@/icons/CrossIcon.svg";
 import { motion } from "framer-motion";
 
 const FailTestSkeleton = forwardRef((props, ref) => {

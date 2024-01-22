@@ -14,6 +14,12 @@ module.exports = {
                 port: "",
                 pathname: "**",
             },
+            {
+                protocol: "https",
+                hostname: "*assets.algoexpert.io",
+                port: "",
+                pathname: "**",
+            },
         ],
     },
     ...withSvgr()
