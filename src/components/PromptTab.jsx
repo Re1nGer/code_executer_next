@@ -6,7 +6,7 @@ import {useQuestionContext} from "@/hooks/useQuestionContext";
 
 const PromptTab = () => {
 
-    const { question: { name, difficulty, prompt, hints, correctcount, failureCount }, isLoading  } = useQuestionContext();
+    const { question: { name, difficulty, prompt, hints, correctcount }, isLoading } = useQuestionContext();
 
     return (
         <div

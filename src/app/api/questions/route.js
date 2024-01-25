@@ -1,5 +1,6 @@
 import prisma from '@/lib/prisma'
-import { sql } from "@vercel/postgres";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]";
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -11,8 +12,23 @@ export async function GET(request, { params }) {
 
 export async function PUT(request, { params }) {
     try {
+        console.log('request');
+        const session = await getServerSession(authOptions)
+
+        if (!session)
+            return Response.json({ error: "Unauthorized" }, { status: 401 });
+
         const { uid, scratchpad } = await request.json()
-        await sql`UPDATE algorithm SET scratchpad = ${scratchpad} WHERE uid = ${uid}`
+
+        await prisma.scratchpad.update({
+            where: {
+                questionId: uid,
+                userId: session.user.id
+            },
+            data: {
+                text: scratchpad
+            },
+        })
         return Response.json([]);
     }
     catch (error) {

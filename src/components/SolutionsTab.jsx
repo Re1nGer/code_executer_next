@@ -23,7 +23,7 @@ const SolutionsTab = () => {
                         className={'rounded-[4px] font-bold text-white px-[6px] py-[1px]'}>{`Solution ${idx + 1}`}</button>
             )) }
         </div>
-        <SolutionTab code={solutions[activeTab]} />
+        <SolutionTab code={solutions[activeTab]?.code} />
     </>
 }
 

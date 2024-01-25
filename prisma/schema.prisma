@@ -17,9 +17,7 @@ model Question {
   difficulty    Int
   prompt        String?
   scratchpads   Scratchpad[]
-  scratchpadIds Int[]        @unique
-  userSolutions Solution[]
-  solutions     String[]
+  solutions     Solution[]
   languages     Language[]
   users         User[]
 }
@@ -29,7 +27,7 @@ model Scratchpad {
   id         Int      @id @default(autoincrement())
   text       String?
   question   Question @relation(fields: [questionId], references: [uid])
-  questionId String
+  questionId String  @unique
   user       User @relation(fields: [userId], references: [id])
   userId     String
 }
@@ -37,19 +35,20 @@ model Scratchpad {
 model Solution {
   id         Int       @id @default(autoincrement())
   code       String?
+  userId     String?
   question   Question? @relation(fields: [questionId], references: [uid])
   questionId String?
-  language Language? @relation(fields: [languageId], references: [id])
+  language   Language? @relation(fields: [languageId], references: [id])
   languageId Int? @unique
 }
 
 model Language {
   id         Int       @id @default(autoincrement())
   question   Question? @relation(fields: [questionId], references: [uid])
-  name String?
-  solution Solution?
-  solutionId Int
+  name       String?
+  solutionId Int?
   questionId String?
+  solutions  Solution[]
 }
 
 model User {
@@ -58,10 +57,10 @@ model User {
   email     String?    @unique
   image     String?
   emailVerified DateTime?
-  createdAt DateTime   @default(now()) @map(name: "created_at")
-  updatedAt DateTime   @updatedAt @map(name: "updated_at")
-  questions Question[]
-  scratchpads Scratchpad[]
+  createdAt     DateTime   @default(now()) @map(name: "created_at")
+  updatedAt     DateTime   @updatedAt @map(name: "updated_at")
+  questions     Question[]
+  scratchpads   Scratchpad[]
   accounts      Account[]
   sessions      Session[]
 

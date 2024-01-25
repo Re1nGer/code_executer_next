@@ -1,4 +1,4 @@
-import {createContext, useContext, useState} from "react";
+import {createContext, useState} from "react";
 
 export const QuestionContext = createContext(null);
 
@@ -27,13 +27,16 @@ export const QuestionContextProvider = ({ children }) => {
 
     const [question, setQuestion] = useState(defaultQuestionValue);
     const [isLoading, setIsLoading] = useState(true);
+    const [isScratchpadSaving, setIsScratchpadSaving] = useState(false);
 
     const value = {
         question,
         setQuestion,
         setIsLoading,
-        isLoading
-    }
+        isLoading,
+        setIsScratchpadSaving,
+        isScratchpadSaving
+    };
 
     return <QuestionContext.Provider value={value}>{children}</QuestionContext.Provider>
 }

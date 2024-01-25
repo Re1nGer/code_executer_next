@@ -3,10 +3,13 @@ import ScratchPadTab from "@/components/ScratchPadTab";
 import PromptTab from "@/components/PromptTab";
 import SolutionsTab from "@/components/SolutionsTab";
 import VideoExplanationTab from "@/components/VideoExplanationTab";
+import {useQuestionContext} from "@/hooks/useQuestionContext";
 
 const PromptTabs = () => {
 
     const [activeTab, setActiveTab] = useState(1);
+
+    const { isLoading, isScratchpadSaving } = useQuestionContext();
 
     const handleTabClick = (tabIndex) => {
         setActiveTab(tabIndex);
@@ -34,24 +37,36 @@ const PromptTabs = () => {
     return (
         <>
             <div className={'bg-[#15314b] text-white font-bold flex rounded-[4px]'}>
-                <button className={'px-[15px] py-[10px] prompt__tab'}
+                <button
+                        tabIndex={1}
+                        className={'px-[15px] py-[10px] prompt__tab'}
                         style={getActiveTabStyle(1)}
                         onClick={() => handleTabClick(1)}
+                        disabled={isScratchpadSaving}
                 >Prompt
                 </button>
-                <button className={'px-[15px] py-[10px] prompt__tab'}
+                <button
+                        tabIndex={2}
+                        disabled={isLoading}
+                        className={'px-[15px] py-[10px] prompt__tab'}
                         style={getActiveTabStyle(2)}
                         onClick={() => handleTabClick(2)}
                 >ScratchPad
                 </button>
-                <button className={'px-[15px] py-[10px] prompt__tab'}
+                <button
+                        tabIndex={3}
+                        className={'px-[15px] py-[10px] prompt__tab'}
                         style={getActiveTabStyle(3)}
                         onClick={() => handleTabClick(3)}
+                        disabled={isScratchpadSaving}
                 >Solutions
                 </button>
-                <button className={'px-[15px] py-[10px] prompt__tab'}
+                <button
+                        tabIndex={4}
+                        className={'px-[15px] py-[10px] prompt__tab'}
                         style={getActiveTabStyle(4)}
                         onClick={() => handleTabClick(4)}
+                        disabled={isScratchpadSaving}
                 >Video Explanations
                 </button>
                 <button className={'px-[15px] py-[10px]'}></button>
