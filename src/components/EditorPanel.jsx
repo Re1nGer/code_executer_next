@@ -1,17 +1,34 @@
-import {Editor} from "@monaco-editor/react";
+import { Editor } from "@monaco-editor/react";
+import {useQuestionContext} from "@/hooks/useQuestionContext";
+import {useState} from "react";
 
 const EditorPanel = ({ width }) => {
 
+    const [activeSolution, setActiveSolution] = useState(0);
+
+    const { question: { solutions = [] } } = useQuestionContext();
+
+    const userSolutions = solutions?.filter(item => item.userId);
+
+    const handleTabClick = (idx) => setActiveSolution(idx);
 
     return <div className={"flex flex-col h-full w-screen min-w-[1px]"} style={{ flexBasis: width }}>
         <div className={"flex flex-col"}>
-            <div className={"bg-[#15314b] text-white font-bold flex rounded-[4px]"}>
-                <button className={"px-[15px] py-[10px] transition-colors hover:bg-[#626ee3]"}>Your Solutions</button>
+            <div className={'bg-[#15314b] text-white font-bold flex rounded-[4px]'}>
+                <button tabIndex={0} className={'px-[15px] py-[10px] prompt__tab'}>Your Solutions</button>
+            </div>
+            <div className={'p-[10px] flex gap-[10px] items-center bg-[#001528]'}>
+                { userSolutions?.map((item, idx) => (
+                    <button key={item} onClick={() => handleTabClick(idx)}
+                            style={{ background: activeSolution === idx ? '#626ee3' : 'transparent' }}
+                            className={'rounded-[4px] font-bold text-white px-[6px] py-[1px]'}>{`Solution ${idx + 1}`}</button>
+                )) }
             </div>
             <div className={'w-full'}>
                 <Editor height={"500px"}
-                        defaultLanguage={"javascript"}
+                        defaultLanguage={"python"}
                         theme={"vs-dark"}
+                        value={userSolutions[activeSolution]?.code}
                 />
             </div>
             <div

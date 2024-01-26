@@ -18,7 +18,7 @@ export async function PUT(request, { params }) {
         if (!session)
             return Response.json({ error: "Unauthorized" }, { status: 401 });
 
-        const { uid, scratchpad } = await request.json()
+        const { uid, scratchpad } = await request.json();
 
         await prisma.scratchpad.update({
             where: {

@@ -39,7 +39,7 @@ model Solution {
   question   Question? @relation(fields: [questionId], references: [uid])
   questionId String?
   language   Language? @relation(fields: [languageId], references: [id])
-  languageId Int? @unique
+  languageId Int?
 }
 
 model Language {

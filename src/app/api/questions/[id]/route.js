@@ -13,8 +13,11 @@ export async function GET(request, { params }) {
 
     const question = await prisma.question.findFirst({
         where: { uid: params.id },
-        include: { solutions: true, scratchpads: { where: { userId: session ? session?.user?.id : '' }, take: 1 } },
-    })
+        include: { solutions: { where: { OR: [ { userId: null }, { userId: session?.user?.id } ] }},
+                   scratchpads: { where: { userId: session ? session?.user?.id : '' }, take: 1 },
+
+        },
+    });
     return Response.json(question)
 }
 
