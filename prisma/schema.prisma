@@ -20,6 +20,16 @@ model Question {
   solutions     Solution[]
   languages     Language[]
   users         User[]
+  resources     Resource[]
+}
+
+model Resource {
+  id          Int      @id @default(autoincrement())
+  archiveLink String
+  language    Language @relation(fields: [languageId], references: [id])
+  languageId  Int
+  question    Question @relation(fields: [questionId], references: [uid])
+  questionId  String
 }
 
 
@@ -44,11 +54,11 @@ model Solution {
 
 model Language {
   id         Int       @id @default(autoincrement())
-  question   Question? @relation(fields: [questionId], references: [uid])
+  question   Question[]
   name       String?
   solutionId Int?
-  questionId String?
   solutions  Solution[]
+  resources  Resource[]
 }
 
 model User {
