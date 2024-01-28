@@ -1,35 +1,53 @@
-import {NextResponse} from "next/server";
-
+import { NextResponse } from "next/server";
+const JSZip = require('jszip');
 import fetch from 'node-fetch'
-import path from 'path';
-import { Blob } from "buffer";
 
-export async function POST(request, res) {
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
-    const { fileLink, userCode } = await request.json();
+export async function POST(request) {
 
-    const response = await fetch(fileLink);
+    const { fileLink, userCode, language } = await request.json();
 
-    if (!response.ok) {
-        console.log(`Failed to fetch the blob. Status: ${response.status}`);
+    const url = 'https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=true&fields=*';
+
+    const existingZipData = await fetch(fileLink).then(res => res.arrayBuffer());
+
+    // Create a JSZip instance and load the existing zip data
+    const zip = new JSZip();
+
+    await zip.loadAsync(existingZipData);
+
+    // Fetch the content of the file to add
+    const fileToAddData = Buffer.from(userCode);
+
+    // Add the file to the zip archive
+    //depending on language there has to be different file extension
+    zip.file('solution.py', fileToAddData);
+
+    // Generate the updated zip file
+    const updatedZipData = await zip.generateAsync({ type: 'base64' });
+
+    //const archive = await zip.generateAsync({ type: 'base64' });
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-RapidAPI-Key': process.env.JUDGE_KEY,
+            },
+            body: JSON.stringify({
+                language_id: 89,
+                additional_files: updatedZipData,
+            }),
+        });
+
+        const result = await response.json();
+
+        return NextResponse.json({ submissionToken: result.token });
+
+    } catch (error) {
+        return NextResponse.error();
     }
-
-    // Read the content as ArrayBuffer
-    const contentBuffer = await response.arrayBuffer();
-
-    console.log(response);
-
-    const userCodeBuffer = Buffer.from(userCode);
-
-    // Concatenate the existing content and userCode
-    const combinedBuffer = Buffer.concat([Buffer.from(contentBuffer), userCodeBuffer]);
-
-    const file = new File([new Blob([combinedBuffer])], 'test.py');
-
-    return new NextResponse(file, {                                            // Create a new NextResponse for the file with the given stream from the disk
-        status: 200,                                                                    //STATUS 200: HTTP - Ok
-        headers: new Headers({                                                          //Headers
-            "content-disposition": `attachment; filename=${path.basename(fileLink)}`,           //State that this is a file attachment
-        }),
-    });
 }

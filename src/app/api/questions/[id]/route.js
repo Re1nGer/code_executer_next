@@ -2,7 +2,6 @@
 import prisma from '@/lib/prisma'
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]";
-import {getSession} from "next-auth/react";
 
 
 export const dynamic = 'force-dynamic'
@@ -19,5 +18,31 @@ export async function GET(request, { params }) {
         },
     });
     return Response.json(question)
+}
+
+export async function PUT(request, { params }) {
+
+    const session = await getServerSession(authOptions)
+
+/*
+    if (!session)
+        return Response.json({ error: "Unauthorized" }, { status: 401 });
+*/
+
+    const { uid, code } = await request.json();
+
+    try {
+        await prisma.solution.updateMany({
+            where: { userId: session?.user?.id, questionId: uid },
+            data: {
+                code: code
+            }
+        });
+        return Response.json({ status: 'saved successfully' });
+    }
+    catch (error) {
+        console.log(error);
+        return Response.json({ error: 'error' }, { status: 500 });
+    }
 }
 

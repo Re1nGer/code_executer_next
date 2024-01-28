@@ -107,6 +107,10 @@
   background: #626ee3 !important;
 }
 
+pre[class*='language-'] {
+  box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.4), 0 0 3px 1px rgba(0, 0, 0, 0.3);
+}
+
 .question {
   -ms-user-select: none;
   -webkit-user-select: none;

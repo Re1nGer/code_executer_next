@@ -1,14 +1,101 @@
 import { Editor } from "@monaco-editor/react";
-import {useQuestionContext} from "@/hooks/useQuestionContext";
-import {useState} from "react";
+import { useQuestionContext } from "@/hooks/useQuestionContext";
+import { useEffect, useMemo, useState } from "react";
+import { useDebounce } from "@/hooks/useDebounce";
+import ScratchpadLoader from "@/components/ScratchpadLoader";
+import TickIcon from "@/icons/TickIcon.svg";
+import CrossIcon from '@/icons/CrossIcon2.svg';
+import ArrowIcon from '@/icons/ArrowDown.svg';
 
 const EditorPanel = ({ width }) => {
 
     const [activeSolution, setActiveSolution] = useState(0);
 
-    const { question: { solutions = [] } } = useQuestionContext();
+    const [runTabActiveIdx, setRunTabActiveIdx] = useState(0);
 
-    const userSolutions = solutions?.filter(item => item.userId);
+    const { question: { solutions = [], uid } } = useQuestionContext();
+
+    const [testCases, setTestCases] = useState([]);
+
+    const [isSaving, setIsSaving] = useState(false);
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const userSolutions = useMemo(() => solutions?.filter(item => item.userId), [solutions]);
+
+    const [localCode, setLocalCode] = useState(userSolutions.length > 0 ? userSolutions[activeSolution]?.code : '');
+
+    const debouncedCodeInput = useDebounce(localCode, 300);
+
+    const getActiveTabStyle = (tabIndex) => {
+        return { background: tabIndex === runTabActiveIdx ? '#001528' : '#15314b' }
+    }
+
+    const handleChange = (value) => {
+        setIsSaving(true);
+        setLocalCode(value);
+    }
+
+    const renderRunTab = () => {
+        switch (runTabActiveIdx) {
+            case 0:
+                return <CustomOutputTab />
+            case 1:
+                return <RawOutputTab />
+            default:
+                return <CustomOutputTab />
+        }
+    }
+
+    const executeCode = async (e) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        try {
+            const res = await fetch('/api/execute', {
+                method: 'POST',
+                body: JSON.stringify({
+                    //filelink should be fetched from the question
+                    fileLink: 'https://mcwlmebmwa37nl3e.public.blob.vercel-storage.com/validate_sub-VlTUfyrh1ACN2Rh8U1fSbzKFFmQ4zm.zip',
+                    userCode: localCode
+                })
+            });
+
+            const { submissionToken } = await res.json();
+
+            setTimeout(async () => {
+                const subRes = await fetch(`/api/submission?token=${submissionToken}`);
+
+                const ans = await subRes.json();
+
+                setTestCases(ans?.testOutput);
+            }, [2000])
+
+        } catch (error) {
+            console.log(error);
+        }
+        finally {
+            setIsSubmitting(false);
+        }
+    }
+
+    const saveCode = async () => {
+        try {
+            await fetch(`/api/questions/${uid}`, { method: 'PUT', body: JSON.stringify({ code: debouncedCodeInput, uid: uid }) });
+        } catch (error) {
+            console.log(error);
+        }
+        finally {
+            setIsSaving(false);
+        }
+    }
+
+    useEffect(() => {
+        if (uid) saveCode();
+    }, [debouncedCodeInput]);
+
+    useEffect(() => {
+        setLocalCode(userSolutions[activeSolution]?.code)
+    }, [solutions]);
 
     const handleTabClick = (idx) => setActiveSolution(idx);
 
@@ -24,29 +111,106 @@ const EditorPanel = ({ width }) => {
                             className={'rounded-[4px] font-bold text-white px-[6px] py-[1px]'}>{`Solution ${idx + 1}`}</button>
                 )) }
             </div>
-            <div className={'w-full'}>
+            <div className={'w-full relative'}>
                 <Editor height={"500px"}
                         defaultLanguage={"python"}
+                        defaultValue={localCode}
+                        value={debouncedCodeInput}
                         theme={"vs-dark"}
-                        value={userSolutions[activeSolution]?.code}
+                        onChange={handleChange}
                 />
+                <div className={'absolute top-0 right-[10px]'}>
+                    { isSaving ? (
+                        <ScratchpadLoader />
+                    ) : (
+                        <TickIcon className={'w-[20px] h-[20px] text-white'} />
+                    ) }
+                </div>
             </div>
             <div
                 className={"w-full h-[15px] bg-transparent cursor-col-resize transition-colors hover:bg-[#626ee3]"}></div>
             <div className={"flex justify-between bg-[#15314b] flex-1"}>
                 <div className={"text-white font-bold flex rounded-[4px]"}>
-                    <button className={"px-[15px] py-[10px] transition-colors hover:bg-[#626ee3]"}>Custom Output</button>
-                    <button className={"px-[15px] py-[10px] transition-colors hover:bg-[#626ee3]"}>Raw Output</button>
+                    <button tabIndex={0}
+                            className={"px-[15px] py-[10px] transition-colors hover:bg-[#626ee3]"}
+                            style={getActiveTabStyle(0)}
+                            onClick={() => setRunTabActiveIdx(0)}>Custom Output</button>
+                    <button tabIndex={1}
+                            className={"px-[15px] py-[10px] transition-colors hover:bg-[#626ee3]"}
+                            style={getActiveTabStyle(1)}
+                            onClick={() => setRunTabActiveIdx(1)}>Raw Output</button>
                     <button className={"px-[15px] py-[10px]"}></button>
                 </div>
-                <button className={"bg-[#008529] px-[15px] text-[14px] text-white font-open_sans"}>Submit code</button>
+                <button type={'button'} className={"bg-[#008529] px-[15px] text-[14px] text-white font-open_sans"} onClick={executeCode}>Submit code</button>
             </div>
-            <div className={"p-[20px] bg-[#001528] h-full min-h-[350px]"}>
-                <h3 className={"text-[#445d6e] flex items-center h-full text-center w-full justify-center font-bold font-open_sans"}>Run
-                    Or Submit your code when you are ready</h3>
+            <div className={"p-[20px] bg-[#001528] h-full flex-1 basis-[35%] shrink-0"}>
+                <CustomOutputTab testCases={testCases} />
             </div>
         </div>
     </div>;
 }
 
 export default EditorPanel
+
+
+const CustomOutputTab = ({ testCases }) => {
+    return <div className={'overflow-y-auto max-h-[400px] product__test_scrollbar'}>
+        { testCases.length > 0 ? (
+            <div className={'flex flex-col gap-[.5rem]'}>
+                { testCases.map(item => <TestCase key={item.data} {...item} />) }
+            </div>
+        ) : (
+            <h3 className={"text-[#445d6e] flex items-center h-full text-center w-full justify-center font-bold font-open_sans"}>Run
+                Or Submit your code when you are ready</h3>
+            )
+        }
+    </div>
+};
+
+const TestCase = ({ passed, num }) => {
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleExpandClick = () => {
+        setIsOpen(!isOpen);
+    }
+
+    return <section className={'bg-[#15314b] text-white rounded-[4px] p-[1rem] cursor-pointer'} onClick={handleExpandClick}>
+        <div className={'flex justify-between'}>
+            { passed ? (
+                <div className={'flex gap-[5px]'}>
+                    <TickIcon className={'w-[20px] text-[#00af32]'} />
+                    <h1> Test Case {num} passed! </h1>
+                </div>
+            ) : (
+                <div className={'flex gap-[5px]'}>
+                    <CrossIcon className={'w-[20px] text-red-600'} />
+                    <h1> Test Case {num} failed. </h1>
+                </div>
+            ) }
+            <div>
+                <ArrowIcon className={'w-[15px]'} />
+            </div>
+        </div>
+        { isOpen ? (
+            <div className={'p-[20px]'}>
+                <div className={'mb-[30px]'}>
+                    <h1 className={'text-[#e9e9e9] items-center font-bold mb-[5px]'}>Expected Output</h1>
+                    <pre className={'language-json line-numbers text-white'}>
+                    <code className={'language-json line-numbers'}>true</code>
+                </pre>
+                </div>
+                <div className={'mb-[30px]'}>
+                    <h1 className={'text-[#e9e9e9] items-center font-bold mb-[5px]'}>Your Code's Output</h1>
+                    <pre className={'language-json line-numbers'}>
+                    <code className={'language-json'}>true</code>
+                </pre>
+                </div>
+            </div>
+        ) : null }
+    </section>
+};
+
+const RawOutputTab = () => {
+    return <></>
+};
