@@ -31,14 +31,45 @@ const EditorPanel = ({ width }) => {
 
     const debouncedCodeInput = useDebounce(localCode, 300);
 
+    const [outputH, setOutputH] = useState(300); //default width of the window
+
+    const [drag, setDrag] = useState({
+        active: false,
+        y: ""
+    });
+
     const getActiveTabStyle = (tabIndex) => {
         return { background: tabIndex === runTabActiveIdx ? '#001528' : '#15314b' }
     }
 
+    const resizeFrame = e => {
+        const { active, x, y } = drag;
+        if (active) {
+            const yDiff = Math.abs(y - e.clientY);
+
+            const newH = y > e.clientY ? outputH + yDiff : outputH - yDiff;
+
+            setDrag({ ...drag, y: e.clientY });
+
+            setOutputH(newH);
+        }
+    };
+
+    const startResize = e => {
+        setDrag({
+            active: true,
+            y: e.clientY
+        });
+    };
+
+    const stopResize = e => {
+        setDrag({ ...drag, active: false });
+    };
+
     const handleChange = (value) => {
         setIsSaving(true);
         setLocalCode(value);
-    }
+    };
 
     const renderRunTab = () => {
         switch (runTabActiveIdx) {
@@ -57,7 +88,7 @@ const EditorPanel = ({ width }) => {
                         hasFailed={hasFailed}
                     />
         }
-    }
+    };
 
     const executeCode = async (e) => {
         e.preventDefault();
@@ -85,9 +116,7 @@ const EditorPanel = ({ width }) => {
 
                     const hasAnyFailed = ans?.testOutput.some(item => !item.passed);
 
-                    if (hasAnyFailed) setHasFailed(true);
-
-                    else setHasFailed(false);
+                    setHasFailed(hasAnyFailed);
 
                 }
                 catch (error) {
@@ -112,7 +141,7 @@ const EditorPanel = ({ width }) => {
         finally {
             setIsSaving(false);
         }
-    }
+    };
 
     useEffect(() => {
         if (uid) saveCode();
@@ -124,10 +153,13 @@ const EditorPanel = ({ width }) => {
 
     const handleTabClick = (idx) => setActiveSolution(idx);
 
-    return <div className={"flex flex-col h-full w-screen min-w-[1px]"} style={{ flexBasis: width }}>
+    return <div className={"flex flex-col w-screen min-w-[1px]"}
+                onMouseMove={resizeFrame}
+                onMouseUp={stopResize}
+                style={{ flexBasis: width, height: `${window.innerHeight - outputH}px` }}>
         <div className={"flex flex-col"}>
             <div className={'bg-[#15314b] text-white font-bold flex rounded-[4px]'}>
-                <button tabIndex={0} className={'px-[15px] py-[10px] prompt__tab'}>Your Solutions</button>
+                <button tabIndex={0} className={'px-[15px] py-[10px] prompt__tab bg-[rgb(0_21_40)]'}>Your Solutions</button>
             </div>
             <div className={'p-[10px] flex gap-[10px] items-center bg-[#001528]'}>
                 { userSolutions?.map((item, idx) => (
@@ -137,7 +169,8 @@ const EditorPanel = ({ width }) => {
                 )) }
             </div>
             <div className={'w-full relative'}>
-                <Editor height={"500px"}
+                <Editor
+                        height={`${window.innerHeight   - outputH}px`}
                         defaultLanguage={"python"}
                         defaultValue={localCode}
                         value={debouncedCodeInput}
@@ -153,23 +186,28 @@ const EditorPanel = ({ width }) => {
                 </div>
             </div>
             <div
-                className={"w-full h-[15px] bg-transparent cursor-col-resize transition-colors hover:bg-[#626ee3]"}></div>
-            <div className={"flex justify-between bg-[#15314b] flex-1"}>
-                <div className={"text-white font-bold flex rounded-[4px]"}>
-                    <button tabIndex={0}
-                            className={"px-[15px] py-[10px] transition-colors hover:bg-[#626ee3]"}
-                            style={getActiveTabStyle(0)}
-                            onClick={() => setRunTabActiveIdx(0)}>Custom Output</button>
-                    <button tabIndex={1}
-                            className={"px-[15px] py-[10px] transition-colors hover:bg-[#626ee3]"}
-                            style={getActiveTabStyle(1)}
-                            onClick={() => setRunTabActiveIdx(1)}>Raw Output</button>
-                    <button className={"px-[15px] py-[10px]"}></button>
-                </div>
-                <button type={'button'} className={"bg-[#008529] px-[15px] text-[14px] text-white font-open_sans"} onClick={executeCode}>Submit code</button>
+                onMouseDown={startResize}
+                className={"w-full h-[20px] py-[.5rem] bg-transparent cursor-row-resize transition-colors hover:bg-[#626ee3]"}>
+
             </div>
-            <div className={"p-[20px] bg-[#001528] h-full flex-1 basis-[35%] shrink-0"}>
-                { renderRunTab() }
+            <div style={{ height: `${outputH}px` }}>
+                <div className={"flex justify-between bg-[#15314b]"}>
+                    <div className={"text-white font-bold flex rounded-[4px] h-full"}>
+                        <button tabIndex={0}
+                                className={"px-[15px] py-[10px] transition-colors hover:bg-[#626ee3]"}
+                                style={getActiveTabStyle(0)}
+                                onClick={() => setRunTabActiveIdx(0)}>Custom Output</button>
+                        <button tabIndex={1}
+                                className={"px-[15px] py-[10px] transition-colors hover:bg-[#626ee3]"}
+                                style={getActiveTabStyle(1)}
+                                onClick={() => setRunTabActiveIdx(1)}>Raw Output</button>
+                        <button className={"px-[15px] py-[10px]"}></button>
+                    </div>
+                    <button type={'button'} className={"bg-[#008529] px-[15px] text-[14px] text-white font-open_sans"} onClick={executeCode}>Submit code</button>
+                </div>
+                <div className={"p-[20px] bg-[#001528] shrink-0 h-full"}>
+                    { renderRunTab() }
+                </div>
             </div>
         </div>
     </div>;
