@@ -6,6 +6,8 @@ import ScratchpadLoader from "@/components/ScratchpadLoader";
 import TickIcon from "@/icons/TickIcon.svg";
 import CrossIcon from '@/icons/CrossIcon2.svg';
 import ArrowIcon from '@/icons/ArrowDown.svg';
+import QuestionsLoader from "@/components/QuestionsLoader";
+import { motion } from "framer-motion";
 
 const EditorPanel = ({ width }) => {
 
@@ -20,6 +22,8 @@ const EditorPanel = ({ width }) => {
     const [isSaving, setIsSaving] = useState(false);
 
     const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const [hasFailed, setHasFailed] = useState(false);
 
     const userSolutions = useMemo(() => solutions?.filter(item => item.userId), [solutions]);
 
@@ -39,11 +43,19 @@ const EditorPanel = ({ width }) => {
     const renderRunTab = () => {
         switch (runTabActiveIdx) {
             case 0:
-                return <CustomOutputTab />
+                return <CustomOutputTab
+                        testCases={testCases}
+                        isExecuting={isSubmitting}
+                        hasFailed={hasFailed}
+                    />
             case 1:
                 return <RawOutputTab />
             default:
-                return <CustomOutputTab />
+                return <CustomOutputTab
+                        testCases={testCases}
+                        isExecuting={isSubmitting}
+                        hasFailed={hasFailed}
+                    />
         }
     }
 
@@ -55,26 +67,39 @@ const EditorPanel = ({ width }) => {
                 method: 'POST',
                 body: JSON.stringify({
                     //filelink should be fetched from the question
-                    fileLink: 'https://mcwlmebmwa37nl3e.public.blob.vercel-storage.com/validate_sub-VlTUfyrh1ACN2Rh8U1fSbzKFFmQ4zm.zip',
+                    fileLink: 'https://mcwlmebmwa37nl3e.public.blob.vercel-storage.com/validate_sub-c5gw4iPng2HteYCRnhwof1kLoA2MPp.zip',
                     userCode: localCode
                 })
             });
 
             const { submissionToken } = await res.json();
 
+            //To avoid throttling Judge0 server
             setTimeout(async () => {
-                const subRes = await fetch(`/api/submission?token=${submissionToken}`);
+                try {
+                    const subRes = await fetch(`/api/submission?token=${submissionToken}`);
 
-                const ans = await subRes.json();
+                    const ans = await subRes.json();
 
-                setTestCases(ans?.testOutput);
-            }, [2000])
+                    setTestCases(ans?.testOutput);
+
+                    const hasAnyFailed = ans?.testOutput.some(item => !item.passed);
+
+                    if (hasAnyFailed) setHasFailed(true);
+
+                    else setHasFailed(false);
+
+                }
+                catch (error) {
+                    console.log(error);
+                }
+                finally {
+                    setIsSubmitting(false)
+                }
+            }, [2000]);
 
         } catch (error) {
             console.log(error);
-        }
-        finally {
-            setIsSubmitting(false);
         }
     }
 
@@ -144,7 +169,7 @@ const EditorPanel = ({ width }) => {
                 <button type={'button'} className={"bg-[#008529] px-[15px] text-[14px] text-white font-open_sans"} onClick={executeCode}>Submit code</button>
             </div>
             <div className={"p-[20px] bg-[#001528] h-full flex-1 basis-[35%] shrink-0"}>
-                <CustomOutputTab testCases={testCases} />
+                { renderRunTab() }
             </div>
         </div>
     </div>;
@@ -153,15 +178,44 @@ const EditorPanel = ({ width }) => {
 export default EditorPanel
 
 
-const CustomOutputTab = ({ testCases }) => {
-    return <div className={'overflow-y-auto max-h-[400px] product__test_scrollbar'}>
-        { testCases.length > 0 ? (
-            <div className={'flex flex-col gap-[.5rem]'}>
-                { testCases.map(item => <TestCase key={item.data} {...item} />) }
-            </div>
-        ) : (
-            <h3 className={"text-[#445d6e] flex items-center h-full text-center w-full justify-center font-bold font-open_sans"}>Run
-                Or Submit your code when you are ready</h3>
+const CustomOutputTab = ({ testCases, isExecuting, hasFailed }) => {
+
+    //TODO: stagger children animation
+    const variants= {
+        hidden : {
+            opacity: 0,
+        },
+        shown: {
+            opacity: 1,
+            transition: {
+                delay: .5,
+                when: "beforeChildren",
+                staggerChildren: 0.3,
+                ease: "easeInOut"
+            },
+        }
+    }
+
+    return <div className={'overflow-y-auto max-h-[400px] product__test_scrollbar h-full'}>
+        { (!isExecuting && testCases.length > 0) ? (
+            <>
+                { hasFailed ? (
+                    <h1 className={'text-white font-bold text-[18px] font-open_sans text-center mb-[.5rem]'}>Aww, some of the tests cases failed.</h1>
+                ) : null }
+                <motion.div variants={variants} initial={'hidden'} animate={"shown"}
+                            style={{ border: hasFailed ? '1px solid red' : '' }}
+                            className={'flex flex-col gap-[.5rem]'}>
+                    { testCases.map(item => <TestCase key={item.data} {...item} />) }
+                </motion.div>
+            </>
+        ) : ( isExecuting ? (
+                    <div className={'flex justify-center items-center h-full'}>
+                        <QuestionsLoader />
+                    </div>
+                ) : (
+                    <h3 className={"text-[#445d6e] flex items-center h-full text-center w-full justify-center font-bold font-open_sans"}>Run
+                        Or Submit your code when you are ready</h3>
+                )
             )
         }
     </div>
@@ -175,7 +229,11 @@ const TestCase = ({ passed, num }) => {
         setIsOpen(!isOpen);
     }
 
-    return <section className={'bg-[#15314b] text-white rounded-[4px] p-[1rem] cursor-pointer'} onClick={handleExpandClick}>
+    return <motion.section
+               initial={{ opacity: 0 }}
+               animate={{ opacity: 1 }}
+               className={'bg-[#15314b] text-white rounded-[4px] p-[1rem] cursor-pointer'}
+               onClick={handleExpandClick}>
         <div className={'flex justify-between'}>
             { passed ? (
                 <div className={'flex gap-[5px]'}>
@@ -208,7 +266,7 @@ const TestCase = ({ passed, num }) => {
                 </div>
             </div>
         ) : null }
-    </section>
+    </motion.section>
 };
 
 const RawOutputTab = () => {

@@ -74,7 +74,6 @@ const ProductMenu = () => {
                                 </div>
                             </Link>
                         </div>
-
                     </motion.div>
                 </motion.section>
             </>

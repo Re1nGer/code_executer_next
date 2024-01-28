@@ -10,7 +10,7 @@ const PromptTab = () => {
 
     return (
         <div
-            className={'p-[20px] max-h-[550px] product__test_scrollbar overflow-x-hidden bg-[#001528]'}>
+            className={'p-[20px] h-full product__test_scrollbar overflow-x-hidden bg-[#001528]'}>
             <div className={'flex gap-[20px] text-white mb-[10px]'}>
                 <div className={'flex items-center gap-[10px] font-bold'}>
                     <h3>Difficulty:</h3>

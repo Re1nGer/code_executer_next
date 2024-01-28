@@ -1,7 +1,7 @@
 import { Editor } from "@monaco-editor/react";
 
-const TestCasePanel = () => {
-    return <div className={"p-[20px] bg-[#001528] blur-[4px]"}>
+const TestCasePanel = ({ handleBlur }) => {
+    return <div className={"p-[20px] bg-[#001528] blur-[4px] h-full"}>
         <div className={"flex flex-col text-white"}>
             <div className={"flex flex-col gap-[1rem]"}>
                 <h1 className={"font-bold font-open_sans text-[18px]"}>Test Case 1</h1>
