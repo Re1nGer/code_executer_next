@@ -1,11 +1,10 @@
-import {useSession} from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import ArrowDownIcon from "@/icons/ArrowDown.svg";
-import {AnimatePresence} from "framer-motion";
-import React, {useRef} from "react";
+import { AnimatePresence } from "framer-motion";
+import React from "react";
 import ProfileContent from "@/components/ProfileContent";
 import {useHeaderContext} from "@/hooks/useHeaderContext";
-import useOutsideMouseMove from "@/hooks/useOutsideMouseMove";
 
 const ProfileMenu = () => {
 

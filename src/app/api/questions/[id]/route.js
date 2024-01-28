@@ -10,11 +10,27 @@ export async function GET(request, { params }) {
 
     const session = await getServerSession(authOptions)
 
+    const hasUserQuestion = await prisma.userQuestion.findFirst({
+        where: { questionId: params.id }
+    });
+
+    if (session && !hasUserQuestion) {
+        await prisma.userQuestion.create({
+            data: {
+                userId: session.user.id,
+                isComplete: false,
+                questionId: params.id
+            }
+        });
+    }
+
+    console.log(hasUserQuestion);
+
     const question = await prisma.question.findFirst({
         where: { uid: params.id },
         include: { solutions: { where: { OR: [ { userId: null }, { userId: session?.user?.id } ] }},
                    scratchpads: { where: { userId: session ? session?.user?.id : '' }, take: 1 },
-
+                    userQuestions: { where: { questionId: params.id } }
         },
     });
     return Response.json(question)

@@ -21,6 +21,7 @@ model Question {
   languages     Language[]
   users         User[]
   resources     Resource[]
+  userQuestions UserQuestion[]
 }
 
 model Resource {
@@ -52,6 +53,15 @@ model Solution {
   languageId Int?
 }
 
+model UserQuestion {
+  id      Int   @id @default(autoincrement())
+  isComplete Boolean
+  question   Question @relation(fields: [questionId], references: [uid])
+  questionId String
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+}
+
 model Language {
   id         Int       @id @default(autoincrement())
   question   Question[]
@@ -66,6 +76,7 @@ model User {
   name      String?
   email     String?    @unique
   image     String?
+  userQuestions UserQuestion[]
   emailVerified DateTime?
   createdAt     DateTime   @default(now()) @map(name: "created_at")
   updatedAt     DateTime   @updatedAt @map(name: "updated_at")
@@ -73,6 +84,7 @@ model User {
   scratchpads   Scratchpad[]
   accounts      Account[]
   sessions      Session[]
+
 
   @@map(name: "users")
 }
