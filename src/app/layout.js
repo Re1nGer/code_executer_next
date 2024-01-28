@@ -2,9 +2,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import {getServerSession} from "next-auth";
 import SessionProvider from "@/contexts/SessionProvider";
-import { authOptions } from "@/app/api/auth/[...nextauth]";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import '../prism/prism.css'
-import Script from "next/script";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,7 +19,6 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-    <Script src={'/public/prism.js'} strategy={'lazyOnload'}/>
       <body className={inter.className}>
         <SessionProvider session={session}>
           {children}

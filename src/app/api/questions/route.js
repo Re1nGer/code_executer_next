@@ -1,6 +1,6 @@
 import prisma from '@/lib/prisma'
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
