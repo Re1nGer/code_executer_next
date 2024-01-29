@@ -200,7 +200,7 @@ const EditorPanel = ({ width }) => {
             </div>
             <div className={'p-[10px] flex gap-[10px] items-center bg-[#001528]'}>
                 { userSolutions?.map((item, idx) => (
-                    <button key={item} onClick={() => handleTabClick(idx)}
+                    <button key={item.id} onClick={() => handleTabClick(idx)}
                             style={{ background: activeSolution === idx ? '#626ee3' : 'transparent' }}
                             className={'rounded-[4px] font-bold text-white px-[6px] py-[1px]'}>{`Solution ${idx + 1}`}</button>
                 )) }

@@ -19,23 +19,28 @@ export async function PUT(request, { params }) {
 
         const { uid, scratchpad, id } = await request.json();
 
+        let newId = '';
 
-        await prisma.scratchpad.upsert({
-            where: {
-                id: id,
-                questionId: uid,
-                userId: session.user.id
-            },
-            update: {
-                text: scratchpad
-            },
-            create: {
-                questionId: uid,
-                userId: session.user.id,
-                text: scratchpad
-            }
-        })
-        return Response.json([]);
+        if (!id) {
+            const record = await prisma.scratchpad.create({
+                data: {
+                    questionId: uid,
+                    userId: session.user.id,
+                    text: scratchpad
+                }
+            })
+            newId = record.id;
+        }
+        else {
+            await prisma.scratchpad.update({
+                where: { id: id },
+                data: {
+                    text: scratchpad
+                }
+            });
+        }
+
+        return Response.json({ id: id ?? newId });
     }
     catch (error) {
         console.log(error)

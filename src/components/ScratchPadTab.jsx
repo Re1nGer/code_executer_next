@@ -22,7 +22,7 @@ const ScratchPadTab = () => {
 
     const [localScratchPad, setLocalScratchPad] = useState(scratchpads ? scratchpads[0]?.text : '');
 
-    const scratchpadId = useMemo(() => scratchpads[0]?.id, [scratchpads]);
+    const scratchpadId = useMemo(() => scratchpads ? scratchpads[0]?.id : '', [scratchpads]);
 
     const debouncedScratchPad = useDebounce(localScratchPad, 100);
 
@@ -33,9 +33,10 @@ const ScratchPadTab = () => {
 
     const handleSave = async () => {
         try {
-            const body = { uid: id, scratchpad: debouncedScratchPad, id: scratchpads[0]?.id };
-            await fetch('/api/questions', { method: 'PUT', body: JSON.stringify(body) });
-            setQuestion((prevState) => ({...prevState, scratchpads: [{ id: scratchpadId, text: debouncedScratchPad }]}));
+            const body = { uid: id, scratchpad: debouncedScratchPad, id: scratchpadId };
+            const res = await fetch('/api/questions', { method: 'PUT', body: JSON.stringify(body) });
+            const result = await res.json();
+            setQuestion((prevState) => ({...prevState, scratchpads: [{ id: result.id, text: debouncedScratchPad }]}));
         }
         catch (error) {
             console.log(error);
