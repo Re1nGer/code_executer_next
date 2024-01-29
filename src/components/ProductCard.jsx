@@ -7,7 +7,7 @@ const ProductCard = ({ Icon, title, paragraph, isLearnMore = true }) => {
 
     return <section onMouseMove={() => setMouseOver(true)} onMouseOut={() => setMouseOver(false)}
                     className={`${mouseOver ? 'product__card--hover' : ''} transition-transform flex flex-col rounded-[4px]' +
-        ' max-w-[400px] w-full text-center p-[20px] gap-[15px] cursor-pointer`}>
+        ' max-w-[200px] lg:max-w-[400px] w-full text-center p-[20px] gap-[15px] cursor-pointer`}>
         <div className={'flex justify-center'}>
             <Icon className={'w-[50px] h-[50px] text-[#626ee3] transition-transform'} />
         </div>

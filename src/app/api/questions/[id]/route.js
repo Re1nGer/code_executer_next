@@ -10,29 +10,53 @@ export async function GET(request, { params }) {
 
     const session = await getServerSession(authOptions)
 
-    const hasUserQuestion = await prisma.userQuestion.findFirst({
-        where: { questionId: params.id }
-    });
+    const resources = await prisma.resource.findFirst({ where: { questionId: params.id, languageId: 4 } })
 
-    if (session && !hasUserQuestion) {
-        await prisma.userQuestion.create({
-            data: {
-                userId: session.user.id,
-                isComplete: false,
-                questionId: params.id
-            }
+    if (session) {
+
+        const hasUserQuestion = await prisma.userQuestion.findFirst({
+            where: { AND: [{ questionId: params.id }, { userId: session.user.id }] }
         });
-    }
 
-    console.log(hasUserQuestion);
+        const hasQuestionSolution = await prisma.solution.findFirst({
+            where: { AND: [{ questionId: params.id }, { userId: session.user.id }] }
+        });
+
+        if (!hasUserQuestion) {
+            await prisma.userQuestion.create({
+                data: {
+                    userId: session.user.id,
+                    isComplete: false,
+                    questionId: params.id
+                }
+            });
+        }
+
+        if (!hasQuestionSolution) {
+            await prisma.solution.create({
+                data: {
+                    userId: session.user.id,
+                    code: resources.templateCode,
+                    questionId: params.id
+                }
+            })
+        }
+    }
 
     const question = await prisma.question.findFirst({
         where: { uid: params.id },
         include: { solutions: { where: { OR: [ { userId: null }, { userId: session?.user?.id } ] }},
                    scratchpads: { where: { userId: session ? session?.user?.id : '' }, take: 1 },
-                    userQuestions: { where: { questionId: params.id } }
         },
     });
+
+    if (!session) {
+
+        const solution = { userId: 'unregistered user', code: resources.templateCode };
+
+        question.solutions.push(solution);
+    }
+
     return Response.json(question)
 }
 

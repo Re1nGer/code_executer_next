@@ -58,7 +58,7 @@ model Solution {
 }
 
 model UserQuestion {
-  id      Int   @id @default(autoincrement())
+  id      Int         @id @default(autoincrement())
   isComplete Boolean
   question   Question @relation(fields: [questionId], references: [uid])
   questionId String

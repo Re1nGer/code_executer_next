@@ -12,7 +12,6 @@ export async function GET(request, { params }) {
 
 export async function PUT(request, { params }) {
     try {
-        console.log('request');
         const session = await getServerSession(authOptions)
 
         if (!session)

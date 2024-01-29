@@ -77,7 +77,7 @@ const EditorPanel = ({ width }) => {
     };
 
     const handleChange = (value) => {
-        setIsSaving(true);
+        if (data) setIsSaving(true);
         setLocalCode(value);
     };
 
@@ -138,6 +138,10 @@ const EditorPanel = ({ width }) => {
 
                     setHasFailed(hasAnyFailed);
 
+                    if (!hasAnyFailed) {
+                        await markAsSolved();
+                    }
+
                 }
                 catch (error) {
                     console.log(error);
@@ -148,6 +152,18 @@ const EditorPanel = ({ width }) => {
             }, [1000]);
 
         } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const markAsSolved = async () => {
+        try {
+            await fetch('/api/questions/mark', { method: 'PUT', body: JSON.stringify({
+                    uid: uid,
+                })
+            })
+        }
+        catch (error) {
             console.log(error);
         }
     }
@@ -165,7 +181,7 @@ const EditorPanel = ({ width }) => {
     };
 
     useEffect(() => {
-        if (uid) saveCode();
+        if (uid && data) saveCode();
     }, [debouncedCodeInput]);
 
     useEffect(() => {
@@ -224,7 +240,9 @@ const EditorPanel = ({ width }) => {
                                 onClick={() => setRunTabActiveIdx(1)}>Raw Output</button>
                         <button className={"px-[15px] py-[10px]"}></button>
                     </div>
-                    <button type={'button'} className={"bg-[#008529] px-[15px] text-[14px] text-white font-open_sans"}
+                    <button type={'button'} disabled={isSubmitting}
+                            style={{ opacity: isSubmitting ? .5 : 1 }}
+                            className={"bg-[#008529] px-[15px] text-[14px] text-white font-open_sans"}
                             onClick={executeCode}>Submit code</button>
                 </div>
                 <div className={"p-[20px] bg-[#001528] shrink-0 h-full"}>
