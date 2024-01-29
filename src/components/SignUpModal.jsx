@@ -39,13 +39,13 @@ const SignUpModal = () => {
 								</div>
 								<div className={'text-center w-full flex-1'}> GitHub </div>
 							</button>
-							<button className={'flex items-center shadow-[0_2px_4px_0_rgba(0,0,0,.25)] border-0 rounded-[4px] text-white bg-[#1877f2] h-[50px] transition-all hover:translate-y-[-3px] hover:shadow-[0_2px_10px_2px_rgba(0,0,0,.35)]'}>
+							<button disabled={true} className={'opacity-[.5] flex items-center shadow-[0_2px_4px_0_rgba(0,0,0,.25)] border-0 rounded-[4px] text-white bg-[#1877f2] h-[50px] transition-all hover:translate-y-[-3px] hover:shadow-[0_2px_10px_2px_rgba(0,0,0,.35)]'}>
 								<div className={'bg-transparent flex justify-center items-center flex-grow-0 flex-shrink-0 h-full rounded-[4px] basis-auto w-[48px]'}>
 									<Facebook className={'w-[35px]'} />
 								</div>
 								<div className={'text-center w-full flex-1'}> Facebook </div>
 							</button>
-							<button className={'flex items-center shadow-[0_2px_4px_0_rgba(0,0,0,.25)] border-0 rounded-[4px] text-white bg-[#0072b1] h-[50px] transition-all hover:translate-y-[-3px] hover:shadow-[0_2px_10px_2px_rgba(0,0,0,.35)]'}>
+							<button disabled={true} className={'opacity-[.5] flex items-center shadow-[0_2px_4px_0_rgba(0,0,0,.25)] border-0 rounded-[4px] text-white bg-[#0072b1] h-[50px] transition-all hover:translate-y-[-3px] hover:shadow-[0_2px_10px_2px_rgba(0,0,0,.35)]'}>
 								<div className={'flex justify-center items-center flex-grow-0 flex-shrink-0 h-full rounded-[4px] basis-auto w-[48px]'}>
 									<LinkedIn className={'w-[35px]'} />
 								</div>

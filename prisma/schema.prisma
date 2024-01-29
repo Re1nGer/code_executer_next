@@ -27,6 +27,7 @@ model Question {
 model Resource {
   id          Int      @id @default(autoincrement())
   archiveLink String
+  templateCode String?
   language    Language @relation(fields: [languageId], references: [id])
   languageId  Int
   question    Question @relation(fields: [questionId], references: [uid])

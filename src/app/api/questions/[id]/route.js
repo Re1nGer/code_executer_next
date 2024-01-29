@@ -51,11 +51,14 @@ export async function PUT(request, { params }) {
     try {
 
         if (!id) {
+            //currently python language id is set to 4
+            const resource = await prisma.resource.findFirst({ where: { questionId: uid, language: 4 } });
+
             await prisma.solution.create({
                 data: {
-                    code: code,
+                    code: resource.templateCode,
                     userId: session?.user.id,
-                    questionId: uid
+                    questionId: uid,
                 }
             })
         }
