@@ -18,21 +18,28 @@ export async function PUT(request, { params }) {
         if (!session)
             return Response.json({ error: "Unauthorized" }, { status: 401 });
 
-        const { uid, scratchpad } = await request.json();
+        const { uid, scratchpad, id } = await request.json();
 
-        await prisma.scratchpad.update({
+
+        await prisma.scratchpad.upsert({
             where: {
+                id: id,
                 questionId: uid,
                 userId: session.user.id
             },
-            data: {
+            update: {
                 text: scratchpad
             },
+            create: {
+                questionId: uid,
+                userId: session.user.id,
+                text: scratchpad
+            }
         })
         return Response.json([]);
     }
     catch (error) {
         console.log(error)
-        return Response.json("something went wrong");
+        return Response.json("something went wrong", { status: 500 });
     }
 }

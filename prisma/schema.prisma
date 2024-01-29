@@ -35,12 +35,15 @@ model Resource {
 
 
 model Scratchpad {
-  id         Int      @id @default(autoincrement())
+  id         Int      @id @unique @default(autoincrement())
   text       String?
   question   Question @relation(fields: [questionId], references: [uid])
-  questionId String  @unique
+  questionId String
   user       User @relation(fields: [userId], references: [id])
   userId     String
+
+
+  @@unique([questionId, userId])
 }
 
 model Solution {

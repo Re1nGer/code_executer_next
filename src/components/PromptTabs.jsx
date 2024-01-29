@@ -4,19 +4,37 @@ import PromptTab from "@/components/PromptTab";
 import SolutionsTab from "@/components/SolutionsTab";
 import VideoExplanationTab from "@/components/VideoExplanationTab";
 import {useQuestionContext} from "@/hooks/useQuestionContext";
+import {useSession} from "next-auth/react";
+import SignUpModal from "@/components/SignUpModal";
+import {useHeaderContext} from "@/hooks/useHeaderContext";
 
 const PromptTabs = () => {
 
     const [activeTab, setActiveTab] = useState(1);
 
-    const { isLoading, isScratchpadSaving } = useQuestionContext();
+    const {
+            isLoading,
+            isScratchpadSaving,
+            setIsLoginModalOpen
+    } = useHeaderContext();
+
+    const { data } = useSession();
+
+    const isLoggedIn = data?.user;
+
+    const getActiveTabStyle = (tabIndex) => {
+        return { background: tabIndex === activeTab ? '#001528' : '#15314b' }
+    }
 
     const handleTabClick = (tabIndex) => {
         setActiveTab(tabIndex);
     }
 
-    const getActiveTabStyle = (tabIndex) => {
-        return { background: tabIndex === activeTab ? '#001528' : '#15314b' }
+    const handleScratchTabClick = (tabIndex) => {
+        if (!isLoggedIn) {
+            setIsLoginModalOpen(true);
+        }
+        else setActiveTab(tabIndex);
     }
 
     const renderActiveTab = () => {
@@ -50,7 +68,7 @@ const PromptTabs = () => {
                         disabled={isLoading}
                         className={'px-[15px] py-[10px] prompt__tab'}
                         style={getActiveTabStyle(2)}
-                        onClick={() => handleTabClick(2)}
+                        onClick={() => handleScratchTabClick(2)}
                 >ScratchPad
                 </button>
                 <button
@@ -72,6 +90,7 @@ const PromptTabs = () => {
                 <button className={'px-[15px] py-[10px]'}></button>
             </div>
             { renderActiveTab() }
+            <SignUpModal />
         </>
     );
 }

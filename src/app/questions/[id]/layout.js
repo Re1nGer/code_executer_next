@@ -1,12 +1,15 @@
 'use client'
 
 import {QuestionContextProvider} from "@/contexts/QuestionContext";
+import {HeaderContextProvider} from "@/contexts/HeaderContext";
 
 const Layout = ({ children }) => {
     return (
-        <QuestionContextProvider>
-            { children }
-        </QuestionContextProvider>
+        <HeaderContextProvider>
+            <QuestionContextProvider>
+                { children }
+            </QuestionContextProvider>
+        </HeaderContextProvider>
     )
 }
 

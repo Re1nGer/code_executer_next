@@ -33,7 +33,7 @@ const SignUpModal = () => {
 								</div>
 								<div className={'text-center w-full flex-1'}> Google </div>
 							</button>
-							<button className={'flex items-center shadow-[0_2px_4px_0_rgba(0,0,0,.25)] border-0 rounded-[4px] text-white bg-[#252525] h-[50px] transition-all hover:translate-y-[-3px] hover:shadow-[0_2px_10px_2px_rgba(0,0,0,.35)]'}>
+							<button onClick={() => signIn('github')} className={'flex items-center shadow-[0_2px_4px_0_rgba(0,0,0,.25)] border-0 rounded-[4px] text-white bg-[#252525] h-[50px] transition-all hover:translate-y-[-3px] hover:shadow-[0_2px_10px_2px_rgba(0,0,0,.35)]'}>
 								<div className={'flex justify-center items-center flex-grow-0 flex-shrink-0 h-full rounded-[4px] basis-auto w-[48px]'}>
 									<GithubIcon className={'w-[35px]'} />
 								</div>

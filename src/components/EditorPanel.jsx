@@ -8,6 +8,8 @@ import CrossIcon from '@/icons/CrossIcon2.svg';
 import ArrowIcon from '@/icons/ArrowDown.svg';
 import QuestionsLoader from "@/components/QuestionsLoader";
 import { motion } from "framer-motion";
+import {useSession} from "next-auth/react";
+import {useHeaderContext} from "@/hooks/useHeaderContext";
 
 const EditorPanel = ({ width }) => {
 
@@ -27,11 +29,19 @@ const EditorPanel = ({ width }) => {
 
     const userSolutions = useMemo(() => solutions?.filter(item => item.userId), [solutions]);
 
+    const currentSolution = useMemo(() => userSolutions[activeSolution], [activeSolution, userSolutions]);
+
     const [localCode, setLocalCode] = useState(userSolutions.length > 0 ? userSolutions[activeSolution]?.code : '');
 
     const debouncedCodeInput = useDebounce(localCode, 300);
 
     const [outputH, setOutputH] = useState(300); //default width of the window
+
+    const { data } = useSession();
+
+    const isLoggedIn = useMemo(() => data?.user, [data?.user]);
+
+    const { setIsLoginModalOpen } = useHeaderContext();
 
     const [drag, setDrag] = useState({
         active: false,
@@ -90,7 +100,17 @@ const EditorPanel = ({ width }) => {
         }
     };
 
+/*
+    const openLoginFormIfNotLoggedIn = () => {
+        !isLoggedIn && setIsLoginModalOpen(true);
+    }
+*/
+
     const executeCode = async (e) => {
+        if (!isLoggedIn) {
+            setIsLoginModalOpen(true)
+            return;
+        }
         e.preventDefault();
         setIsSubmitting(true);
         try {
@@ -134,7 +154,8 @@ const EditorPanel = ({ width }) => {
 
     const saveCode = async () => {
         try {
-            await fetch(`/api/questions/${uid}`, { method: 'PUT', body: JSON.stringify({ code: debouncedCodeInput, uid: uid }) });
+            await fetch(`/api/questions/${uid}`, {
+                method: 'PUT', body: JSON.stringify({ code: debouncedCodeInput, uid: uid, id: currentSolution?.id }) });
         } catch (error) {
             console.log(error);
         }
@@ -203,7 +224,8 @@ const EditorPanel = ({ width }) => {
                                 onClick={() => setRunTabActiveIdx(1)}>Raw Output</button>
                         <button className={"px-[15px] py-[10px]"}></button>
                     </div>
-                    <button type={'button'} className={"bg-[#008529] px-[15px] text-[14px] text-white font-open_sans"} onClick={executeCode}>Submit code</button>
+                    <button type={'button'} className={"bg-[#008529] px-[15px] text-[14px] text-white font-open_sans"}
+                            onClick={executeCode}>Submit code</button>
                 </div>
                 <div className={"p-[20px] bg-[#001528] shrink-0 h-full"}>
                     { renderRunTab() }

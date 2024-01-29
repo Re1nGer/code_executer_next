@@ -45,15 +45,29 @@ export async function PUT(request, { params }) {
         return Response.json({ error: "Unauthorized" }, { status: 401 });
 */
 
-    const { uid, code } = await request.json();
+    //TODO: add a current language
+    const { uid, code, id, language } = await request.json();
 
     try {
-        await prisma.solution.updateMany({
-            where: { userId: session?.user?.id, questionId: uid },
-            data: {
-                code: code
-            }
-        });
+
+        if (!id) {
+            await prisma.solution.create({
+                data: {
+                    code: code,
+                    userId: session?.user.id,
+                    questionId: uid
+                }
+            })
+        }
+        else {
+            await prisma.solution.update({
+                where: { id: id },
+                data: {
+                    code: code
+                },
+            });
+        }
+
         return Response.json({ status: 'saved successfully' });
     }
     catch (error) {

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react";
+import {useEffect, useMemo, useState} from "react";
 import { Editor } from "@monaco-editor/react";
 import TickIcon from "@/icons/TickIcon.svg";
 import { useDebounce } from "@/hooks/useDebounce";
@@ -20,9 +20,11 @@ const ScratchPadTab = () => {
             isScratchpadSaving
     } = useQuestionContext();
 
-    const [localScratchPad, setLocalScratchPad] = useState(scratchpads ? scratchpads[0].text : '');
+    const [localScratchPad, setLocalScratchPad] = useState(scratchpads ? scratchpads[0]?.text : '');
 
-    const debouncedScratchPad = useDebounce(localScratchPad, 200);
+    const scratchpadId = useMemo(() => scratchpads[0]?.id, [scratchpads]);
+
+    const debouncedScratchPad = useDebounce(localScratchPad, 100);
 
     const handleEditorChange = (value) => {
         setIsScratchpadSaving(true)
@@ -31,9 +33,9 @@ const ScratchPadTab = () => {
 
     const handleSave = async () => {
         try {
-            const body = { uid: id, scratchpad: debouncedScratchPad };
+            const body = { uid: id, scratchpad: debouncedScratchPad, id: scratchpads[0]?.id };
             await fetch('/api/questions', { method: 'PUT', body: JSON.stringify(body) });
-            setQuestion((prevState) => ({...prevState, scratchpads: [{ text: debouncedScratchPad }]}));
+            setQuestion((prevState) => ({...prevState, scratchpads: [{ id: scratchpadId, text: debouncedScratchPad }]}));
         }
         catch (error) {
             console.log(error);
@@ -52,7 +54,7 @@ const ScratchPadTab = () => {
         <Editor
             height={'60vh'}
             theme={'vs-dark'}
-            defaultValue={scratchpads ? scratchpads[0].text : ''}
+            defaultValue={scratchpads ? scratchpads[0]?.text : ''}
             onChange={handleEditorChange}
         />
         <div className={'absolute top-0 right-[10px]'}>
