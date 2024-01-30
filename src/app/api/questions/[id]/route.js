@@ -49,7 +49,8 @@ export async function GET(request, { params }) {
         where: { uid: params.id },
         include: { solutions: { where: { OR: [ { userId: null }, { userId: session?.user?.id } ] }},
                    scratchpads: { where: { userId: session ? session?.user?.id : '' }, take: 1 },
-                   resources: { where: { questionId: params.id } }
+                   resources: { where: { questionId: params.id } },
+                   userQuestions: { where: { AND: [{ questionId: params.id }, { userId: session?.user?.id }] } }
         },
     });
 

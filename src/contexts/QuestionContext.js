@@ -21,6 +21,7 @@ const defaultQuestionValue = {
     prompt: '',
     spaceTime: '',
     resources: [{ archiveLink: '' }],
+    userQuestions: [{ isComplete: false }],
     hints: [],
 }
 

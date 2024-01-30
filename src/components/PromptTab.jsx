@@ -3,10 +3,13 @@ import PromptSkeleton from "@/components/PromptSkeleton";
 import StarIcon from "@/icons/StarIcon.svg";
 import Hint from "@/components/Hint";
 import {useQuestionContext} from "@/hooks/useQuestionContext";
+import {useMemo} from "react";
 
 const PromptTab = () => {
 
-    const { question: { name, difficulty, prompt, hints, correctcount }, isLoading } = useQuestionContext();
+    const { question: { name, difficulty, prompt, hints, correctcount, userQuestions }, isLoading } = useQuestionContext();
+
+    const isComplete = useMemo(() => userQuestions ? userQuestions[0]?.isComplete : false, [userQuestions]);
 
     return (
         <div
@@ -32,6 +35,7 @@ const PromptTab = () => {
                     <div className={'flex gap-[10px] items-center text-white'}>
                         <h2 className={'text-[24px]'}>{name}</h2>
                         <div
+                            style={{ background: isComplete ? 'linear-gradient(#04ff00,#369536)' : '' }}
                             className={'border-[1px] rounded-full h-[20px] w-[20px] bg-transparent border-[#505ac5]'}></div>
                         <StarIcon className={'w-[20px] h-[20px] cursor-pointer'}/>
                     </div>
