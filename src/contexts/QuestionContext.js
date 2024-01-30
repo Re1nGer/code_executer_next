@@ -20,6 +20,7 @@ const defaultQuestionValue = {
     codeWalkthroughTime: 12,
     prompt: '',
     spaceTime: '',
+    resources: [{ archiveLink: '' }],
     hints: [],
 }
 

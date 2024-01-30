@@ -17,7 +17,9 @@ const EditorPanel = ({ width }) => {
 
     const [runTabActiveIdx, setRunTabActiveIdx] = useState(0);
 
-    const { question: { solutions = [], uid } } = useQuestionContext();
+    const { question: { solutions = [], uid, resources  } } = useQuestionContext();
+
+    const fileLink = resources[0].archiveLink;
 
     const [testCases, setTestCases] = useState([]);
 
@@ -118,7 +120,7 @@ const EditorPanel = ({ width }) => {
                 method: 'POST',
                 body: JSON.stringify({
                     //filelink should be fetched from the question
-                    fileLink: 'https://mcwlmebmwa37nl3e.public.blob.vercel-storage.com/validate_sub-c5gw4iPng2HteYCRnhwof1kLoA2MPp.zip',
+                    fileLink: fileLink,
                     userCode: localCode
                 })
             });
@@ -299,7 +301,7 @@ const CustomOutputTab = ({ testCases, isExecuting, hasFailed }) => {
     </div>
 };
 
-const TestCase = ({ passed, num }) => {
+const TestCase = ({ passed, num, error, data }) => {
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -331,17 +333,19 @@ const TestCase = ({ passed, num }) => {
         { isOpen ? (
             <div className={'p-[20px]'}>
                 <div className={'mb-[30px]'}>
-                    <h1 className={'text-[#e9e9e9] items-center font-bold mb-[5px]'}>Expected Output</h1>
+                    <h1 className={'text-[#e9e9e9] items-center font-bold mb-[5px]'}>Output</h1>
                     <pre className={'language-json line-numbers text-white'}>
-                    <code className={'language-json line-numbers'}>true</code>
+                    <code className={'language-json line-numbers'}>{ error ? error : data }</code>
                 </pre>
                 </div>
+{/*
                 <div className={'mb-[30px]'}>
                     <h1 className={'text-[#e9e9e9] items-center font-bold mb-[5px]'}>Your Code's Output</h1>
                     <pre className={'language-json line-numbers'}>
                     <code className={'language-json'}>true</code>
                 </pre>
                 </div>
+*/}
             </div>
         ) : null }
     </motion.section>
