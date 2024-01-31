@@ -84,19 +84,23 @@ export default function Question({ params }) {
     return (
         <section className={'bg-[#02203c] px-[15px] h-screen overflow-hidden'}>
             <ExecuteHeader />
-            <div className={`rounded-[4px] flex h-full`} onMouseMove={resizeFrame} onMouseUp={stopResize}>
+            <div className={`rounded-[4px] flex h-full`}
+                 onMouseMove={resizeFrame}
+                 onMouseUp={stopResize}>
                 <div className={'flex flex-col'} style={{width: `${promptW}px`}}>
                     <div className={'flex flex-col'} style={{height: `${window.innerHeight - testD.h}px`}}>
                         <PromptTabs />
                     </div>
                     <div onMouseDown={startResize}
-                         className={'w-full h-[20px] flex-grow-1 py-[.5rem] bg-transparent cursor-row-resize transition-colors hover:bg-[#626ee3]'}></div>
+                         className={'w-full h-[20px] flex-grow-1 py-[.5rem] bg-transparent cursor-row-resize transition-colors hover:bg-[#626ee3]'}>
+                    </div>
                     <div style={{height: testD.h + 'px'}}>
                         <TestTabs />
                     </div>
                 </div>
                 <div onMouseDown={handleMouseDown}
-                    className={'w-[15px] h-full bg-transparent cursor-col-resize transition-colors hover:bg-[#626ee3]'}></div>
+                    className={'w-[15px] h-full bg-transparent cursor-col-resize transition-colors hover:bg-[#626ee3]'}>
+                </div>
                 <EditorPanel width={editorPanelWidthPercent + '%'}/>
             </div>
         </section>

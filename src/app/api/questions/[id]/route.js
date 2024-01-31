@@ -1,4 +1,3 @@
-
 import prisma from '@/lib/prisma'
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
@@ -41,16 +40,16 @@ export async function GET(request, { params }) {
                     code: resources.templateCode,
                     questionId: params.id
                 }
-            })
+            });
         }
     }
 
     const question = await prisma.question.findFirst({
         where: { uid: params.id },
-        include: { solutions: { where: { OR: [ { userId: null }, { userId: session?.user?.id } ] }},
-                   scratchpads: { where: { userId: session ? session?.user?.id : '' }, take: 1 },
-                   resources: { where: { questionId: params.id } },
-                   userQuestions: { where: { AND: [{ questionId: params.id }, { userId: session?.user?.id }] } }
+        include: { scratchpads: { where: { userId: session ? session?.user?.id : '' }, take: 1 },
+            resources: { where: { questionId: params.id } },
+            solutions: { where: { OR: [{ userId: null }, { userId: session?.user?.id }] } },
+            userQuestions: { where: { AND: [{ questionId: params.id }, { userId: session?.user?.id ?? '' }] } }
         },
     });
 

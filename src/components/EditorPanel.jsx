@@ -209,6 +209,7 @@ const EditorPanel = ({ width }) => {
             </div>
             <div className={'w-full relative'}>
                 <Editor
+                        options={{ autoIndent: "full" }}
                         height={`${window.innerHeight   - outputH}px`}
                         defaultLanguage={"python"}
                         defaultValue={localCode}
