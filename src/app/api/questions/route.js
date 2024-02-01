@@ -6,7 +6,13 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export async function GET(request, { params }) {
-    const questions = await prisma.question.findMany();
+
+    const session = await getServerSession(authOptions)
+
+    const questions = await prisma.question.findMany({
+        include: { userQuestions: { where: { userId: session ? session.user.id : '' } } }
+    });
+
     return Response.json(questions);
 }
 

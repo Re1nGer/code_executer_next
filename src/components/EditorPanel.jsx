@@ -79,7 +79,7 @@ const EditorPanel = ({ width }) => {
     };
 
     const handleChange = (value) => {
-        if (data) setIsSaving(true);
+        if (isLoggedIn) setIsSaving(true);
         setLocalCode(value);
     };
 
@@ -119,7 +119,6 @@ const EditorPanel = ({ width }) => {
             const res = await fetch('/api/execute', {
                 method: 'POST',
                 body: JSON.stringify({
-                    //filelink should be fetched from the question
                     fileLink: fileLink,
                     userCode: localCode
                 })
@@ -217,13 +216,15 @@ const EditorPanel = ({ width }) => {
                         theme={"vs-dark"}
                         onChange={handleChange}
                 />
-                <div className={'absolute top-0 right-[10px]'}>
-                    { isSaving ? (
-                        <ScratchpadLoader />
-                    ) : (
-                        <TickIcon className={'w-[20px] h-[20px] text-white'} />
-                    ) }
-                </div>
+                { isLoggedIn ? (
+                    <div className={'absolute top-0 right-[10px]'}>
+                        { isSaving ? (
+                            <ScratchpadLoader />
+                        ) : (
+                            <TickIcon className={'w-[20px] h-[20px] text-white'} />
+                        ) }
+                    </div>
+                ) : null }
             </div>
             <div
                 onMouseDown={startResize}
@@ -282,9 +283,9 @@ const CustomOutputTab = ({ testCases, isExecuting, hasFailed }) => {
             <>
                 { hasFailed ? (
                     <h1 className={'text-white font-bold text-[18px] font-open_sans text-center mb-[.5rem]'}>Aww, some of the tests cases failed.</h1>
-                ) : null }
+                ) : <h1 className={'text-white font-bold text-[18px] font-open_sans text-center mb-[.5rem]'}>Yay, All test cases passed !</h1> }
                 <motion.div variants={variants} initial={'hidden'} animate={"shown"}
-                            style={{ border: hasFailed ? '1px solid red' : '' }}
+                            style={{ border: hasFailed ? '1px solid red' : '1px solid green' }}
                             className={'flex flex-col gap-[.5rem]'}>
                     { testCases.map(item => <TestCase key={item.data} {...item} />) }
                 </motion.div>

@@ -62,6 +62,7 @@ const Questions = () => {
                                     id={item.uid}
                                     difficulty={item.difficulty}
                                     name={item.name}
+                                    completed={item.userQuestions.some(t => t.questionId === item.uid && t.isComplete)}
                                 /> )
                         }
                     </div>
@@ -74,6 +75,7 @@ const Questions = () => {
                                     id={item.uid}
                                     difficulty={item.difficulty}
                                     name={item.name}
+                                    completed={item.userQuestions.some(t => t.questionId === item.uid && t.isComplete)}
                                 /> )
                         }
                     </div>
