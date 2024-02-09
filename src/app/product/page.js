@@ -6,12 +6,13 @@ import ComparisonTable from "@/components/ComparisonTable";
 import { useAnimation, motion } from "framer-motion";
 import { useEffect } from "react";
 import TestimonialsCards from "@/components/TestimonialsCards";
+import ProductQuestionSection from "@/components/productQuestionLanding/ProductQuestionSection";
 
 
 
 const Product = () => {
     return (
-        <section className={'py-[250px] px-[20px]'}>
+        <section className={'py-[250px]'}>
             <h1 className={'w-full text-center text-[35px] mb-[20px] text-[#02203c]'}>What is AlgoExpert</h1>
             <div className={'flex justify-center mb-[50px]'}>
                 <button
@@ -26,6 +27,7 @@ const Product = () => {
                 <OutcomesCard />
                 <TestimonialsCards />
             </div>
+            <ProductQuestionSection />
         </section>
     )
 }

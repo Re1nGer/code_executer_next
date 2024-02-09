@@ -99,6 +99,53 @@
   transform: scale(1.2);
 }
 
+.product__question-section_landing-card_inner {
+  backface-visibility: hidden;
+  transition: transform .8s;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition-delay: .14s;
+}
+
+.product__question-section_landing-card_back {
+  backface-visibility: hidden;
+  transition: transform .5s;
+  transform-style: preserve-3d;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotateY(180deg);
+}
+
+.product__question-section_landing-card_back:hover {
+  transform: rotateY(180deg);
+}
+
+.product__question-section_landing-card_list {
+  transition: transform .5s;
+}
+
+.product__question-section_landing-card_list:hover {
+  transform: rotateY(180deg);
+}
+
+.product__question-section_landing-card_container {
+  transform-style: preserve-3d;
+  transition: transform .8s;
+}
+
+.backface__visibility-hidden {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
 .prompt__tab {
   transition: background .2s linear;
 }
