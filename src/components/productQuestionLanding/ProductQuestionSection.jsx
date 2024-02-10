@@ -50,20 +50,20 @@ const ProductQuestionSection = () => {
         <motion.div className={'mt-[40px]'} variants={list} initial={'hidden'} animate={'visible'} ref={scope}>
             <motion.ul className={'max-w-[1000px] mx-auto text-white flex gap-[40px] flex-wrap'} style={{ perspective: '1000px' }} ref={questionCardContainer}>
                 <ProductQuestionCard variants={item} title={'Arrays'} backText={'Harder than they seem'} />
-                <ProductQuestionCard variants={item} title={'Arrays'} backText={'Harder than they seem'} />
-                <ProductQuestionCard variants={item} title={'Arrays'} backText={'Harder than they seem'} />
-                <ProductQuestionCard variants={item} title={'Arrays'} backText={'Harder than they seem'} />
-                <ProductQuestionCard variants={item} title={'Arrays'} backText={'Harder than they seem'} />
-                <ProductQuestionCard variants={item} title={'Arrays'} backText={'Harder than they seem'} />
-                <ProductQuestionCard variants={item} title={'Arrays'} backText={'Harder than they seem'} />
-                <ProductQuestionCard variants={item} title={'Arrays'} backText={'Harder than they seem'} />
-                <ProductQuestionCard variants={item} title={'Arrays'} backText={'Harder than they seem'} />
-                <ProductQuestionCard variants={item} title={'Arrays'} backText={'Harder than they seem'} />
-                <ProductQuestionCard variants={item} title={'Arrays'} backText={'Harder than they seem'} />
-                <ProductQuestionCard variants={item} title={'Arrays'} backText={'Harder than they seem'} />
-                <ProductQuestionCard variants={item} title={'Arrays'} backText={'Harder than they seem'} />
-                <ProductQuestionCard variants={item} title={'Arrays'} backText={'Harder than they seem'} />
-                <ProductQuestionCard variants={item} title={'Arrays'} backText={'Harder than they seem'} />
+                <ProductQuestionCard variants={item} title={'Graphs'} backText={'Easier than they seem'} />
+                <ProductQuestionCard variants={item} title={'Tries'} backText={'Yes. Tries. Not a typo'} />
+                <ProductQuestionCard variants={item} title={'Linked Lists'} backText={'Reverse them'} />
+                <ProductQuestionCard variants={item} title={'Binary Trees'} backText={'Invert them.'} />
+                <ProductQuestionCard variants={item} title={'Strings'} backText={'"This is a string"'} />
+                <ProductQuestionCard variants={item} title={'Dynamic Programming'} backText={'Everyone hates it.'} />
+                <ProductQuestionCard variants={item} title={'Searching'} backText={'Searching for the purchase button?'} />
+                <ProductQuestionCard variants={item} title={'Sorting'} backText={'array = [3,1,2] sort(array) array = [1,2,3]'} />
+                <ProductQuestionCard variants={item} title={'Greedy Algorithms'} backText={'Not too greedy'} />
+                <ProductQuestionCard variants={item} title={'Recursion'} backText={'[[[[[[[[[[]]]]]]]]]]'} />
+                <ProductQuestionCard variants={item} title={'Famous Algorithms'} backText={'ヽ( ͡° ͜ʖ ͡°)ﾉ'} />
+                <ProductQuestionCard variants={item} title={'Heaps'} backText={'Fancy trees.'} />
+                <ProductQuestionCard variants={item} title={'Binary Search Trees'} backText={'BS Trees'} />
+                <ProductQuestionCard variants={item} title={'Stacks'} backText={'Push. Pop. That\'s about it '} />
             </motion.ul>
         </motion.div>
     </section>;

@@ -7,6 +7,7 @@ import { useAnimation, motion } from "framer-motion";
 import { useEffect } from "react";
 import TestimonialsCards from "@/components/TestimonialsCards";
 import ProductQuestionSection from "@/components/productQuestionLanding/ProductQuestionSection";
+import SetUsApart from "@/components/SetUsApart";
 
 
 
@@ -28,6 +29,7 @@ const Product = () => {
                 <TestimonialsCards />
             </div>
             <ProductQuestionSection />
+            <SetUsApart />
         </section>
     )
 }
