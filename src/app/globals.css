@@ -130,6 +130,7 @@
 
 .product__question-section_landing-card_list {
   transition: transform .5s;
+  transition-timing-function: cubic-bezier(0,1.01,.55,.99);
 }
 
 .product__question-section_landing-card_list:hover {
