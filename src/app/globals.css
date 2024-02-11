@@ -142,6 +142,15 @@
   transition: transform .8s;
 }
 
+.product__datastructures-picture {
+  box-shadow: 27.1px 62.5px 125px -25px rgba(50,50,93,.6), 16.2px 37.5px 75px -37.5px rgba(0,0,0,.7);
+  transform: rotate3d(.5,.866,0,15deg) rotate(-1deg);
+}
+
+.product__datastructures-picture_gradient {
+  background: linear-gradient(45deg,rgba(0,0,0,.4),hsla(0,0%,100%,0));
+}
+
 .backface__visibility-hidden {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;

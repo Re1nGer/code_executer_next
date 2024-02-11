@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import TestimonialsCards from "@/components/TestimonialsCards";
 import ProductQuestionSection from "@/components/productQuestionLanding/ProductQuestionSection";
 import SetUsApart from "@/components/SetUsApart";
+import ProductDivider from "@/components/ProductDivider";
+import ProductDataStructuresCourse from "@/components/ProductDataStructuresCourse";
 
 
 
@@ -30,6 +32,8 @@ const Product = () => {
             </div>
             <ProductQuestionSection />
             <SetUsApart />
+            <ProductDivider />
+            <ProductDataStructuresCourse />
         </section>
     )
 }
