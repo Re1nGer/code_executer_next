@@ -9,7 +9,8 @@ export async function GET(request, { params }) {
 
     const session = await getServerSession(authOptions)
 
-    const resources = await prisma.resource.findFirst({ where: { questionId: params.id, languageId: 4 } })
+    const resources = await prisma.resource
+        .findFirst({ where: { questionId: params.id, languageId: 4 } })
 
     if (session) {
 
