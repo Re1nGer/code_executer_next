@@ -160,6 +160,28 @@
   width: 300px;
 }
 
+@keyframes blink {
+  0% {
+    color: #6772e5;
+  }
+  49% {
+    color: #6772e5;
+  }
+  50% {
+    color: transparent;
+  }
+  100% {
+    color: transparent;
+  }
+}
+
+.cursor__blink {
+  animation: blink .9s infinite;
+  color: #6772e5;
+  font-size: 22px;
+  line-height: 0;
+}
+
 .backface__visibility-hidden {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
