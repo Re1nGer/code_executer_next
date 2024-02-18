@@ -14,9 +14,9 @@ export default function layout({ children }) {
                 <div className={'pl-[20px] text-white basis-[50%] flex justify-end'}>
                     <ProductLanding />
                 </div>
-                <div className={'flex-1 max-h-[700px] product__banner_container'}>
+                <div className={'basis-[50%] max-h-[700px] product__banner_container min-w-[600px] hidden xl:block'}>
                     <div
-                        className={'hidden xl:flex flex-wrap min-w-[300px] gap-[10px] text-white font-bold max-h-[500px] max-w-[600px] product__banner'}>
+                        className={'hidden xl:flex absolute min-w-[400px] w-full flex-wrap flex-row gap-[10px] text-white font-bold max-h-[500px] max-w-[800px] product__banner'}>
                         <ProductPromptSkeletons />
                         <ProductInputSkeletons />
                         <ProductTestSkeletons />

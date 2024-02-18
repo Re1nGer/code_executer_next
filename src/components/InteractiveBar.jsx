@@ -15,7 +15,7 @@ const InteractiveBar = () => {
         setIsYesClicked(false);
     }
 
-    return <div className={'mt-[50px] max-w-[1200px] mx-auto'}>
+    return <div className={'my-[50px] max-w-[1200px] mx-auto'}>
         <div  className={''}>
             <div className={`bg-white rounded-[4px] shadow-[0_2px_4px_rgba(50,50,93,.1)] text-[#445d6e] font-open_sans mb-[20px] px-[25px] py-[20px] ${(isYesClicked || isNoClicked) ? 'interactive__bar-yes' : ''}`}>
                 { (!isYesClicked && !isNoClicked) ? (
