@@ -23,7 +23,12 @@ export async function POST(request) {
 
     // Add the file to the zip archive
     //depending on language there has to be different file extension
-    zip.file('solution.py', fileToAddData);
+
+    if (language === 'python') {
+        zip.file('solution.py', fileToAddData);
+    } else if (language === 'go') {
+        zip.file('solution.go')
+    }
 
     // Generate the updated zip file
     const updatedZipData = await zip.generateAsync({ type: 'base64' });

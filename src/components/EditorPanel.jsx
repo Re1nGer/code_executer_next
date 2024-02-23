@@ -8,8 +8,8 @@ import CrossIcon from '@/icons/CrossIcon2.svg';
 import ArrowIcon from '@/icons/ArrowDown.svg';
 import QuestionsLoader from "@/components/QuestionsLoader";
 import { motion } from "framer-motion";
-import {useSession} from "next-auth/react";
-import {useHeaderContext} from "@/hooks/useHeaderContext";
+import { useSession } from "next-auth/react";
+import { useHeaderContext } from "@/hooks/useHeaderContext";
 
 const EditorPanel = ({ width }) => {
 
@@ -17,7 +17,7 @@ const EditorPanel = ({ width }) => {
 
     const [runTabActiveIdx, setRunTabActiveIdx] = useState(0);
 
-    const { question: { solutions = [], uid, resources  } } = useQuestionContext();
+    const { question: { solutions = [], uid, resources  }, currentLanguage } = useQuestionContext();
 
     const fileLink = resources[0].archiveLink;
 
@@ -102,12 +102,6 @@ const EditorPanel = ({ width }) => {
         }
     };
 
-/*
-    const openLoginFormIfNotLoggedIn = () => {
-        !isLoggedIn && setIsLoginModalOpen(true);
-    }
-*/
-
     const executeCode = async (e) => {
         if (!isLoggedIn) {
             setIsLoginModalOpen(true)
@@ -120,7 +114,8 @@ const EditorPanel = ({ width }) => {
                 method: 'POST',
                 body: JSON.stringify({
                     fileLink: fileLink,
-                    userCode: localCode
+                    userCode: localCode,
+                    language: currentLanguage
                 })
             });
 
@@ -129,7 +124,7 @@ const EditorPanel = ({ width }) => {
             //To avoid throttling Judge0 server
             setTimeout(async () => {
                 try {
-                    const subRes = await fetch(`/api/submission?token=${submissionToken}`);
+                    const subRes = await fetch(`/api/submission?token=${submissionToken}&language=${currentLanguage}`);
 
                     const ans = await subRes.json();
 
@@ -213,6 +208,7 @@ const EditorPanel = ({ width }) => {
                         defaultLanguage={"python"}
                         defaultValue={localCode}
                         value={debouncedCodeInput}
+                        language={currentLanguage}
                         theme={"vs-dark"}
                         onChange={handleChange}
                 />
@@ -340,14 +336,6 @@ const TestCase = ({ passed, num, error, data }) => {
                     <code className={'language-json line-numbers'}>{ error ? error : data }</code>
                 </pre>
                 </div>
-{/*
-                <div className={'mb-[30px]'}>
-                    <h1 className={'text-[#e9e9e9] items-center font-bold mb-[5px]'}>Your Code's Output</h1>
-                    <pre className={'language-json line-numbers'}>
-                    <code className={'language-json'}>true</code>
-                </pre>
-                </div>
-*/}
             </div>
         ) : null }
     </motion.section>

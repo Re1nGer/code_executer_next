@@ -23,7 +23,7 @@ export async function GET(request, { params }) {
     const result = await response.json();
     console.log(result);
 
-    const formattedTestOutput = parseTestCasesOutputPython(result.stderr);
+    const formattedTestOutput = language === 'python' ?  parseTestCasesOutputPython(result.stderr) : parseTestCasesOutputGoLang(result.stderr);
 
     return Response.json({ time: result.time,
             memory: result.memory,
@@ -31,6 +31,35 @@ export async function GET(request, { params }) {
             languageId: result.language_id,
             testOutput: formattedTestOutput
     });
+}
+
+
+function parseTestCasesOutputGoLang(testOutput) {
+    const testCases = []
+
+    const blocks = testOutput.split('\n')
+
+    //Build fail | for now we don't know how many test cases each problem has
+    if (!testOutput.includes('RUN')) {
+        for (let i = 0; i < 5; i++) {
+            testCases.push(testOutput);
+        }
+        return testCases;
+    }
+
+    for (let i = 1; i < blocks.length; i++) {
+        // line contains information about test case
+        if (blocks[i].includes('.go')) {
+            const testCase = {
+                data: blocks[i],
+                passed: blocks[i].includes('Passed'),
+                error: ''
+            }
+            testCases.push(testCase);
+        }
+    }
+
+    return testCases;
 }
 
 function parseTestCasesOutputPython(testOutput) {

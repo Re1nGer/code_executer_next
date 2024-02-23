@@ -30,6 +30,7 @@ export const QuestionContextProvider = ({ children }) => {
     const [question, setQuestion] = useState(defaultQuestionValue);
     const [isLoading, setIsLoading] = useState(true);
     const [isScratchpadSaving, setIsScratchpadSaving] = useState(false);
+    const [currentLanguage, setCurrentLanguage] = useState('python'); //default language
 
     const value = {
         question,
@@ -37,7 +38,9 @@ export const QuestionContextProvider = ({ children }) => {
         setIsLoading,
         isLoading,
         setIsScratchpadSaving,
-        isScratchpadSaving
+        isScratchpadSaving,
+        currentLanguage,
+        setCurrentLanguage
     };
 
     return <QuestionContext.Provider value={value}>{children}</QuestionContext.Provider>

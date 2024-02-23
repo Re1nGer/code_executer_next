@@ -1,29 +1,32 @@
 import ArrowIcon from '@/icons/ArrowDown.svg';
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useQuestionContext } from "@/hooks/useQuestionContext";
 
 const ProgrammingLanguageDropdown = () => {
 
     const [open, setOpen] = useState(false);
 
-    const [language, setLanguage] = useState('Python');
-
-    const handleLanguageChange = () => {}
+    const { setCurrentLanguage, currentLanguage } = useQuestionContext();
+    const handleLanguageChange = (language) => {
+        setCurrentLanguage(language);
+        setOpen(false);
+    }
 
     return <div className={'relative w-[150px] h-[40px] text-white'}>
         <button onClick={() => setOpen(!open)} className={'bg-[#15314b] transition-colors cursor-pointer hover:bg-[#626ee3] h-full w-[150px] text-[14px] gap-[1rem] font-bold border-none items-center flex justify-between px-[15px]'}>
-            <span className={'overflow-hidden whitespace-nowrap text-ellipsis font-open_sans '}>Python</span>
+            <span className={'overflow-hidden whitespace-nowrap text-ellipsis font-open_sans capitalize'}>{ currentLanguage }</span>
             <ArrowIcon className={'w-[14px]'} />
         </button>
         { open ? (
             <motion.ul className={'absolute rounded-[4px] h-[350px] z-10 min-w-[100%] text-white text-[14px] font-bold'}>
                 <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'}>C#</li>
                 <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'}>C++</li>
-                <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'}>Go</li>
+                <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'} onClick={() => handleLanguageChange('go')}>Go</li>
                 <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'}>Java</li>
                 <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'}>JavaScript</li>
                 <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'}>Kotlin</li>
-                <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'}>Python</li>
+                <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'} onClick={() => handleLanguageChange('python')}>Python</li>
                 <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'}>Swift</li>
                 <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'}>Typescript</li>
             </motion.ul>
