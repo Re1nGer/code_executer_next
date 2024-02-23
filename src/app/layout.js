@@ -4,6 +4,7 @@ import {getServerSession} from "next-auth";
 import SessionProvider from "@/contexts/SessionProvider";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import '../prism/prism.css'
+import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,6 +20,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
+    <Analytics />
       <body className={inter.className}>
         <SessionProvider session={session}>
           {children}
