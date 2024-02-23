@@ -5,6 +5,7 @@ import SessionProvider from "@/contexts/SessionProvider";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import '../prism/prism.css'
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,6 +26,7 @@ export default async function RootLayout({ children }) {
           {children}
         </SessionProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
