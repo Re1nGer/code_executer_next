@@ -20,11 +20,11 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-    <Analytics />
       <body className={inter.className}>
         <SessionProvider session={session}>
           {children}
         </SessionProvider>
+        <Analytics />
       </body>
     </html>
   )
