@@ -49,7 +49,7 @@ export async function GET(request, { params }) {
 
     if (!session) {
 
-        const solutions = resources.map(item => ({ userId: 'unregistered user', code: item.templateCode, languageId: item.languageId })); //for now default is python
+        const solutions = resources.map(item => ({ userId: 'unregistered user', code: item.templateCode, languageId: item.languageId }));
 
         question.solutions.push(...solutions);
     }

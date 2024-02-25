@@ -22,9 +22,9 @@ const ProgrammingLanguageDropdown = () => {
             <motion.ul className={'absolute rounded-[4px] h-[350px] z-10 min-w-[100%] text-white text-[14px] font-bold'}>
                 <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'}>C#</li>
                 <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'}>C++</li>
-                <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'} onClick={() => handleLanguageChange({ id: 6, language: 'go' })}>Go</li>
+                <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'} onClick={() => handleLanguageChange({ id: 7, language: 'javascript' })}>JavaScript</li>
                 <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'}>Java</li>
-                <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'}>JavaScript</li>
+                <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'} onClick={() => handleLanguageChange({ id: 6, language: 'go' })}>Go</li>
                 <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'}>Kotlin</li>
                 <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'} onClick={() => handleLanguageChange({ id: 4, language: 'python' })}>Python</li>
                 <li className={'bg-[#15314b] py-[10px] px-[15px] transition-colors cursor-pointer hover:bg-[#626ee3]'}>Swift</li>
