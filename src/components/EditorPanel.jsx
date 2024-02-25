@@ -19,7 +19,7 @@ const EditorPanel = ({ width }) => {
 
     const { question: { solutions = [], uid, resources  }, currentLanguage } = useQuestionContext();
 
-    const fileLink = resources[0].archiveLink;
+    const fileLink = resources.find(item => item.languageId === currentLanguage.id)?.archiveLink;
 
     const [testCases, setTestCases] = useState([]);
 
@@ -29,11 +29,13 @@ const EditorPanel = ({ width }) => {
 
     const [hasFailed, setHasFailed] = useState(false);
 
-    const userSolutions = useMemo(() => solutions?.filter(item => item.userId), [solutions]);
+    const userSolutions = useMemo(() => solutions?.filter(item => item.userId && item.languageId === currentLanguage.id), [solutions, currentLanguage.id]);
 
     const currentSolution = useMemo(() => userSolutions[activeSolution], [activeSolution, userSolutions]);
 
-    const [localCode, setLocalCode] = useState(userSolutions.length > 0 ? userSolutions[activeSolution]?.code : '');
+    const [localCode, setLocalCode] = useState(currentSolution?.code);
+
+    console.log(localCode, currentLanguage, userSolutions, currentSolution);
 
     const debouncedCodeInput = useDebounce(localCode, 300);
 
@@ -115,7 +117,7 @@ const EditorPanel = ({ width }) => {
                 body: JSON.stringify({
                     fileLink: fileLink,
                     userCode: localCode,
-                    language: currentLanguage
+                    language: currentLanguage.language
                 })
             });
 
@@ -124,7 +126,7 @@ const EditorPanel = ({ width }) => {
             //To avoid throttling Judge0 server
             setTimeout(async () => {
                 try {
-                    const subRes = await fetch(`/api/submission?token=${submissionToken}&language=${currentLanguage}`);
+                    const subRes = await fetch(`/api/submission?token=${submissionToken}&language=${currentLanguage.language}`);
 
                     const ans = await subRes.json();
 
@@ -167,7 +169,7 @@ const EditorPanel = ({ width }) => {
     const saveCode = async () => {
         try {
             await fetch(`/api/questions/${uid}`, {
-                method: 'PUT', body: JSON.stringify({ code: debouncedCodeInput, uid: uid, id: currentSolution?.id }) });
+                method: 'PUT', body: JSON.stringify({ code: debouncedCodeInput, uid: uid, id: currentSolution?.id, language: currentLanguage.id }) });
         } catch (error) {
             console.log(error);
         }
@@ -182,7 +184,7 @@ const EditorPanel = ({ width }) => {
 
     useEffect(() => {
         setLocalCode(userSolutions[activeSolution]?.code)
-    }, [solutions]);
+    }, [solutions, currentLanguage.id]);
 
     const handleTabClick = (idx) => setActiveSolution(idx);
 
@@ -205,10 +207,10 @@ const EditorPanel = ({ width }) => {
                 <Editor
                         options={{ autoIndent: "full" }}
                         height={`${window.innerHeight   - outputH}px`}
-                        defaultLanguage={"python"}
-                        defaultValue={localCode}
-                        value={debouncedCodeInput}
-                        language={currentLanguage}
+                        defaultLanguage={currentLanguage.language}
+                        defaultValue={localCode || ''}
+                        value={debouncedCodeInput || ''}
+                        language={currentLanguage.language}
                         theme={"vs-dark"}
                         onChange={handleChange}
                 />

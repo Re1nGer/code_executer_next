@@ -27,8 +27,9 @@ export async function POST(request) {
     if (language === 'python') {
         zip.file('solution.py', fileToAddData);
     } else if (language === 'go') {
-        zip.file('solution.go')
+        zip.file('solution.go', fileToAddData)
     }
+
 
     // Generate the updated zip file
     const updatedZipData = await zip.generateAsync({ type: 'base64' });
@@ -45,6 +46,10 @@ export async function POST(request) {
             body: JSON.stringify({
                 language_id: 89,
                 additional_files: updatedZipData,
+                max_processes_and_or_threads: 120,
+                memory_limit: 256000,
+                max_file_size: 5000,
+                redirect_stderr_to_stdout: true
             }),
         });
 

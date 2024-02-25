@@ -25,12 +25,24 @@ const defaultQuestionValue = {
     hints: [],
 }
 
+//TODO: Extract out into constants
+export const languages = [
+    {
+        id: 4,
+        language: 'python'
+    },
+    {
+        id: 6,
+        language: 'go'
+    }
+]
+
 export const QuestionContextProvider = ({ children }) => {
 
     const [question, setQuestion] = useState(defaultQuestionValue);
     const [isLoading, setIsLoading] = useState(true);
     const [isScratchpadSaving, setIsScratchpadSaving] = useState(false);
-    const [currentLanguage, setCurrentLanguage] = useState('python'); //default language
+    const [currentLanguage, setCurrentLanguage] = useState({ id: 4, language: 'python' }); //default language python
 
     const value = {
         question,

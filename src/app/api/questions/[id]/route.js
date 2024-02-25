@@ -9,8 +9,7 @@ export async function GET(request, { params }) {
 
     const session = await getServerSession(authOptions)
 
-    const resources = await prisma.resource
-        .findFirst({ where: { questionId: params.id, languageId: 4 } })
+    const resources = await prisma.resource.findMany({ where: { questionId: params.id } });
 
     if (session) {
 
@@ -35,13 +34,7 @@ export async function GET(request, { params }) {
         }
 
         if (!hasQuestionSolution) {
-            await prisma.solution.create({
-                data: {
-                    userId: session.user.id,
-                    code: resources.templateCode,
-                    questionId: params.id
-                }
-            });
+            await saveAllTemplateCodeForQuestion(params.id, resources, session)
         }
     }
 
@@ -56,12 +49,27 @@ export async function GET(request, { params }) {
 
     if (!session) {
 
-        const solution = { userId: 'unregistered user', code: resources.templateCode };
+        const solutions = resources.map(item => ({ userId: 'unregistered user', code: item.templateCode, languageId: item.languageId })); //for now default is python
 
-        question.solutions.push(solution);
+        question.solutions.push(...solutions);
     }
 
     return Response.json(question)
+}
+
+
+
+const saveAllTemplateCodeForQuestion = async (id, resources, session) => {
+    for (const resource of resources) {
+        await prisma.solution.create({
+            data: {
+                userId: session.user.id,
+                code: resource.templateCode,
+                questionId: id,
+                languageId: resource.languageId
+            }
+        });
+    }
 }
 
 export async function PUT(request, { params }) {
@@ -78,15 +86,20 @@ export async function PUT(request, { params }) {
 
     try {
 
-        if (!id) {
+        const solution = await prisma.solution.findFirst({ where: { AND:[{ questionId: uid }, { languageId: language }, { userId: session?.user?.id }] }})
+
+        console.log('solution', solution);
+
+        if (!solution) {
             //currently python language id is set to 4
-            const resource = await prisma.resource.findFirst({ where: { questionId: uid, language: 4 } });
+            const resource = await prisma.resource.findFirst({ where: { questionId: uid, languageId: language } });
 
             await prisma.solution.create({
                 data: {
-                    code: resource.templateCode,
+                    code: code ? code : resource.templateCode,
                     userId: session?.user.id,
                     questionId: uid,
+                    languageId: language
                 }
             })
         }
@@ -95,7 +108,7 @@ export async function PUT(request, { params }) {
                 where: { id: id },
                 data: {
                     code: code
-                },
+                }
             });
         }
 
