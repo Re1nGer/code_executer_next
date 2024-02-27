@@ -18,26 +18,41 @@ const SolutionsTab = () => {
     return <>
         <div className={'p-[10px] flex gap-[10px] items-center bg-[#001528]'}>
             { defaultSolutions?.map((item, idx) => (
-                <button key={item} onClick={() => handleTabClick(idx)}
+                <button key={item.id}
+                        onClick={() => handleTabClick(idx)}
                         style={{ background: activeTab === idx ? '#626ee3' : 'transparent' }}
                         className={'rounded-[4px] font-bold text-white px-[6px] py-[1px]'}>{`Solution ${idx + 1}`}</button>
             )) }
         </div>
-        <SolutionTab code={defaultSolutions[activeTab]?.code} />
+        <SolutionTab solution={defaultSolutions[activeTab]} />
     </>
 }
 
-const SolutionTab = ({ code = '' }) => {
+const SolutionTab = ({ solution }) => {
 
     return <div>
         <Editor
             height={'60vh'}
             theme={'vs-dark'}
             options={{ readOnly: true }}
-            value={code}
-            language={'python'}
+            value={solution?.code || ''}
+            language={getLanguageFromId(solution?.languageId)}
+            defaultLanguage={getLanguageFromId(solution?.languageId)}
         />
     </div>
+}
+
+
+const getLanguageFromId = (id) => {
+    switch (id) {
+        case 4:
+            return 'python'
+        case 6:
+            return 'go'
+
+        default:
+            return 'python'
+    }
 }
 
 
