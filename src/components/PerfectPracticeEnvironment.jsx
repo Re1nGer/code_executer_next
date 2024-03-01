@@ -4,7 +4,7 @@ import Image from "next/image";
 const PerfectPracticeEnvironment = () => {
 
     return <div className={'py-[100px] px-[20px]'}>
-        <div className={'flex w-full mx-auto max-w-[1200px]'}>
+        <div className={'flex flex-col lg:flex-row items-center w-full mx-auto max-w-[1200px]'}>
             <div className={'flex flex-col justify-center relative basis-[50%] max-w-[570px]'}>
                 <h2 className={'text-[35px] mb-[20px] font-bold text-[#02203c] whitespace-nowrap'}>The Perfect Practice Environment.</h2>
                 <div className={'mb-[25px] font-open_sans'}>
@@ -16,15 +16,19 @@ const PerfectPracticeEnvironment = () => {
                           className={'bg-[#626ee3] h-[50px] border-0 rounded-[4px] text-white flex justify-center items-center px-[40px] text-center transition-all hover:bg-[#4c5adf]'}>Try Our Workspace</Link>
                 </div>
             </div>
-            <div className={'h-[500px] w-[90px]'}></div>
+            <div className={'lg:h-[500px] lg:w-[90px] h-0 w-0'}></div>
             <div className={'min-h-[500px] flex justify-center items-center relative basis-[50%]'} style={{ perspective: '1500px' }}>
-                <div style={{ transform: "rotate3d(.5,-.866,0,15deg) rotate(1deg)"}} className={'absolute w-[610px] rounded-[4px] mx-auto'}>
+                <div style={{ transform: "rotate3d(.5,-.866,0,15deg) rotate(1deg)"}} className={'absolute w-[610px] flex justify-center rounded-[4px] mx-auto'}>
                     <picture>
+{/*
                         <div style={{ background: "linear-gradient(165deg,#fcfcfc 39%,#3e3e68)" }} className={'absolute h-full w-full z-[-1] left-0 top-0'}></div>
+*/}
                         <Image width={600} height={450} src={'https://assets.algoexpert.io/spas/main/prod/g640eb8276b-prod/dist/images/fbbc40f754e2336576a5.png'}
-                               style={{ objectPosition: 'left top' }} className={'relative z-10 max-w-[600px] w-full'} alt={'workspace'} />
+                               style={{ objectPosition: 'left top' }} className={'relative z-10 max-w-[400px] lg:max-w-[600px] w-full'} alt={'workspace'} />
                     </picture>
+{/*
                     <div className={'rounded-[4px] h-full absolute w-full top-0 left-0 bg-transparent'} style={{ background: "linear-gradient(165deg,#fcfcfc 39%,#3e3e68)"  }}></div>
+*/}
                 </div>
             </div>
         </div>

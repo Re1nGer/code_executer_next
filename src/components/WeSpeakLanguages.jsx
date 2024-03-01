@@ -17,20 +17,20 @@ const CImage = 'https://assets.algoexpert.io/spas/main/prod/g640eb8276b-prod/dis
 
 const WeSpeakLanguages = () => {
     return <div className={'pt-[100px] px-[20px]'}>
-        <div className={'max-w-[1200px] mx-auto flex'}>
+        <div className={'max-w-[1200px] mx-auto flex flex-col lg:flex-row'}>
             <div className={'flex flex-col justify-center relative'}>
-                <h2 className={'mb-[20px] text-[#02203c] text-[35px] leading-[1.3]'}>We Speak 9 languages</h2>
+                <h2 className={'mb-[20px] text-[#02203c] text-[35px] leading-[1.3] text-center lg:text-left'}>We Speak 9 languages</h2>
                 <div>
-                    <p className={'max-w-[700px] mb-[30px] font-open_sans text-[#445d6e] leading-[1.7]'}>
+                    <p className={'max-w-[700px] mb-[30px] text-center lg:text-left font-open_sans text-[#445d6e] leading-[1.7]'}>
                         There's nothing more frustrating than opening an interview prep book, only to find a bunch of solutions in a programming language that you don't know. That's why all of our questions come with complete written solutions in 9 popular languages
                     </p>
-                    <ul>
-                        <li className={'mb-[25px] text-[#02203c] flex items-center'}>
+                    <ul className={'flex justify-center flex-col items-baseline'}>
+                        <li className={'mb-[25px] text-[#02203c] flex items-center justify-start'}>
                             <JavaScriptIcon className={'w-[50px] mr-[25px]'} />
                             <span className={'text-[18px] font-bold font-open_sans'}>Javascript</span>
                             <p>, for all you Front-End Developers</p>
                         </li>
-                        <li className={'mb-[25px] text-[#02203c] flex items-center'}>
+                        <li className={'mb-[25px] text-[#02203c] flex items-center justify-start'}>
                             <TypescriptIcon className={'w-[50px] mr-[25px]'} />
                             <span className={'text-[18px] font-bold font-open_sans'}>Typescript</span>
                             <p>, for all you Edgy JavaScripters</p>
@@ -73,14 +73,14 @@ const WeSpeakLanguages = () => {
                     </ul>
                 </div>
             </div>
-            <div className={'w-[60px] h-full'}></div>
-            <div className={'w-full items-center flex flex-col justify-center relative basis-[50%]'}>
-                <div className={'flex basis-[50%] justify-center'}>
+            <div className={'lg:w-[60px] lg:h-full h-0 w-0'}></div>
+            <div className={'w-full items-center flex-col justify-center relative basis-[15%] lg:basis-[50%] hidden lg:flex'}>
+                <div className={'flex basis-[15%] lg:basis-[50%] justify-center'}>
                     <div id={'spinner'} className={'h-full'}>
                         <div id={'shadowContainer'}></div>
                         <div id={'actualCube'} style={{ perspective: '800px', perspectiveOrigin: '50% 100%' }}>
-                            <motion.div id={'cubeFaces'} initial={null} animate={{ rotateY: '1turn', transition: { duration: '45', repeat: Infinity } }} style={{ transformStyle: 'preserve-3d' }} className={'relative w-[300px]'}>
-                                <div id={'cubeFace cubeFront'} className={'bg-[#3e526a] cube__face'} style={{ transform: 'translateZ(150px)'}}>
+                            <motion.div id={'cubeFaces'} initial={null} animate={{ rotateY: '1turn', transition: { duration: '45', repeat: Infinity } }} style={{ transformStyle: 'preserve-3d' }} className={'relative w-[100px] lg:w-[300px]'}>
+                                <div id={'cubeFace cubeFront'} className={'bg-[#3e526a] cube__face w-[100px] lg'} style={{ transform: 'translateZ(150px)'}}>
                                     <Image src={JavascriptImage} width={'300'} height={'300'} className={'w-full'} alt={'javascript logo'} />
                                 </div>
                                 <div id={'cubeFace cubeBack'} className={'bg-[#3e526a] cube__face'} style={{ transform: 'translateZ(-150px) rotateY(180deg)'}}>

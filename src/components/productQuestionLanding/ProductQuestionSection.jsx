@@ -48,7 +48,7 @@ const ProductQuestionSection = () => {
                 Explore Questions</Link>
         </div>
         <motion.div className={'mt-[40px]'} variants={list} initial={'hidden'} animate={'visible'} ref={scope}>
-            <motion.ul className={'max-w-[1000px] mx-auto text-white flex gap-[40px] flex-wrap'} style={{ perspective: '1000px' }} ref={questionCardContainer}>
+            <motion.ul className={'max-w-[1000px] mx-auto text-white flex gap-[40px] flex-wrap justify-center lg:justify-start'} style={{ perspective: '1000px' }} ref={questionCardContainer}>
                 <ProductQuestionCard variants={item} title={'Arrays'} backText={'Harder than they seem'} />
                 <ProductQuestionCard variants={item} title={'Graphs'} backText={'Easier than they seem'} />
                 <ProductQuestionCard variants={item} title={'Tries'} backText={'Yes. Tries. Not a typo'} />
