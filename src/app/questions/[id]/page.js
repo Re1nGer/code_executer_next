@@ -6,6 +6,7 @@ import PromptTabs from "@/components/PromptTabs";
 import { useQuestionContext } from "@/hooks/useQuestionContext";
 import TestTabs from "@/components/execute/TestTabs";
 import ExecuteHeader from "@/components/execute/ExecuteHeader";
+import { useResizeWindow } from "@/hooks/useResizeWindow";
 
 
 
@@ -13,41 +14,16 @@ export default function Question({ params }) {
 
     const [promptW, setPromptW] = useState(800)
 
-    const [drag, setDrag] = useState({
-        active: false,
-        y: ""
-    });
-
-    const [testD, setTestD] = useState({
-        h: 215
-    });
-
     const editorPanelWidthPercent = window ? ((innerWidth - promptW) / innerWidth) * 100 : 1
 
     const { setQuestion, setIsLoading } = useQuestionContext();
 
-    const resizeFrame = e => {
-        const { active, x, y } = drag;
-        if (active) {
-            const yDiff = Math.abs(y - e.clientY);
-
-            const newH = y > e.clientY ? testD.h + yDiff : testD.h - yDiff;
-
-            setDrag({ ...drag, x: e.clientX, y: e.clientY });
-            setTestD({ h: newH });
-        }
-    };
-
-    const startResize = e => {
-        setDrag({
-            active: true,
-            y: e.clientY
-        });
-    };
-
-    const stopResize = e => {
-        setDrag({ ...drag, active: false });
-    };
+    const {
+        startResize,
+        resizeFrame,
+        stopResize,
+        height,
+    } = useResizeWindow(215);
 
     const fetchQuestion = async (id) => {
         try {
@@ -88,13 +64,13 @@ export default function Question({ params }) {
                  onMouseMove={resizeFrame}
                  onMouseUp={stopResize}>
                 <div className={'flex flex-col'} style={{width: `${promptW}px`}}>
-                    <div className={'flex flex-col'} style={{height: `${window.innerHeight - testD.h}px`}}>
+                    <div className={'flex flex-col'} style={{height: `${window.innerHeight - height}px`}}>
                         <PromptTabs />
                     </div>
                     <div onMouseDown={startResize}
                          className={'w-full h-[20px] flex-grow-1 py-[.5rem] bg-transparent cursor-row-resize transition-colors hover:bg-[#626ee3]'}>
                     </div>
-                    <div style={{height: testD.h + 'px'}}>
+                    <div style={{height: height + 'px'}}>
                         <TestTabs />
                     </div>
                 </div>
