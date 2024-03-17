@@ -111,7 +111,7 @@ const EditorPanel = ({ width }) => {
                 method: 'POST',
                 body: JSON.stringify({
                     fileLink: fileLink,
-                    userCode: localCode,
+                    userCode: localCode || currentSolution?.code || '',
                     language: currentLanguage.language
                 })
             });
@@ -157,16 +157,6 @@ const EditorPanel = ({ width }) => {
 
     useMemo(() => setLocalCode(userSolutions[activeSolution]?.code), [activeSolution, currentLanguage.id])
 
-
-/*    useEffect(() => {
-        if (uid && data) saveCode();
-    }, [debouncedCodeInput]);*/
-
-/*
-    useEffect(() => {
-        setLocalCode(userSolutions[activeSolution]?.code)
-    }, [solutions, currentLanguage.id]);
-*/
 
     const handleTabClick = (idx) => setActiveSolution(idx);
 
