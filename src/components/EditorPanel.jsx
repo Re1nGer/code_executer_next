@@ -88,6 +88,7 @@ const EditorPanel = ({ width }) => {
 
             setHasFailed(hasAnyFailed);
 
+
             if (!hasAnyFailed) {
                 await markAsSolved();
             }
