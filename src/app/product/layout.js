@@ -10,17 +10,21 @@ import ProductOutputSkeleton from "@/components/ProductOutputSkeleton";
 export default function layout({ children }) {
     return <>
         <Header>
-            <div className={'flex flex-col lg:flex-row justify-center min-h-[320px] gap-[50px]'}>
+            <div className={'flex flex-col md:flex-row justify-center min-h-[320px] w-full gap-[50px]'}>
                 <div className={'pl-[20px] text-white basis-[50%] flex justify-end'}>
                     <ProductLanding />
                 </div>
-                <div className={'basis-[50%] max-h-[700px] product__banner_container min-w-[600px] hidden xl:block'}>
+                <div className={'basis-[50%] h-[700px] relative product__banner_container w-[300px] lg:w-[600px] hidden md:flex'}>
                     <div
-                        className={'hidden xl:flex absolute min-w-[400px] w-full flex-wrap flex-row gap-[10px] text-white font-bold max-h-[500px] max-w-[800px] product__banner'}>
-                        <ProductPromptSkeletons />
-                        <ProductInputSkeletons />
-                        <ProductTestSkeletons />
-                        <ProductOutputSkeleton />
+                        className={'hidden md:flex relative w-[600px] flex-col text-white font-bold h-[500px] product__banner'}>
+                        <div className={'flex'}>
+                            <ProductPromptSkeletons />
+                            <ProductInputSkeletons />
+                        </div>
+                        <div className={'flex'}>
+                            <ProductTestSkeletons />
+                            <ProductOutputSkeleton />
+                        </div>
                     </div>
                 </div>
             </div>

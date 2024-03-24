@@ -20,15 +20,9 @@ const PerfectPracticeEnvironment = () => {
             <div className={'min-h-[500px] flex justify-center items-center relative basis-[50%]'} style={{ perspective: '1500px' }}>
                 <div style={{ transform: "rotate3d(.5,-.866,0,15deg) rotate(1deg)"}} className={'absolute w-[610px] flex justify-center rounded-[4px] mx-auto'}>
                     <picture>
-{/*
-                        <div style={{ background: "linear-gradient(165deg,#fcfcfc 39%,#3e3e68)" }} className={'absolute h-full w-full z-[-1] left-0 top-0'}></div>
-*/}
                         <Image width={600} height={450} src={'https://assets.algoexpert.io/spas/main/prod/g640eb8276b-prod/dist/images/fbbc40f754e2336576a5.png'}
                                style={{ objectPosition: 'left top' }} className={'relative z-10 max-w-[400px] lg:max-w-[600px] w-full'} alt={'workspace'} />
                     </picture>
-{/*
-                    <div className={'rounded-[4px] h-full absolute w-full top-0 left-0 bg-transparent'} style={{ background: "linear-gradient(165deg,#fcfcfc 39%,#3e3e68)"  }}></div>
-*/}
                 </div>
             </div>
         </div>

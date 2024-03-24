@@ -10,6 +10,7 @@ import { useSession } from "next-auth/react";
 import ProfileMenu from "@/components/ProfileMenu";
 import { HeaderContextProvider } from "@/contexts/HeaderContext";
 import Navbar from "@/components/Navbar";
+import HamburgerIcon from "@/icons/Hamburger.svg";
 
 
 const Header = ({ type = 'algo', children }) => {
@@ -38,10 +39,11 @@ const Header = ({ type = 'algo', children }) => {
                 style={{ background: getStyles() }}
             >
                 <div className={'mx-[20px] py-[20px] flex justify-center items-center'}>
+                    <HeaderHamburger />
                     <HeaderLogo />
-                    <div className={'w-[150px]'}></div>
+                    <div className={'w-[150px] hidden lg:block'}></div>
                     <Navbar />
-                    <div className={'w-[150px]'}></div>
+                    <div className={'w-[150px] hidden lg:block'}></div>
                     <div className={'flex-1 max-w-[290px] items-start h-full flex justify-start'}>
                         { !isLoggedIn ? <LogInButton /> : <ProfileMenu /> }
                     </div>
@@ -53,6 +55,18 @@ const Header = ({ type = 'algo', children }) => {
             </header>
         </HeaderContextProvider>
     );
+}
+
+
+const HeaderHamburger = () => {
+    const [isOpen, setIsOpen] = React.useState(false);
+
+    return <div className={'block md:hidden h-full relative'}>
+        <HamburgerIcon className={'h-[30px] text-white cursor-pointer transition-colors'} />
+        <section className={'bg-[#02203c] h-full pt-[60px] px-[20px]'}>
+            <HeaderLogo />
+        </section>
+    </div>
 }
 
 export default Header

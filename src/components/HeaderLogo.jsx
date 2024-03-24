@@ -30,10 +30,4 @@ const HeaderLogo = () => {
     </Link>;
 }
 
-const HeaderLogoText = () => {
-    return <div className={"text-[#8d96eb] font-bold font-jura text-[18px]"}>
-        Ace the Technical Interviews
-    </div>
-}
-
 export default HeaderLogo

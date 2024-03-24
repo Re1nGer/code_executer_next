@@ -27,7 +27,7 @@ const TestimonialSlider= ({ children, offsetFactor = 7 }) => {
         <h2 className={'text-center text-[35px] mb-[20px]'}>
             And over 200,000 Satisfied Engineers
         </h2>
-        <div className={'overflow-hidden max-w-[1000px] mx-auto'}>
+        <div className={'overflow-hidden max-w-[1000px] mx-auto '}>
             <motion.ul className={'flex flex-nowrap flex-col md:flex-row w-[500px] lg:w-[5000px]'} animate={control}>
                 { children }
             </motion.ul>
