@@ -42,7 +42,7 @@ const Header = ({ type = 'algo', children }) => {
                     <HeaderHamburger />
                     <HeaderLogo />
                     <Navbar />
-                    <div className={'max-w-[150px] lg:max-w-[290px] items-start h-full flex justify-start flex-1'}>
+                    <div className={'max-w-[150px] lg:max-w-[290px] items-start h-full flex justify-end md:flex-1'}>
                         { !isLoggedIn ? <LogInButton /> : <ProfileMenu /> }
                     </div>
                 </div>

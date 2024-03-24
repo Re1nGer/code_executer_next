@@ -11,7 +11,7 @@ export default function layout({ children }) {
     return <>
         <Header>
             <div className={'flex flex-col md:flex-row justify-center min-h-[320px] w-full gap-[50px]'}>
-                <div className={'pl-[20px] text-white basis-[50%] flex justify-end'}>
+                <div className={'pl-[20px] text-white basis-[50%] flex justify-center md:justify-end'}>
                     <ProductLanding />
                 </div>
                 <div className={'basis-[50%] h-[700px] relative product__banner_container w-[300px] lg:w-[600px] hidden md:flex'}>
