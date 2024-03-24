@@ -16,7 +16,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className={'flex relative mx-[55px] mt-[10px] gap-[30px] h-full items-start font-open_sans text-[14px] text-white'}>
+        <nav className={'hidden lg:flex relative mx-[55px] mt-[10px] gap-[30px] h-full items-start font-open_sans text-[14px] text-white'}>
             <div onMouseOver={handleOnProductMenuMouseOver} className={'bg-transparent relative z-10 nav__link'}>Products</div>
             <div onMouseOver={handleOnContentMenuMouseOver} className={'bg-transparent relative z-10 nav__link'}>Content</div>
             <div className={'bg-transparent relative nav__link'}>Team</div>

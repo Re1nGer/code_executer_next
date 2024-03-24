@@ -38,13 +38,11 @@ const Header = ({ type = 'algo', children }) => {
                 className={'h-[540px] flex flex-col relative'}
                 style={{ background: getStyles() }}
             >
-                <div className={'mx-[20px] py-[20px] flex justify-center items-center'}>
+                <div className={'mx-auto max-w-[1300px] w-full py-[10px] px-[10px] flex justify-between'}>
                     <HeaderHamburger />
                     <HeaderLogo />
-                    <div className={'w-[150px] hidden lg:block'}></div>
                     <Navbar />
-                    <div className={'w-[150px] hidden lg:block'}></div>
-                    <div className={'flex-1 max-w-[290px] items-start h-full flex justify-start'}>
+                    <div className={'max-w-[150px] lg:max-w-[290px] items-start h-full flex justify-start flex-1'}>
                         { !isLoggedIn ? <LogInButton /> : <ProfileMenu /> }
                     </div>
                 </div>
@@ -61,11 +59,13 @@ const Header = ({ type = 'algo', children }) => {
 const HeaderHamburger = () => {
     const [isOpen, setIsOpen] = React.useState(false);
 
-    return <div className={'block md:hidden h-full relative'}>
+    return <div className={'flex lg:hidden h-full relative'}>
         <HamburgerIcon className={'h-[30px] text-white cursor-pointer transition-colors'} />
+{/*
         <section className={'bg-[#02203c] h-full pt-[60px] px-[20px]'}>
             <HeaderLogo />
         </section>
+*/}
     </div>
 }
 
