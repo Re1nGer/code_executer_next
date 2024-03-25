@@ -21,11 +21,11 @@ const HeaderLogo = () => {
     return <Link href={"/product"}>
         <div className={"w-[290px] flex flex-col gap-[5px] lg:gap-[5px] text-center"}>
             <div className={"flex items-center justify-center text-white gap-[5px] lg:gap-[15px]"}>
-                <HeaderIcon id={"header_logo"} className={"max-w-[48px] max-h-[20px] lg:max-h-[40px]"}
+                <HeaderIcon id={"header_logo"} className={"max-w-[48px] max-h-[20px] sm:max-h-[40px]"}
                             onMouseEnter={handleOnLogoHover}/>
-                <h1 className={"lg:text-[36px] text-[20px] font-jura"}>AlgoExpert</h1>
+                <h1 className={"sm:text-[36px] text-[20px] font-jura"}>AlgoExpert</h1>
             </div>
-            <div className={"text-[#8d96eb] font-bold font-jura lg:text-[18px] text-[12px]"}>Ace the Technical Interviews</div>
+            <div className={"text-[#8d96eb] font-bold font-jura sm:text-[18px] text-[12px]"}>Ace the Technical Interviews</div>
         </div>
     </Link>;
 }

@@ -20,32 +20,36 @@ import BetterWayToLandInterviews from "@/components/BetterWayToLandInterviews";
 
 const Product = () => {
     return (
-        <section className={'py-[100px] px-[20px]'}>
-            <h1 className={'w-full text-center text-[35px] mb-[20px] text-[#02203c]'}>What is AlgoExpert</h1>
-            <div className={'flex justify-center mb-[50px]'}>
-                <button
-                    className={'bg-transparent max-w-[190px] p-[5px] w-full rounded-[4px] border-[#02203c] border-[2px] flex justify-center gap-[4px] items-center'}>
-                    <PlayIcon className={'w-[30px] h-[30px]'}/>
-                    <h3>Watch the Video</h3>
-                </button>
-            </div>
-            <div className={'flex flex-col items-center justify-center w-full bg-transparent'}>
-                <ProductCards />
-                <ComparisonTable />
-                <OutcomesCard />
-                <TestimonialsCards />
+        <section className={'py-0 md:py-[60px]'}>
+            <div className={'py-[100px] px-[20px]'}>
+                <h1 className={'w-full text-center text-[35px] mb-[20px] text-[#02203c]'}>What is AlgoExpert</h1>
+                <div className={'flex justify-center mb-[50px]'}>
+                    <button
+                        className={'bg-transparent max-w-[190px] p-[5px] w-full rounded-[4px] border-[#02203c] border-[2px] flex justify-center gap-[4px] items-center'}>
+                        <PlayIcon className={'w-[30px] h-[30px]'}/>
+                        <h3>Watch the Video</h3>
+                    </button>
+                </div>
+                <div className={'flex flex-col items-center justify-center w-full bg-transparent'}>
+                    <ProductCards />
+                    <ComparisonTable />
+                    <OutcomesCard />
+                    <TestimonialsCards />
+                </div>
             </div>
             <ProductQuestionSection />
-            <SetUsApart />
-            <ProductDivider />
-            <ProductDataStructuresCourse />
-            <ProductDivider />
-            <WeSpeakLanguages />
-            <InteractiveBar />
-            <ProductDivider />
-            <PerfectPracticeEnvironment />
-            <ProductDivider />
-            <BigONotationMadeEasy />
+            <div className={'py-[100px] px-[20px]'}>
+                <SetUsApart />
+                <ProductDivider />
+                <ProductDataStructuresCourse />
+                <ProductDivider />
+                <WeSpeakLanguages />
+                <InteractiveBar />
+                <ProductDivider />
+                <PerfectPracticeEnvironment />
+                <ProductDivider />
+                <BigONotationMadeEasy />
+            </div>
             <BetterWayToLandInterviews />
         </section>
     )
@@ -58,7 +62,7 @@ export default Product
 const OutcomesCard = () => {
 
 
-    return <section className={'py-[120px] px-[20px] relative overflow-hidden'}>
+    return <section className={'py-[120px] relative overflow-hidden'}>
         <div className={'max-w-[1200px] bg-white rounded-[4px] py-[60px] px-[40px] flex flex-col shadow-[0_60px_0_rgba(0,0,0,.1)]'}>
             <h2 className={'text-center mb-[20px] text-[35px] text-[#02203c]'}>With Great Outcomes.</h2>
             <h4 className={'text-[#02203c] mb-[50px] text-[18px] text-center'}>Out customers have gotten offers from awesome companies.</h4>

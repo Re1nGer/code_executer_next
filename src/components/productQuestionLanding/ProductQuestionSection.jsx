@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useInView, useAnimate, motion } from "framer-motion";
+import { useAnimate, motion } from "framer-motion";
 import { useRef } from "react";
 import ProductQuestionCard from "@/components/productQuestionLanding/ProductQuestionCard";
 
@@ -24,17 +24,7 @@ const ProductQuestionSection = () => {
 
     const questionCardContainer = useRef(null);
 
-    const isInView = useInView(questionCardContainer, { once: true });
-
     const [scope, animate] = useAnimate();
-
-/*
-    useEffect(() => {
-        if (isInView) {
-            animate('ul', { opacity: 1 })
-        }
-    }, [isInView]);
-*/
 
     return <section className={'bg-[#02203c] py-[100px] px-[20px]'}>
         <h2 className={'text-white mb-[20px] text-[35px] text-center'}>200 Questions Spanning 15 Categories</h2>

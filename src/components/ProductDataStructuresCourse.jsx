@@ -1,9 +1,9 @@
 import Link from "next/link";
 
 const ProductDataStructuresCourse = () => {
-    return <div className={'py-[100px] px-[20px] relative max-w-[1200px] w-full mx-auto flex flex-col lg:flex-row'}>
+    return <div className={'py-[100px] relative max-w-[1200px] w-full mx-auto flex flex-col lg:flex-row'}>
         <div style={{ perspective: '1500px' }} className={'min-h-[550px] relative flex basis-[50%]'}>
-            <div className={'rounded-[8px] product__datastructures-picture w-[600px] absolute right-[30px]'}>
+            <div className={'rounded-[8px] product__datastructures-picture max-w-[600px] absolute right-0 md:right-[30px]'}>
                 <picture>
                     <img src={'https://assets.algoexpert.io/spas/main/prod/g06ca8b96c2-prod/dist/images/06df1ca4f429059c4945.jpg'}
                          className={'w-[100%]'}

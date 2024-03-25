@@ -23,11 +23,11 @@ const TestimonialSlider= ({ children, offsetFactor = 8 }) => {
         setInitialXOffset(prevState => prevState + offsetFactor);
     }
 
-    return <section className={'py-[100px] px-[20px]'}>
+    return <section className={'py-[100px]'}>
         <h2 className={'text-center text-[30px] lg:text-[35px] mb-[20px]'}>
             And over 200,000 Satisfied Engineers
         </h2>
-        <div className={'overflow-hidden max-w-[400px] md:max-w-[800px] lg:max-w-[1000px] mx-auto'}>
+        <div className={'overflow-hidden max-w-[360px] md:max-w-[770px] lg:max-w-[1000px] mx-auto'}>
             <motion.ul className={'flex flex-nowrap w-[5000px]'} animate={control}>
                 { children }
             </motion.ul>
