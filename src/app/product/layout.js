@@ -14,16 +14,20 @@ export default function layout({ children }) {
                 <div className={'pl-[20px] text-white basis-[50%] flex justify-center md:justify-end'}>
                     <ProductLanding />
                 </div>
-                <div className={'basis-[50%] h-[700px] relative product__banner_container w-[300px] lg:w-[600px] hidden md:flex'}>
-                    <div
-                        className={'hidden md:flex relative w-[600px] flex-col text-white font-bold h-[500px] product__banner'}>
-                        <div className={'flex'}>
-                            <ProductPromptSkeletons />
-                            <ProductInputSkeletons />
-                        </div>
-                        <div className={'flex'}>
-                            <ProductTestSkeletons />
-                            <ProductOutputSkeleton />
+                <div className={'h-[500px] product__banner_container w-[600px] hidden md:flex'}>
+                    <div className={'absolute h-[730px] left-0 pt-[50px] top-[-50px] overflow-hidden w-full'}>
+                        <div
+                            className={'hidden md:flex flex-col text-white font-bold'} style={{ perspective: '700px' }}>
+                            <div className={'product__banner'}>
+                                <div className={'flex'}>
+                                    <ProductPromptSkeletons />
+                                    <ProductInputSkeletons />
+                                </div>
+                                <div className={'flex'}>
+                                    <ProductTestSkeletons />
+                                    <ProductOutputSkeleton />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

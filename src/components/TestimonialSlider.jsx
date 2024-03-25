@@ -3,7 +3,7 @@ import {useState} from "react";
 import ArrowLeft from "@/icons/ArrowLeft.svg";
 import ArrowRight from "@/icons/ArrowRight.svg";
 
-const TestimonialSlider= ({ children, offsetFactor = 7 }) => {
+const TestimonialSlider= ({ children, offsetFactor = 8 }) => {
 
     const control = useAnimation();
 
@@ -23,12 +23,12 @@ const TestimonialSlider= ({ children, offsetFactor = 7 }) => {
         setInitialXOffset(prevState => prevState + offsetFactor);
     }
 
-    return <section className={'py-[100px] px-[20px] '}>
-        <h2 className={'text-center text-[35px] mb-[20px]'}>
+    return <section className={'py-[100px] px-[20px]'}>
+        <h2 className={'text-center text-[30px] lg:text-[35px] mb-[20px]'}>
             And over 200,000 Satisfied Engineers
         </h2>
-        <div className={'overflow-hidden max-w-[300px] md:max-w-[600px] lg:max-w-[1000px] mx-auto'}>
-            <motion.ul className={'flex flex-nowrap md:flex-row w-[5000px]'} animate={control}>
+        <div className={'overflow-hidden max-w-[400px] md:max-w-[800px] lg:max-w-[1000px] mx-auto'}>
+            <motion.ul className={'flex flex-nowrap w-[5000px]'} animate={control}>
                 { children }
             </motion.ul>
             <div className={'w-full flex justify-center pt-[10px] gap-[20px] mb-[20px]'}>

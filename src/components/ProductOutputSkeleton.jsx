@@ -36,8 +36,8 @@ const ProductOutputSkeleton = () => {
     return <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { delay: .3 } }}
-        className={"bg-[#15314b] flex flex-col rounded-[4px] border-[2px] border-[#15314b] max-w-[291px] h-full w-full product__landing_output-skeleton"}>
-        <div className={"max-h-[30px] h-full flex justify-between items-center"}>
+        className={"bg-[#15314b] flex flex-col rounded-[4px] border-[2px] border-[#15314b] w-[260px] lg:w-[291px] product__landing_output-skeleton"}>
+        <div className={"h-[30px] flex justify-between items-center"}>
             <h3 className={"pl-[10px]"}>Output</h3>
             <button
                 onClick={handleCodeRun}

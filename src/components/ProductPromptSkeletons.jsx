@@ -6,7 +6,7 @@ const ProductPromptSkeletons = () => {
 
     return <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                        className={"bg-[#15314b] flex flex-col rounded-[4px]" +
-                           " border-[2px] border-[#15314b] max-w-[291px] w-full product__landing_prompt-skeleton"}>
+                           " border-[2px] border-[#15314b] w-[260px] lg:w-[290px] product__landing_prompt-skeleton"}>
         <div className={"h-[30px]"}>
             <h3 className={"pl-[10px]"}>Prompt</h3>
         </div>
