@@ -5,7 +5,7 @@ import Link from "next/link";
 const BigONotationMadeEasy = () => {
     return <div className={'relative py-[100px]'}>
         <h2 className={'mb-[60px] text-[#02203c] text-[35px] leading-[1.3] text-center'}>Big O Notation Made Easy.</h2>
-        <div className={'flex flex-col md:flex-row mx-auto max-w-[1200px]'}>
+        <div className={'flex flex-col gap-[15px] md:flex-row mx-auto max-w-[1200px]'}>
             <div className={'flex flex-col max-w-[570px] justify-center'}>
                 <h2 className={'text-[24px] mb-[10px] text-[#02203c] text-center font-bold'}>Time Complexity</h2>
                 <div className={'flex flex-col items-center'}>

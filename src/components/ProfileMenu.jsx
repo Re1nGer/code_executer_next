@@ -19,8 +19,8 @@ const ProfileMenu = () => {
     return <section className={'relative w-full h-full'} onClick={(e) => e.stopPropagation()}>
         <div className={'flex gap-[10px] items-center text-white cursor-pointer'} onClick={handleProfileClick}>
             <Image src={data?.user?.image} className={'rounded-full'} alt={'user'} width={'35'} height={'35'} />
-            <span className={'overflow-hidden text-ellipsis text-[14px]'}>{name}</span>
-            <ArrowDownIcon className={'w-[11px] h-[11px]'} />
+            <span className={'hidden sm:block overflow-hidden text-ellipsis text-[14px]'}>{name}</span>
+            <ArrowDownIcon className={'hidden sm:block w-[11px] h-[11px]'} />
         </div>
         <AnimatePresence>
             { isProfileMenuOpen ? (

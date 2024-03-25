@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const ProductDataStructuresCourse = () => {
-    return <div className={'py-[100px] relative max-w-[1200px] w-full mx-auto flex flex-col lg:flex-row'}>
+    return <div className={'py-[100px] relative max-w-[1200px] w-full mx-auto flex flex-col-reverse gap-[30px] lg:flex-row'}>
         <div style={{ perspective: '1500px' }} className={'min-h-[550px] relative flex basis-[50%]'}>
             <div className={'rounded-[8px] product__datastructures-picture max-w-[600px] absolute right-0 md:right-[30px]'}>
                 <picture>
