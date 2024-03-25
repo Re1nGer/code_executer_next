@@ -10,7 +10,7 @@ import MockIcon from "@/icons/MockIcon.svg";
 import CertificateIcon from "@/icons/Certificate.svg";
 
 const ProductCards = () => {
-    return <div className={"max-w-[1200px] w-full flex flex-wrap justify-center"}>
+    return <div className={"max-w-[1200px] w-full flex flex-col items-center md:flex-row flex-wrap justify-center"}>
         <ProductCard
             Icon={QuestionsIcon}
             title={"200 hand picked questions"}
