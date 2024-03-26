@@ -50,7 +50,7 @@ const ProductQuestionSection = () => {
             <motion.ul
                initial={'hidden'}
                variants={list}
-               className={'max-w-[1000px] mx-auto text-white flex gap-[20px] md:gap-[40px] flex-wrap justify-center lg:justify-start'}
+               className={'max-w-[1000px] text-white flex gap-[20px] md:gap-[40px] flex-wrap justify-center lg:justify-start'}
                style={{ perspective: '1000px' }}
                ref={scope}>
                     <ProductQuestionCard variants={item} title={'Arrays'} backText={'Harder than they seem'} />
