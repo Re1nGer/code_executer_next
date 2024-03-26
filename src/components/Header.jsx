@@ -38,7 +38,7 @@ const Header = ({ type = 'algo', children }) => {
                 className={'h-[540px] flex flex-col relative'}
                 style={{ background: getStyles() }}
             >
-                <div className={'max-w-[1300px] w-full py-[10px] px-[10px] flex justify-between mb-[60px] md:mb-0'}>
+                <div className={'max-w-[1300px] mx-auto w-full py-[10px] px-[10px] flex justify-between mb-[60px] md:mb-0'}>
                     <HeaderHamburger />
                     <HeaderLogo />
                     <Navbar />
