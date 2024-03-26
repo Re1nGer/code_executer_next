@@ -10,6 +10,7 @@ module.exports = {
       jura: ['Jura', 'sans-serif'],
       open_sans: ['Open Sans', 'sans-serif'],
       roboto: ['Roboto', 'sans-serif'],
+      ubuntu: ['Ubuntu', 'sans-serif']
     },
     extend: {
       backgroundImage: {

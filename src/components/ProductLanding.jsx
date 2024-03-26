@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import BuyAlgoExpertButton from "@/components/BuyAlgoExpertButton.jsx";
 
 const ProductLanding = () => {
-    return <div className={"max-w-[500px] flex flex-col items-start justify-center"}>
-        <h1 className={"text-[38px] mb-[20px] text-center md:text-left w-full"}>AlgoExpert</h1>
+    return <div className={"max-w-[500px] flex flex-col items-start justify-center mx-auto"}>
+        <h1 className={"text-[38px] mb-[20px] text-center md:text-left w-full font-ubuntu"}>AlgoExpert</h1>
         <p className={"font-open_sans text-[18px] mb-[30px] text-center md:text-left"}>The ultimate resource to prepare for coding
             interviews.
             Everything you need, in one streamlined platform.</p>

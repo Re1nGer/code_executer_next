@@ -7,7 +7,7 @@ const BetterWayToLandInterviews = () => {
     return <div className={'py-[100px] px-[20px] bg-[#02203c] relative'}>
         <div className={'flex flex-col md:flex-row mx-auto max-w-[1200px]'}>
             <div className={'flex flex-col justify-center items-center basis-[50%]'}>
-                <h2 className={'text-white text-[35px] mb-[20px]'}>A Better Way To Land Interview</h2>
+                <h2 className={'text-white text-[30px] md:text-[35px] mb-[20px] leading-[1.3]'}>A Better Way To Land Interview</h2>
                 <div className={'mb-[25px]'}>
                     <p className={'text-white mb-[15px]'}>Earn the AlgoExpert Certificate. Get referred to tech companies.</p>
                     <p className={'text-white mb-[15px]'}>No more InMail messages that get ignored.</p>

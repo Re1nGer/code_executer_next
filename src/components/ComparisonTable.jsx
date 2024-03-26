@@ -5,7 +5,7 @@ import ComparisonTableCrossBox from "@/components/ComparisonTableCrossBox";
 const ComparisonTable = () => {
 
     return <section className={'py-[100px] relative w-full max-w-[1200px]'}>
-        <h1 className={'mb-[20px] w-full text-center text-[35px] text-[#02203c]'}>A Better Way to Prep for Coding Interviews</h1>
+        <h1 className={'mb-[20px] w-full text-center text-[30px] leading-[1.3]  md:text-[35px] text-[#02203c] font-ubuntu'}>A Better Way to Prep for Coding Interviews</h1>
         <div className={'shadow-[0_0_50px_-10px_rgba(0,0,0,.1)] overflow-auto'}>
             <table className={'bg-white rounded-[4px] text-[#445d6e] table-fixed min-w-[800px] border-collapse w-full'}>
                 <thead className={'w-full'}>
