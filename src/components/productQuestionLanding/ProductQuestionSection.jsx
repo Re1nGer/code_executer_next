@@ -27,8 +27,8 @@ const ProductQuestionSection = () => {
     const [scope, animate] = useAnimate();
 
     return <section className={'bg-[#02203c] py-[100px] px-[20px]'}>
-        <h2 className={'text-white mb-[20px] text-[35px] text-center'}>200 Questions Spanning 15 Categories</h2>
-        <p className={'max-w-[800px] w-full text-center mx-auto mb-[15px] text-white'}>
+        <h2 className={'text-white mb-[20px] text-[30px] md:text-[35px] text-center font-ubuntu'}>200 Questions Spanning 15 Categories</h2>
+        <p className={'max-w-[800px] w-full text-center mx-auto mb-[15px] text-white leading-[1.7] font-open_sans'}>
             If you want to ace the coding interviews, being well-versed in all common data structures and popular problem-solving methods is paramount. With
             200 questions spanning 15 categories and 4 difficulty levels, we've got you covered
         </p>
@@ -38,7 +38,7 @@ const ProductQuestionSection = () => {
                 Explore Questions</Link>
         </div>
         <motion.div className={'mt-[40px]'} variants={list} initial={'hidden'} animate={'visible'} ref={scope}>
-            <motion.ul className={'max-w-[1000px] mx-auto text-white flex gap-[40px] flex-wrap justify-center lg:justify-start'} style={{ perspective: '1000px' }} ref={questionCardContainer}>
+            <motion.ul className={'max-w-[1000px] mx-auto text-white flex gap-[20px] md:gap-[40px] flex-wrap justify-center lg:justify-start'} style={{ perspective: '1000px' }} ref={questionCardContainer}>
                 <ProductQuestionCard variants={item} title={'Arrays'} backText={'Harder than they seem'} />
                 <ProductQuestionCard variants={item} title={'Graphs'} backText={'Easier than they seem'} />
                 <ProductQuestionCard variants={item} title={'Tries'} backText={'Yes. Tries. Not a typo'} />

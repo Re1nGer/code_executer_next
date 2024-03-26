@@ -16,8 +16,7 @@ export default function layout({ children }) {
                 </div>
                 <div className={'h-[500px] product__banner_container w-[600px] hidden md:flex basis-0 md:basis-[50%]'}>
                     <div className={'absolute left-0 pt-[50px] top-[-50px] overflow-hidden w-full'}>
-                        <div
-                            className={'hidden md:flex flex-col text-white font-bold'} style={{ perspective: '700px' }}>
+                        <div className={'hidden md:flex flex-col text-white font-bold'} style={{ perspective: '700px' }}>
                             <div className={'product__banner'}>
                                 <div className={'flex gap-[5px]'}>
                                     <ProductPromptSkeletons />
