@@ -46,11 +46,11 @@ const ProductQuestionSection = () => {
                   className={'bg-[#626ee3] h-full font-open_sans shadow-[0_2px_5px_0_rgba(0,0,0,.5)] rounded-[4px] px-[40px] text-white flex justify-center items-center whitespace-nowrap'}>
                 Explore Questions</Link>
         </div>
-        <motion.div className={'mt-[40px]'}>
+        <motion.div className={'mt-[40px] w-full'}>
             <motion.ul
                initial={'hidden'}
                variants={list}
-               className={'max-w-[800px] md:max-w-[1000px] text-white flex gap-[20px] md:gap-[40px] flex-wrap justify-center lg:justify-start'}
+               className={'text-white max-w-[1200px] mx-auto w-full flex gap-[20px] md:gap-[40px] flex-wrap justify-center'}
                style={{ perspective: '1000px' }}
                ref={scope}>
                     <ProductQuestionCard variants={item} title={'Arrays'} backText={'Harder than they seem'} />
