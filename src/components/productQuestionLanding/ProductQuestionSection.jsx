@@ -33,8 +33,6 @@ const ProductQuestionSection = () => {
         }
     }, [inView])
 
-    console.log(inView);
-
     return <section className={'bg-[#02203c] py-[100px] px-[20px]'}>
         <h2 className={'text-white mb-[20px] text-[30px] md:text-[35px] text-center font-ubuntu'}>200 Questions Spanning 15 Categories</h2>
         <p className={'max-w-[800px] w-full text-center mx-auto mb-[15px] text-white leading-[1.7] font-open_sans'}>
