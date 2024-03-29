@@ -20,6 +20,7 @@ const item = {
     hidden: {  z: 200, opacity: 0 },
 }
 
+
 const ProductQuestionSection = () => {
 
     const [scope, animate] = useAnimate();
