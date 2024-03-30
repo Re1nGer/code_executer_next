@@ -19,12 +19,12 @@ const QuestionCard = ({ name = '', completed, striked, difficulty = 1, id }) => 
     }
 
     return <div className={'h-[50px] bg-white rounded-[4px] pl-[15px]' +
-        ' whitespace-nowrap font-bold flex justify-between shadow-[0_1px_2px_0_rgba(0,0,0,0.2)]'}>
+        ' font-bold flex justify-between shadow-[0_1px_2px_0_rgba(0,0,0,0.2)]'}>
         <div className={'flex mr-[2rem] items-center'}>
             <div
                 style={{ background: completed ? 'linear-gradient(#04ff00,#369536)' : '' }}
                 className={'w-[20px] mr-[10px] h-[20px] rounded-full bg-transparent border-[1px] border-[rgba(103,114,229,.3)]'}></div>
-            <Link href={`questions/${id}`} className={'text-[15px] whitespace-nowrap overflow-ellipsis transition-colors text-[#626ee3] font-bold hover:text-[#02203c]'}>
+            <Link href={`questions/${id}`} className={'text-[15px] whitespace-normal md:whitespace-nowrap overflow-ellipsis transition-colors text-[#626ee3] font-bold hover:text-[#02203c]'}>
                 { name }
             </Link>
         </div>

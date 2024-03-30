@@ -26,7 +26,7 @@ const BetterWayToLandInterviews = () => {
             <div className={'h-[350px] flex justify-center items-start flex-col basis-[50%] relative overflow-hidden'}>
                 <div className={'absolute left-[45px] w-full'}>
                     <div className={'w-[1500px] h-[400px] z-[1000] relative'}>
-                        <div className={'rounded-[8px] w-[80px] absolute top-[50%] left-[-45px]'}>
+                        <div className={'rounded-[8px] w-[90px] h-[90px] trash-icon flex justify-center items-center z-20 absolute top-[40%] left-[-45px] bg-[#626ee3]'}>
                             <TrashIcon className={'w-[50px] text-white'} />
                         </div>
                         <div className={'h-full w-full relative overflow-hidden rounded-tl-[200px] rounded-bl-[200px] text-white'}>
