@@ -20,7 +20,7 @@ import BetterWayToLandInterviews from "@/components/BetterWayToLandInterviews";
 
 const Product = () => {
     return (
-        <section className={'py-0 md:py-[60px]'}>
+        <section className={'py-0 md:pt-[60px]'}>
             <div className={'py-[100px] px-[20px]'}>
                 <h1 className={'w-full text-center text-[35px] mb-[20px] text-[#02203c]'}>What is AlgoExpert</h1>
                 <div className={'flex justify-center mb-[50px]'}>
