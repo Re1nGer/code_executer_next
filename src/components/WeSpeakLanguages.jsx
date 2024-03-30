@@ -24,51 +24,53 @@ const WeSpeakLanguages = () => {
                     <p className={'max-w-[700px] mb-[30px] text-center lg:text-left font-open_sans text-[#445d6e] leading-[1.7]'}>
                         There's nothing more frustrating than opening an interview prep book, only to find a bunch of solutions in a programming language that you don't know. That's why all of our questions come with complete written solutions in 9 popular languages
                     </p>
-                    <ul className={'flex justify-center flex-col items-baseline'}>
-                        <li className={'mb-[25px] text-[#02203c] flex items-center justify-start'}>
-                            <JavaScriptIcon className={'w-[50px] mr-[25px]'} />
+                    <ul className={'flex justify-center flex-col items-center md:items-start'}>
+                        <li className={'mb-[25px] text-[#02203c] flex justify-end items-baseline md:items-center'}>
+                            <JavaScriptIcon className={'w-[25px] md:w-[50px] mr-[10px] md:mr-[25px]'} />
                             <span className={'md:text-[18px] font-bold font-open_sans'}>Javascript</span>
-                            <p className={'text-[14px]'}>, for all you Front-End Developers</p>
+                            <p className={'text-[14px] md:text-[16px] max-w-[160px] md:max-w-full'}>, for all you Front-End Developers</p>
                         </li>
-                        <li className={'mb-[25px] text-[#02203c] flex items-center justify-start'}>
-                            <TypescriptIcon className={'w-[50px] mr-[25px]'} />
-                            <span className={'md:text-[18px] font-bold font-open_sans'}>Typescript</span>
-                            <p className={'text-[16px] align-bottom'}>, for all you Edgy JavaScripters</p>
+                        <li className={'mb-[25px] text-[#02203c] flex justify-start items-baseline md:items-center'}>
+                            <div className={'flex items-start'}>
+                                <TypescriptIcon className={'w-[25px] md:w-[50px] mr-[10px] md:mr-[25px]'} />
+                                <span className={'md:text-[18px] font-bold font-open_sans'}>Typescript</span>
+                                <p className={'text-[14px] md:text-[16px] max-w-[160px] md:max-w-full'}>, for all you Edgy JavaScripters</p>
+                            </div>
                         </li>
-                        <li className={'mb-[25px] text-[#02203c] flex items-center'}>
-                            <PythonIcon className={'w-[50px] mr-[25px]'} />
+                        <li className={'mb-[25px] text-[#02203c] flex items-baseline md:items-center'}>
+                            <PythonIcon className={'w-[25px] md:w-[50px] mr-[10px] md:mr-[25px]'} />
                             <span className={'md:text-[18px] font-bold font-open_sans'}>Python</span>
-                            <p className={'text-[14px]'}>, for all you Data Scientists</p>
+                            <p className={'text-[14px] md:text-[16px]'}>, for all you Data Scientists</p>
                         </li>
-                        <li className={'mb-[25px] text-[#02203c] flex items-center'}>
-                            <MobileIcon className={'w-[50px] mr-[25px]'} />
+                        <li className={'mb-[25px] text-[#02203c] flex items-baseline md:items-center'}>
+                            <MobileIcon className={'w-[25px] md:w-[50px] mr-[10px] md:mr-[25px]'} />
                             <span className={'md:text-[18px] font-bold font-open_sans'}>Swift</span>
-                            <p className={'text-[14px]'}>, for all you iOS Engineers</p>
+                            <p className={'text-[14px] md:text-[16px]'}>, for all you iOS Engineers</p>
                         </li>
-                        <li className={'mb-[25px] text-[#02203c] flex items-center'}>
-                            <AndroidIcon className={'w-[50px] mr-[25px]'} />
+                        <li className={'mb-[25px] text-[#02203c] flex items-baseline md:items-center'}>
+                            <AndroidIcon className={'w-[25px] md:w-[50px]  mr-[10px] md:mr-[25px]'} />
                             <span className={'md:text-[18px] font-bold font-open_sans'}>Androiders</span>
-                            <p className={'text-[14px]'}>, for all you Androiders</p>
+                            <p className={'text-[14px] md:text-[16px]'}>, for all you Androiders</p>
                         </li>
-                        <li className={'mb-[25px] text-[#02203c] flex items-center'}>
-                            <CIcon className={'w-[50px] mr-[25px]'} />
+                        <li className={'mb-[25px] text-[#02203c] flex items-baseline md:items-center'}>
+                            <CIcon className={'w-[25px] md:w-[50px] mr-[10px] md:mr-[25px]'} />
                             <span className={'md:text-[18px] font-bold font-open_sans'}>C++</span>
-                            <p className={'text-[14px]'}>, for all you Old Schoolers</p>
+                            <p className={'text-[14px] md:text-[16px]'}>, for all you Old Schoolers</p>
                         </li>
-                        <li className={'mb-[25px] text-[#02203c] flex items-center'}>
-                            <JavaIcon className={'w-[50px] mr-[25px]'} />
+                        <li className={'mb-[25px] text-[#02203c] flex items-baseline md:items-center'}>
+                            <JavaIcon className={'w-[25px] md:w-[50px] mr-[10px] md:mr-[25px]'} />
                             <span className={'md:text-[18px] font-bold font-open_sans'}>Java</span>
-                            <p className={'text-[14px]'}>, for all you Masochists</p>
+                            <p className={'text-[14px] md:text-[16px]'}>, for all you Masochists</p>
                         </li>
-                        <li className={'mb-[25px] text-[#02203c] flex items-center'}>
-                            <WindowsIcon className={'w-[50px] mr-[25px]'} />
+                        <li className={'mb-[25px] text-[#02203c] flex items-baseline md:items-center'}>
+                            <WindowsIcon className={'w-[25px] md:w-[50px] mr-[10px] md:mr-[25px]'} />
                             <span className={'text-[18px] font-bold font-open_sans'}>C#</span>
-                            <p className={'text-[14px]'}>, for all you Microsofters</p>
+                            <p className={'text-[14px] md:text-[16px]'}>, for all you Microsofters</p>
                         </li>
-                        <li className={'mb-[25px] text-[#02203c] flex items-center'}>
-                            <GoIcon className={'w-[50px] mr-[25px]'} />
+                        <li className={'mb-[25px] text-[#02203c] flex items-baseline md:items-center'}>
+                            <GoIcon className={'w-[25px] md:w-[50px] mr-[10px] md:mr-[25px]'} />
                             <span className={'text-[18px] font-bold font-open_sans'}>Go</span>
-                            <p className={'text-[14px]'}>, for all you Kool Kidz</p>
+                            <p className={'text-[14px] md:text-[16px]'}>, for all you Kool Kidz</p>
                         </li>
                     </ul>
                 </div>
