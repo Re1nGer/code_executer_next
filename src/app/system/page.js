@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import BuyExpertButton from "@/components/BuyExpertButton";
 import QuestionIcon from '../../icons/QuestionsIcon.svg';
 
+
 const SystemExpert = () => {
     return (
         <>
